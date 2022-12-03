@@ -22,10 +22,10 @@ const Background = styled.img`
 `
 
 const Content = styled.div`
-    width: 35%;
+    // width: 35%;
     height 100%;
     margin: 0 auto;
-    margin-top: 50px;
+    // margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,7 +41,7 @@ const Title = styled.h1`
 const SignInBox = styled.div`
     background-color: white;
     border-radius: 10%;
-    width: 100%;
+    width: 40%;
     justify-content: center;
     display: flex;
 	flex-direction: column;
@@ -67,7 +67,7 @@ const InputBar = styled.input`
     margin-bottom: 30px;
     border: 0px;
     background-color: #F1F1F1;
-    box-shadow: 0px 3px 3px  grey;
+    box-shadow: 0px 3px 3px grey;
 `
 
 const Submit = styled.button`

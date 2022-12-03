@@ -41,7 +41,6 @@ const ContentBox = styled.div `
 
 const Row = styled.div `
     width: 100%;
-    box-sizing: border-box;
     padding: 0 20px;
     display: flex;
     gap: 10px;

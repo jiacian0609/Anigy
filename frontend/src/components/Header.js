@@ -7,6 +7,7 @@ import HeaderButton from "./HeaderButton";
 const Container = styled.div `
     width: 100%;
     height: 100px;
+    z-index: 1;
     padding: 10px;
     background-color: #619E5C;
 
@@ -14,7 +15,7 @@ const Container = styled.div `
     align-items: center;
     gap: 10px;
 
-    position: relative;
+    position: fixed;
 `
 
 const Logo = styled.img `

@@ -15,15 +15,17 @@ function App() {
   return (
     <Router>
       <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/signIn" element={<SignIn />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/post/:id" element={<Post />} />
-        <Route path="/manage" element={<Manage />} />
-        <Route path="/create" element={<Create />} />
-        <Route path="/edit/:id" element={<Edit />} />
-      </Routes>
+      <div style={{paddingTop: '100px'}}>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/signIn" element={<SignIn />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/post/:id" element={<Post />} />
+          <Route path="/manage" element={<Manage />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/edit/:id" element={<Edit />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

@@ -1,22 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import styled from "styled-components";
+
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
+import { Carousel } from 'react-responsive-carousel';
 
 const Container = styled.div `
     width: 100%;
 
-    padding: 30px;
+    padding: 50px;
 
     display: flex;
+    gap: 50px;
 `
 
 const ImgsContainer = styled.div `
     width: 50%;
     height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 `
 
 const ContentContainer = styled.div `
-    width: 50%;
+    // width: 30%;
     height: 100%;
 
     display: flex;
@@ -51,21 +59,42 @@ function Post() {
         id: 1,
         animal: '貓',
         breed: '混種貓',
+        cover_image: '/images/login_img.png',
+        images: ['/images/login_img.png', '/images/login_img.png'],
         sex: 'F',
         age: '1歲',
         neutered: true,
         location: '台北動物之家',
         mobile: '0900-000-000',
         detail: '下巴有痣',
-        status: '開放'
+        status: '開放',
     }
 
     const { id } = useParams();
     const [post, setPost] = useState(samplePost);
+    
+    useEffect(() => {
+        if (document.getElementsByClassName('thumbs animated')) {
+            // console.log(document.getElementsByClassName('thumbs'))
+            document.getElementsByClassName('thumbs animated')[0].style.padding = 0;
+            // document.getElementsByClassName('thumbs animated')[0].style['transition-duration'] = 0;
+            // document.getElementsByClassName('thumbs animated')[0].style.transform = ''
+            // document.getElementsByClassName('thumbs animated')[0].style['transition-duration'] = '';
+            // document.getElementsByClassName('thumbs')[0].style.transform = ''
+            // document.getElementsByClassName('thumbs')[0].style.transition = '';
+        }
+    }, [])
 
     return (
         <Container>
-            <ImgsContainer></ImgsContainer>
+            <ImgsContainer>
+            
+                <Carousel infiniteLoop autoPlay>
+                    {[post.cover_image, ...post.images].map((img, index) =>
+                        <img src={img} alt="img" key={index} />
+                    )}
+                </Carousel>
+            </ImgsContainer>
             <ContentContainer>
                 <Row>
                     <Field>動物</Field>

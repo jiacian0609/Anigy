@@ -35,6 +35,7 @@ const Field = styled.div `
     padding: 2px 5px;
 
     background-color: #619E5C;
+    border-radius: 3px;
     text-align: center;
     font-size: 25px;
     color: #FFFFFF;

@@ -7,6 +7,7 @@ import HeaderButton from "./HeaderButton";
 const Container = styled.div `
     width: 100%;
     height: 100px;
+    padding: 10px;
     background-color: #619E5C;
 
     display: flex;
@@ -24,7 +25,7 @@ const Logo = styled.img `
 `
 
 const Title = styled.div `
-    font-size: 40px;
+    font-size: 33px;
     color: #FFFFFF;
 `
 
@@ -33,8 +34,8 @@ const Buttons = styled.div `
     gap: 50px;
 
     position: absolute;
-    right: 15px;
-    bottom: 10px;
+    right: 80px;
+    bottom: 18px;
 `
 
 function Header() {

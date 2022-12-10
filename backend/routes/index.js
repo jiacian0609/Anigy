@@ -1,10 +1,11 @@
-var express = require('express');
-var router = express.Router();
+import { Router } from 'express';
+import postsRouter from './posts.js';
+import usersRouter from './users.js';
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    //res.render('index', { title: 'Express' });
-	res.status(200).send('Hello World!');
-});
+const router = Router();
+const basePath = '/api'
 
-module.exports = router;
+router.use(basePath + '/users', usersRouter);
+router.use(basePath + '/posts', postsRouter);
+
+export default router;

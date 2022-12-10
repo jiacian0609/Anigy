@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 const Container = styled.div `
-    width: 65%;
+    min-width: 65%;
 
     margin: 0 auto;
 

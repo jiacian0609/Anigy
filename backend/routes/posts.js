@@ -5,12 +5,7 @@ const router = Router();
 
 /* GET posts data */
 router.get('/', async function(req, res, next) {
-    const user_id = req.body.user_id;
-    const post_id = req.body.post_id;
-    const age = req.body.age;
-    const sex = req.body.sex;
-    const animal = req.body.animal;
-    const location = req.body.location;
+    const { user_id, post_id, age, sex, animal, location } = req.body
 
     try {
         let allPosts;
@@ -35,9 +30,20 @@ router.get('/', async function(req, res, next) {
 	}
 });
 
-router.post('/', function(req, res, next) {
-    const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url } = req.body
+/* POST a new post */
+router.post('/', async function(req, res, next) {
+    const { user_id, animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url } = req.body
 
+    try {
+        const newPost = new Post({ user_id, animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url });
+        const addPost = await newPost.save();
+        console.log(addPost)
+		return res.status(200).json({ data: allPosts });
+	}
+	catch (error) {
+        //console.log(error.message)
+		return res.status(400).json({ error: 'Add a post error' });
+	}
 });
 
 export default router;

@@ -5,7 +5,8 @@ const router = Router();
 
 /* GET all posts data with filter or user_id*/
 router.get('/', async function(req, res, next) {
-    const user_id = null;
+    /* TODO: add user authentication */
+    // const user_id = null;
     const { age, sex, animal, location } = req.query
 
     try {
@@ -58,6 +59,23 @@ router.post('/', async function(req, res, next) {
 	}
 });
 
+/* PATCH a post */
+router.patch('/:post_id', async function(req, res, next) {
+    /* TODO: add user authentication */
+    // const user_id = null;
+    const { post_id } = req.params
+    const { animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url } = req.body
+
+    try {
+        await Post.updateOne({ _id: post_id }, { $set: { animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url }});
+		return res.status(200).json({ message: 'Update Success' });
+	}
+	catch (error) {
+        //console.log(error.message)
+		return res.status(400).json({ error: 'Update a post error' });
+	}
+});
+
 /* DELETE a new post */
 router.delete('/:post_id', async function(req, res, next) {
     /* TODO: add user authentication */
@@ -66,7 +84,7 @@ router.delete('/:post_id', async function(req, res, next) {
 
     try {
         const deletePost = await Post.deleteOne({ _id: post_id });
-		return res.status(200).json({ data: deletePost, message: 'Delete Success' });
+		return res.status(200).json({ message: 'Delete Success' });
 	}
 	catch (error) {
         //console.log(error.message)

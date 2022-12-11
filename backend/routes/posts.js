@@ -50,11 +50,27 @@ router.post('/', async function(req, res, next) {
     try {
         const newPost = new Post({ user_id, animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url });
         const addPost = await newPost.save();
-		return res.status(200).json({ data: addPost });
+		return res.status(200).json({ data: addPost, message: 'Add Success' });
 	}
 	catch (error) {
         //console.log(error.message)
 		return res.status(400).json({ error: 'Add a post error' });
+	}
+});
+
+/* DELETE a new post */
+router.delete('/:post_id', async function(req, res, next) {
+    /* TODO: add user authentication */
+    // const user_id = null;
+    const { post_id } = req.params
+
+    try {
+        const deletePost = await Post.deleteOne({ _id: post_id });
+		return res.status(200).json({ data: deletePost, message: 'Delete Success' });
+	}
+	catch (error) {
+        //console.log(error.message)
+		return res.status(400).json({ error: 'Delete a post error' });
 	}
 });
 

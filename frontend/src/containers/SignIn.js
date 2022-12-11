@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components'
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 
 const Base = styled.div`
@@ -17,9 +18,6 @@ const Background = styled.img`
         left: 0;
         top: 0;
         z-index: -1;
-
-    opacity: 0.9;
-    background-image: url('/images/login_img.png');
 `
 
 const Content = styled.div`
@@ -49,6 +47,7 @@ const SignInBox = styled.div`
 	align-items: center;
     padding-top: 50px;
     padding-bottom: 50px;
+    box-shadow: 0px 3px 5px grey;
 `
 
 const InputText = styled.div`
@@ -80,7 +79,13 @@ const Submit = styled.button`
     background-color: #619E5C;
     border-radius: 50px;
     border: 0px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+`
+const Signup = styled.button`
+    text-decoration: underline;
+    font-size: 16px;
+    border: 0px;
+    background: white;
 `
 
 function SignIn() {
@@ -103,10 +108,13 @@ function SignIn() {
 			else window.alert(error.response.data)
 		})
     }
+    const navigate = useNavigate();
+
+
 
     return (
         <Base>
-            <Background src="/images/login_img.png"/>
+            <Background/>
             <Content>
                 <Title>流浪動物收養平台</Title>
                 <SignInBox>
@@ -115,6 +123,7 @@ function SignIn() {
                     <InputText>密碼</InputText>
                     <InputBar id="password" type="password"/>
                     <Submit onClick={() => handleSubmit(document.getElementById('username').value, document.getElementById('password').value)}>登入</Submit>
+                    <Signup onClick={() => navigate('/signup')}>還沒有帳號嗎？註冊一個吧！</Signup>
                 </SignInBox>
             </Content>
         </Base>

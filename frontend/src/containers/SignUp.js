@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components'
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Base = styled.div`
     width: 100%;
@@ -16,9 +17,6 @@ const Background = styled.img`
         left: 0;
         top: 0;
         z-index: -1;
-
-    opacity: 0.9;
-    background-image: url('/images/login_img.png');
 `
 
 const Content = styled.div`
@@ -32,12 +30,6 @@ const Content = styled.div`
     justify-content; center;
 `
 
-const Title = styled.h1`
-    color: white;
-    font-size: 64px;
-    font-style: normal;
-`
-
 const SignInBox = styled.div`
     background-color: white;
     border-radius: 10%;
@@ -46,8 +38,10 @@ const SignInBox = styled.div`
     display: flex;
 	flex-direction: column;
 	align-items: center;
+    margin-top: 100px;
     padding-top: 50px;
     padding-bottom: 50px;
+    box-shadow: 0px 3px 5px grey;
 `
 
 const InputText = styled.div`
@@ -63,8 +57,8 @@ const InputBar = styled.input`
     font-size: 25px;
     padding-left: 20px;
     border-radius: 50px;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     border: 0px;
     background-color: #F1F1F1;
     box-shadow: 0px 3px 3px grey;
@@ -78,17 +72,42 @@ const Submit = styled.button`
     font-weight: bolder;
     background-color: #619E5C;
     border-radius: 50px;
+    margin-top: 20px;
     border: 0px;
+`
+const Checkbox = styled.label`
+    font-size: 20px;
+`
+const Signin = styled.button`
+    text-decoration: underline;
+    font-size: 16px;
+    border: 0px;
+    background: white;
+    margin-top: 10px;
 `
 
 function SignUp() {
+    const navigate = useNavigate();
 
     const handleSubmit = ( email, username, password) => {
         console.log('username', username);
+        var chked = document.querySelectorAll("[type=checkbox]");
+        console.log(chked[0].checked);
+        if(chked[0].checked) {
+            const show_mobile = true;//
+            const show_email = true;//
+        }
+        else {
+            const show_mobile = false;//
+            const show_email = false;//
+        }
+        
         axios.post("http://localhost:8000/signup", {
             "email": email,
             "username": username,
-            "password": password
+            "password": password,
+            "show_mobile": show_mobile,
+            "show_email": show_email
         })
         .then( (response) => {
 			window.localStorage.setItem('JWT', response.data.JWT)
@@ -105,17 +124,23 @@ function SignUp() {
 
     return (
         <Base>
-            <Background src="/images/login_img.png"/>
+            <Background />
             <Content>
-                <Title>流浪動物收養平台</Title>
                 <SignInBox>
-                    <InputText>電子信箱</InputText>
-                    <InputBar id="email"/>
                     <InputText>使用者名稱</InputText>
                     <InputBar id="username"/>
                     <InputText>密碼</InputText>
                     <InputBar id="password" type="password"/>
-                    <Submit onClick={() => handleSubmit(document.getElementById('email').value誒document.getElementById('username').value, document.getElementById('password').value)}>註冊</Submit>
+                    <InputText>電子信箱</InputText>
+                    <InputBar id="email"/>
+                    <InputText>電話號碼</InputText>
+                    <InputBar id="phone"/>
+                    <Checkbox>
+                        <input type='checkbox' value='我同意公開聯絡電話和信箱'/>
+                        <span>我同意公開聯絡電話和信箱</span>
+                    </Checkbox>
+                    <Submit onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value)}>註冊</Submit>
+                    <Signin onClick={() => navigate('/signin')}>已經有帳號嗎？快來登入吧！</Signin>
                 </SignInBox>
             </Content>
         </Base>

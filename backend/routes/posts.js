@@ -37,8 +37,7 @@ router.post('/', async function(req, res, next) {
     try {
         const newPost = new Post({ user_id, animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url });
         const addPost = await newPost.save();
-        console.log(addPost)
-		return res.status(200).json({ data: allPosts });
+		return res.status(200).json({ data: addPost });
 	}
 	catch (error) {
         //console.log(error.message)

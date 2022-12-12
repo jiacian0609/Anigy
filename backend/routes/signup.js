@@ -1,29 +1,44 @@
-var express = require('express');
-var router = express.Router();
-const pool = require("../db");
+import { Router } from 'express';
+import User from '../models/User.js'
 var bcrypt = require('bcryptjs');
 var jwt = require("jsonwebtoken");
 
+const router = Router();
 /* signup */
 router.post('/', async function (req, res) {
 	const username = req.body.username;
 	const password = req.body.password;
 	const email = req.body.email;
+	const show_mobile = req.body.show_mobile;
+	const show_email = req.body.show_email;
 
-	//(Optional)Check whether the email exists
+	//Check whether the username and email exists
+	let user = await User.find({ username })
+	if(user) 
+		return res.status(400).json({ error: 'Username exists.'})
+	user = await User.find({ email })
+	if(user) 
+		return res.status(400).json({ error: 'email exists.'})
 	//Encrypt password
 	var encryptedPassword = await bcrypt.hash(password, 10);
-
 	//Insert data into DB
-	await pool.query('INSERT INTO "WormGym".user_info("username", "password", "email") VALUES ($1, $2, $3)', [username, password, email]);
-
+	try {
+		const newUser = new User({ user_id, username, password, email, show_mobile, show_email })
+		const addUser = await User.save();	
+	}
+	catch ( error ) {
+		console.log(error.message );
+		return res.status(400).json({ error: 'Add a user error'})
+	}
+	
 	//Create token
-	var userID = await pool.query('SELECT user_id FROM "WormGym".user_info WHERE username = $1', [username]);
 	var token = await jwt.sign(
 		{
-			Uid: userID,
+			Uid: user_id,
 			Username: username,
-			Email: email
+			Email: email,
+			show_mobile: show_mobile,
+			show_email: show_email
 		},
 		"b7b16ad9db0ca7c5705cba37840e4ec310740c62beea61cfd9bdcee0720797a6c8bb1b3ffc0d781601fb77dbdaa899acfd08ac560aec19f2d18bb3b6e25beb7a",
 		{

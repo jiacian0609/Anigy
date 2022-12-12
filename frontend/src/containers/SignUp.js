@@ -99,7 +99,7 @@ function SignUp() {
         }
         else {
             const show_mobile = false;//
-            const show_email = false;//
+            const show_email = true;//
         }
         
         axios.post("http://localhost:8000/signup", {

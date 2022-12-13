@@ -14,14 +14,16 @@ router.post('/', async (req, res) => {
 
     //check the user
     const user = await User.find({ username: username })
+    console.log(user);
     if ( user.rows[0] === undefined) { 
       return res.status(404).send('Username does not exist.');
     } else {
       encryptedPassword = user.rows[0].password;
     }
 
+    console.log(encryptedPassword);
     //check the password
-    const compare = await bcrypt.compare('test', encryptedPassword)
+    const compare = await bcrypt.compare(password, encryptedPassword)
     if(!compare)//比對加密前後
       return res.status(403).send('Password is wrong :(');
  

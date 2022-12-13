@@ -89,7 +89,7 @@ const Signin = styled.button`
 function SignUp() {
     const navigate = useNavigate();
 
-    const handleSubmit = ( email, username, password) => {
+    const handleSubmit = ( email, username, password, phone) => {
         console.log('username', username);
         var chked = document.querySelectorAll("[type=checkbox]");
         console.log(chked[0].checked);
@@ -101,6 +101,7 @@ function SignUp() {
             "email": email,
             "username": username,
             "password": password,
+            "mobile": phone
         })
         .then( (response) => {
 			window.localStorage.setItem('JWT', response.data.JWT)
@@ -133,7 +134,7 @@ function SignUp() {
                         <input type='checkbox' value='我同意公開聯絡電話和信箱'/>
                         <span>我同意公開聯絡電話和信箱</span>
                     </Checkbox>
-                    <Submit onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value)}>註冊</Submit>
+                    <Submit onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('phone').value)}>註冊</Submit>
                     <Signin onClick={() => navigate('/signin')}>已經有帳號嗎？快來登入吧！</Signin>
                 </SignInBox>
             </Content>

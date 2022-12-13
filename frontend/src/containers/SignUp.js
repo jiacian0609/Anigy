@@ -93,30 +93,24 @@ function SignUp() {
         console.log('username', username);
         var chked = document.querySelectorAll("[type=checkbox]");
         console.log(chked[0].checked);
-        if(chked[0].checked) {
-            const show_mobile = true;//
-            const show_email = true;//
-        }
-        else {
-            const show_mobile = false;//
-            const show_email = true;//
+        if(!chked[0].checked) {
+            window.alert('請同意公開資訊')
         }
         
-        axios.post("http://localhost:8000/signup", {
+        axios.post("http://localhost:4000/api/signup", {
             "email": email,
             "username": username,
             "password": password,
-            "show_mobile": show_mobile,
-            "show_email": show_email
         })
         .then( (response) => {
 			window.localStorage.setItem('JWT', response.data.JWT)
             window.location.href = "/"
 		})
 		.catch( (error) => {
-			if(error.response.data === 'Username exists.')
+            console.log(error);
+			if(error.response.data.error === 'Username exists.')
 				window.alert('會員帳號已存在！')
-			else if(error.response.data === 'email exists.')
+			else if(error.response.data.error === 'email exists.')
 				window.alert('信箱已存在！')
 			else window.alert(error.response.data)
 		})

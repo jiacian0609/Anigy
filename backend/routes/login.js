@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import User from '../models/User.js'
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs';
 
 const router = Router();
 
@@ -14,11 +15,12 @@ router.post('/', async (req, res) => {
 
     //check the user
     const user = await User.find({ username: username })
-    console.log(user);
-    if ( user.rows[0] === undefined) { 
+    console.log(user[0]);
+    if ( user[0] === undefined) { 
       return res.status(404).send('Username does not exist.');
     } else {
-      encryptedPassword = user.rows[0].password;
+      console.log('?');
+      encryptedPassword = user[0].password;
     }
 
     console.log(encryptedPassword);
@@ -27,11 +29,12 @@ router.post('/', async (req, res) => {
     if(!compare)//比對加密前後
       return res.status(403).send('Password is wrong :(');
  
-    token = await jwt.sign(
+    var token = await jwt.sign(
       {
-        Uid: user.rows[0].user_id,
+        Uid: user[0]._id,
         Username: username,
-        Email: user.rows[0].Email
+        Email: user[0].email,
+        Mobile: user[0].mobile
       },
       "b7b16ad9db0ca7c5705cba37840e4ec310740c62beea61cfd9bdcee0720797a6c8bb1b3ffc0d781601fb77dbdaa899acfd08ac560aec19f2d18bb3b6e25beb7a",
       {

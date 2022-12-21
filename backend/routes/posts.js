@@ -11,7 +11,7 @@ router.get('/', async function(req, res, next) {
 
     try {
         let allPosts;
-    
+        
         if(user_id) // Case 1: by user_id
             allPosts= await Post.find({ user_id });
         else { // Case 2: by filter
@@ -30,13 +30,25 @@ router.get('/', async function(req, res, next) {
 	}
 });
 
+/* GET all posts data */
+router.get('/all', async function(req, res, next) {
+    try {
+        let post = await Post.find();
+        return res.status(200).json({ data: post });
+	}
+	catch (error) {
+        //console.log(error.message)
+		return res.status(400).json({ error: 'Get a post error' });
+	}
+});
+
 /* GET a post data by post_id */
 router.get('/:post_id', async function(req, res, next) {
     const { post_id } = req.params
 
     try {
         let post = await Post.find({ _id: post_id });
-		return res.status(200).json({ data: post[0] });
+        return res.status(200).json({ data: post[0] });
 	}
 	catch (error) {
         //console.log(error.message)

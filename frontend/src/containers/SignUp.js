@@ -75,7 +75,8 @@ function SignUp() {
         var chked = document.querySelectorAll("[type=checkbox]");
         console.log(chked[0].checked);
         if(!chked[0].checked) {
-            window.alert('請同意公開資訊')
+            window.alert('請同意公開資訊');
+            return;
         }
         
         axios.post("http://localhost:4000/api/signup", {

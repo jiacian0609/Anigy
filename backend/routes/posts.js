@@ -3,42 +3,30 @@ import Post from "../models/Post.js";
 
 const router = Router();
 
-/* GET all posts data with filter or user_id*/
+/* GET all posts data with user_id*/
 router.get('/', async function(req, res, next) {
     /* TODO: add user authentication */
     // const user_id = null;
-    const { age, sex, animal, location } = req.query
 
     try {
-        let allPosts;
-        
-        if(user_id) // Case 1: by user_id
-            allPosts= await Post.find({ user_id });
-        else { // Case 2: by filter
-            allPosts = await Post.find();
-            allPosts = allPosts.filter((post) => age ? post.age === age : true)
-            allPosts = allPosts.filter((post) => sex ? post.sex === sex : true)
-            allPosts = allPosts.filter((post) => animal ? post.animal === animal : true)
-            allPosts = allPosts.filter((post) => location ? post.location === location : true)
-        } 
-
-		return res.status(200).json({ data: allPosts });
+        let posts = await Post.find({ user_id });
+        return res.status(200).json({ data: posts });
 	}
 	catch (error) {
         console.log(error.message)
-		return res.status(400).json({ error: 'Get posts error' });
+		return res.status(400).json({ error: "Get user's posts error" });
 	}
 });
 
 /* GET all posts data */
 router.get('/all', async function(req, res, next) {
     try {
-        let post = await Post.find();
-        return res.status(200).json({ data: post });
+        let posts = await Post.find();
+        return res.status(200).json({ data: posts });
 	}
 	catch (error) {
         //console.log(error.message)
-		return res.status(400).json({ error: 'Get a post error' });
+		return res.status(400).json({ error: 'Get all posts error' });
 	}
 });
 

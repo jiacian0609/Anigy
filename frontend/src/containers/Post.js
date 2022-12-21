@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import styled from "styled-components";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
@@ -9,6 +9,8 @@ import { api } from "../api";
 
 const Container = styled.div `
     width: 100%;
+    height: calc(100% - 100px);
+    position: absolute;
 
     padding: 50px;
 
@@ -56,6 +58,28 @@ const Text = styled.div `
     font-size: 25px;
 `
 
+const Buttons = styled.div `
+    position: absolute;
+    right: 20px;
+
+    display: flex;
+    gap: 10px;
+`
+
+const EditButton = styled.div `
+    width: 40px;
+    height: 40px;
+    background-image: url('/icons/edit.png');
+    background-size: contain;
+`
+
+const DeleteButton = styled.div `
+    width: 40px;
+    height: 40px;
+    background-image: url('/icons/delete.png');
+    background-size: contain;
+`
+
 function Post() {
     const samplePost = {
         id: 1,
@@ -87,6 +111,9 @@ function Post() {
         detail: '',
         status: '',
     });
+
+    const user_id = '63a313fca9f8cad1c7f579cc';
+    console.log(user_id === post.user_id, user_id, post.user_id)
     
     useEffect(() => {
         if (document.getElementsByClassName('thumbs animated')) {
@@ -101,7 +128,7 @@ function Post() {
 
         api.getPostDetail(id)
         .then(res => {
-            // console.log(res.data);
+            console.log(res.data);
             setPost(res.data);
         })
         .catch(err => console.log(err));
@@ -110,7 +137,6 @@ function Post() {
     return (
         <Container>
             <ImgsContainer>
-            
                 <Carousel infiniteLoop autoPlay>
                     {[post.cover_image, ...post.images].map((img, index) =>
                         <img src={img} alt="img" key={index} />
@@ -155,6 +181,14 @@ function Post() {
                     <Text>{post.status}</Text>
                 </Row>
             </ContentContainer>
+            {/*user_id === post.user_id &&*/
+                <Buttons>
+                    <Link to={`/edit/${post._id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
+                        <EditButton />
+                    </Link>
+                    <DeleteButton />
+                </Buttons>
+            }
         </Container>
     )
 }

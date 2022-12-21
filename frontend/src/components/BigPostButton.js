@@ -67,15 +67,27 @@ const Text = styled.div `
     padding: 2px 5px;
 `
 
+const Buttons = styled.div `
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+    display: flex;
+    gap: 5px;
+`
+
 const EditButton = styled.div `
     width: 20px;
     height: 20px;
     background-image: url('/icons/edit.png');
     background-size: contain;
+`
 
-    position: absolute;
-    right: 20px;
-    top: 20px;
+const DeleteButton = styled.div `
+    width: 20px;
+    height: 20px;
+    background-image: url('/icons/delete.png');
+    background-size: contain;
 `
 
 
@@ -128,9 +140,12 @@ function BigPostButton({ post }) {
                         <Text>{post.status}</Text>
                     </Row>
                 </Column>
-                <Link to={`/edit/${post.id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
-                    <EditButton />
-                </Link>
+                <Buttons>
+                    <Link to={`/edit/${post.id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
+                        <EditButton />
+                    </Link>
+                    <DeleteButton />
+                </Buttons>
             </ContentBox>
         </Container>
     )

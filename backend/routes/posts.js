@@ -1,10 +1,11 @@
 import { Router } from "express";
 import Post from "../models/Post.js";
+import { authentication } from "../utils/util.js";
 
 const router = Router();
 
 /* GET all posts data with user_id*/
-router.get('/', async function(req, res, next) {
+router.get('/', authentication(), async function(req, res, next) {
     /* TODO: add user authentication */
     // const user_id = null;
 

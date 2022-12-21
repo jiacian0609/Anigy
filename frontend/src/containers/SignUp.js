@@ -5,42 +5,23 @@ import { useNavigate } from "react-router-dom";
 
 const Base = styled.div`
     width: 100%;
-    height: 100%;
+    height: calc(100% - 100px);
     position: absolute;
-`
-
-const Background = styled.img`
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -1;
-`
-
-const Content = styled.div`
-    // width: 35%;
-    height 100%;
-    margin: 0 auto;
-    // margin-top: 50px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content; center;
 `
 
 const SignInBox = styled.div`
     background-color: white;
     border-radius: 10%;
     width: 40%;
+    margin: auto;
     justify-content: center;
     display: flex;
 	flex-direction: column;
 	align-items: center;
-    margin-top: 100px;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     box-shadow: 0px 3px 5px grey;
 `
 
@@ -119,25 +100,22 @@ function SignUp() {
 
     return (
         <Base>
-            <Background />
-            <Content>
-                <SignInBox>
-                    <InputText>使用者名稱</InputText>
-                    <InputBar id="username"/>
-                    <InputText>密碼</InputText>
-                    <InputBar id="password" type="password"/>
-                    <InputText>電子信箱</InputText>
-                    <InputBar id="email"/>
-                    <InputText>電話號碼</InputText>
-                    <InputBar id="phone"/>
-                    <Checkbox>
-                        <input type='checkbox' value='我同意公開聯絡電話和信箱'/>
-                        <span>我同意公開聯絡電話和信箱</span>
-                    </Checkbox>
-                    <Submit onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('phone').value)}>註冊</Submit>
-                    <Signin onClick={() => navigate('/signin')}>已經有帳號嗎？快來登入吧！</Signin>
-                </SignInBox>
-            </Content>
+            <SignInBox>
+                <InputText>使用者名稱</InputText>
+                <InputBar id="username"/>
+                <InputText>密碼</InputText>
+                <InputBar id="password" type="password"/>
+                <InputText>電子信箱</InputText>
+                <InputBar id="email"/>
+                <InputText>電話號碼</InputText>
+                <InputBar id="phone"/>
+                <Checkbox>
+                    <input type='checkbox' value='我同意公開聯絡電話和信箱'/>
+                    <span>我同意公開聯絡電話和信箱</span>
+                </Checkbox>
+                <Submit onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('phone').value)}>註冊</Submit>
+                <Signin onClick={() => navigate('/signin')}>已經有帳號嗎？快來登入吧！</Signin>
+            </SignInBox>
         </Base>
     )
 }

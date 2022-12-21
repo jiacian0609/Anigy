@@ -6,41 +6,16 @@ import { useNavigate } from "react-router-dom";
 
 const Base = styled.div`
     width: 100%;
-    height: 100%;
+    height: calc(100% - 100px);
     position: absolute;
-`
-
-const Background = styled.img`
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -1;
-`
-
-const Content = styled.div`
-    // width: 35%;
-    height 100%;
-    margin: 0 auto;
-    // margin-top: 50px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content; center;
-`
-
-const Title = styled.h1`
-    color: white;
-    font-size: 64px;
-    font-style: normal;
 `
 
 const SignInBox = styled.div`
-    background-color: white;
     border-radius: 10%;
     width: 40%;
+    margin: auto;
     justify-content: center;
     display: flex;
 	flex-direction: column;
@@ -114,18 +89,14 @@ function SignIn() {
 
     return (
         <Base>
-            <Background/>
-            <Content>
-                <Title>流浪動物收養平台</Title>
-                <SignInBox>
-                    <InputText>使用者名稱</InputText>
-                    <InputBar id="username"/>
-                    <InputText>密碼</InputText>
-                    <InputBar id="password" type="password"/>
-                    <Submit onClick={() => handleSubmit(document.getElementById('username').value, document.getElementById('password').value)}>登入</Submit>
-                    <Signup onClick={() => navigate('/signup')}>還沒有帳號嗎？註冊一個吧！</Signup>
-                </SignInBox>
-            </Content>
+            <SignInBox>
+                <InputText>使用者名稱</InputText>
+                <InputBar id="username"/>
+                <InputText>密碼</InputText>
+                <InputBar id="password" type="password"/>
+                <Submit onClick={() => handleSubmit(document.getElementById('username').value, document.getElementById('password').value)}>登入</Submit>
+                <Signup onClick={() => navigate('/signup')}>還沒有帳號嗎？註冊一個吧！</Signup>
+            </SignInBox>
         </Base>
     )
 }

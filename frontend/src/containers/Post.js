@@ -5,6 +5,8 @@ import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from 'react-responsive-carousel';
 
+import { api } from "../api";
+
 const Container = styled.div `
     width: 100%;
 
@@ -71,7 +73,20 @@ function Post() {
     }
 
     const { id } = useParams();
-    const [post, setPost] = useState(samplePost);
+    const [post, setPost] = useState({
+        id: 0,
+        animal: '',
+        breed: '',
+        cover_image: '',
+        images: [],
+        sex: '',
+        age: '',
+        neutered: true,
+        location: '',
+        mobile: '',
+        detail: '',
+        status: '',
+    });
     
     useEffect(() => {
         if (document.getElementsByClassName('thumbs animated')) {
@@ -83,6 +98,13 @@ function Post() {
             // document.getElementsByClassName('thumbs')[0].style.transform = ''
             // document.getElementsByClassName('thumbs')[0].style.transition = '';
         }
+
+        api.getPostDetail(id)
+        .then(res => {
+            // console.log(res.data);
+            setPost(res.data);
+        })
+        .catch(err => console.log(err));
     }, [])
 
     return (

@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const PostSchema = Schema({ 
-        user_id: { type: Number, required: false },
+        user_id: { type: String, required: false },
         animal: { type: String, required: false },
         color: { type: String, required: false },
         age: { type: String, required: false },

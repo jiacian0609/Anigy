@@ -113,7 +113,6 @@ function Post() {
     });
 
     const user_id = '63a313fca9f8cad1c7f579cc';
-    console.log(user_id === post.user_id, user_id, post.user_id)
     
     useEffect(() => {
         if (document.getElementsByClassName('thumbs animated')) {
@@ -181,7 +180,7 @@ function Post() {
                     <Text>{post.status}</Text>
                 </Row>
             </ContentContainer>
-            {/*user_id === post.user_id &&*/
+            {user_id === post.user_id &&
                 <Buttons>
                     <Link to={`/edit/${post._id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
                         <EditButton />

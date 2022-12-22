@@ -80,7 +80,6 @@ const beforeUpload = (file) => {
 function Create() {
     const [loading, setLoading] = useState(false);
     const [coverImage, setCoverImage] = useState();
-    
     const [images, setImages] = useState([
         {
           uid: '-1',
@@ -101,6 +100,10 @@ function Create() {
           status: 'error',
         },
     ]);
+    const [post, setPost] = useState({
+        sex: 'M',
+        neutured: true
+    });
 
 
     const handleCoverImageChange = (info) => {
@@ -132,6 +135,7 @@ function Create() {
             <Title>新增送養貼文</Title>
             <FormContainer>
                 <FormColumn>
+                    {/* 照片 */}
                     <Row>
                         <SubColumn>
                             <Text>封面照片</Text>
@@ -169,27 +173,23 @@ function Create() {
                             </OtherImages>
                         </SubColumn>
                     </Row>
-                    <div>
-                        <Text>動物</Text>
-                        <Select
-                            style={{ width: '100%' }}
-                        ></Select>
-                    </div>
+                    {/* 動物 & 品種 */}
                     <Row>
                         <SubColumn>
-                            <Text>性別</Text>
+                            <Text>動物</Text>
                             <Select
-                                style={{ width: '100%' }}
+                                style={{ width: '100%', marginBottom: '10px' }}
                             ></Select>
+                            <Input
+                                bordered={false}
+                                placeholder='自行輸入...'
+                                style={{
+                                    width: '100%', 
+                                    borderBottom: 'solid 1px #ECECEC',
+                                    borderRadius: 0
+                                }}
+                            ></Input>
                         </SubColumn>
-                        <SubColumn>
-                            <Text>結紮</Text>
-                            <Select
-                                style={{ width: '100%' }}
-                            ></Select>
-                        </SubColumn>
-                    </Row>
-                    <Row>
                         <SubColumn>
                             <Text>品種</Text>
                             <Select
@@ -205,8 +205,27 @@ function Create() {
                                 }}
                             ></Input>
                         </SubColumn>
+                    </Row>
+                    
+                    {/* 年齡 & 地區 */}
+                    <Row>
                         <SubColumn>
                             <Text>年齡</Text>
+                            <Select
+                                style={{ width: '100%', marginBottom: '10px' }}
+                            ></Select>
+                            <Input
+                                bordered={false}
+                                placeholder='自行輸入...'
+                                style={{
+                                    width: '100%', 
+                                    borderBottom: 'solid 1px #ECECEC',
+                                    borderRadius: 0
+                                }}
+                            ></Input>
+                        </SubColumn>
+                        <SubColumn>
+                            <Text>地區</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
                             ></Select>
@@ -223,12 +242,43 @@ function Create() {
                     </Row>
                 </FormColumn>
                 <FormColumn>
+                    {/* 性別 & 結紮 */}
                     <Row>
                         <SubColumn>
-                            <Text>地區</Text>
+                            <Text>性別</Text>
                             <Select
-                                style={{ width: '100%', marginBottom: '10px' }}
-                            ></Select>
+                                style={{ width: '100%' }}
+                                options={[
+                                    {
+                                        value: 'M',
+                                        label: '公'
+                                    },
+                                    {
+                                        value: 'F',
+                                        label: '母'
+                                    }
+                                ]}
+                                defaultValue='M'
+                                onChange={value => setPost({...post, sex: value})}
+                            />
+                        </SubColumn>
+                        <SubColumn>
+                            <Text>結紮</Text>
+                            <Select
+                                style={{ width: '100%' }}
+                                options={[
+                                    {
+                                        value: true,
+                                        label: '是'
+                                    },
+                                    {
+                                        value: false,
+                                        label: '否'
+                                    }
+                                ]}
+                                defaultValue={true}
+                                onChange={value => setPost({...post, neutured: value})}
+                            />
                         </SubColumn>
                     </Row>
                     <div>

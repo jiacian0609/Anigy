@@ -1,6 +1,16 @@
+import dotenv from "dotenv-defaults";
+dotenv.config();
+import jwt from 'jsonwebtoken'
+
 const authentication = () => {
     return async function (req, res, next) {
-        let accessToken = req.get('Authorization');
+        var JWT = req.headers.authorization
+        JWT = JWT.replace('Bearer ', '');
+        var payload = jwt.verify(JWT, process.env.TOKEN_SECRET);
+        req.user_id = payload.Uid;
+        next();
+        //var user_id = payload.Uid;
+        /* let accessToken = req.get('Authorization');
         if (!accessToken) {
             res.status(401).send({error: 'Unauthorized'});
             return;
@@ -15,6 +25,7 @@ const authentication = () => {
         try {
             const user = await promisify(jwt.verify)(accessToken, TOKEN_SECRET);
             req.user = user;
+            console.log(user)
             if (roleId == null) {
                 next();
             } else {
@@ -34,10 +45,11 @@ const authentication = () => {
             }
             return;
         } catch(err) {
+            console.log(err)
             res.status(403).send({error: 'Forbidden'});
             return;
-        }
-    };
+        }*/
+    }; 
 };
 
 export { authentication };

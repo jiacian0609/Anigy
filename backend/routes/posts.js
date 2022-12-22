@@ -6,8 +6,7 @@ const router = Router();
 
 /* GET all posts data with user_id*/
 router.get('/', authentication(), async function(req, res, next) {
-    /* TODO: add user authentication */
-    // const user_id = null;
+    const user_id = req.user_id;
 
     try {
         let posts = await Post.find({ user_id });
@@ -46,8 +45,9 @@ router.get('/:post_id', async function(req, res, next) {
 });
 
 /* POST a new post */
-router.post('/', async function(req, res, next) {
-    const { user_id, animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url } = req.body
+router.post('/', authentication(), async function(req, res, next) {
+    const user_id = req.user_id;
+    const { animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url } = req.body
 
     try {
         const newPost = new Post({ user_id, animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url });
@@ -61,9 +61,8 @@ router.post('/', async function(req, res, next) {
 });
 
 /* PATCH a post */
-router.patch('/:post_id', async function(req, res, next) {
-    /* TODO: add user authentication */
-    // const user_id = null;
+router.patch('/:post_id', authentication(), async function(req, res, next) {
+    const user_id = req.user_id;
     const { post_id } = req.params
     const { animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url } = req.body
 
@@ -78,9 +77,8 @@ router.patch('/:post_id', async function(req, res, next) {
 });
 
 /* DELETE a new post */
-router.delete('/:post_id', async function(req, res, next) {
-    /* TODO: add user authentication */
-    // const user_id = null;
+router.delete('/:post_id', authentication(), async function(req, res, next) {
+    const user_id = req.user_id;
     const { post_id } = req.params
 
     try {

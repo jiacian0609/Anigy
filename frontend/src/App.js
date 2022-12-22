@@ -10,6 +10,8 @@ import Post from './containers/Post';
 import Manage from './containers/Manage';
 import Create from './containers/Create';
 import Edit from './containers/Edit';
+import Account from './containers/account';
+import Modal from './components/AccountModal';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/manage" element={<Manage />} />
           <Route path="/create" element={<Create />} />
           <Route path="/edit/:id" element={<Edit />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/account/Modal" element={<Modal />} />
         </Routes>
       </div>
     </Router>

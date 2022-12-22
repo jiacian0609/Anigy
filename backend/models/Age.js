@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const AgeSchema = Schema({ 
-        age: { type: string, required: true },
+        age: { type: String, required: true },
     }, {
         versionKey: false 
     }

@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const LocationSchema = Schema({ 
-        location: { type: string, required: true },
+        location: { type: String, required: true },
     }, {
         versionKey: false 
     }

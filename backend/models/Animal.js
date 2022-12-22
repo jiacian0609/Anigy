@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const AnimalSchema = Schema({ 
-        animal: { type: string, required: true },
+        animal: { type: String, required: true },
     }, {
         versionKey: false 
     }

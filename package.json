@@ -4,5 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/jiacian0609/Anigy.git",
   "author": "jiacian0609 <79597797+jiacian0609@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "cd frontend && yarn start",
+    "server": "cd backend && yarn server"
+  }
 }

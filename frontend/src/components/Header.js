@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
+import _ from "lodash";
 
 import HeaderButton from "./HeaderButton";
 
@@ -40,6 +41,7 @@ const Buttons = styled.div `
 `
 
 function Header() {
+    const jwt = localStorage.getItem('JWT');
     return (
         <Container>
             <Logo alt='logo' />
@@ -51,8 +53,8 @@ function Header() {
                 <Link to='/manage' style={{ textDecoration: 'none', color: 'inherit'}}>
                     <HeaderButton icon='manage' name='我的貼文'/>
                 </Link>
-                <Link to='/signIn' style={{ textDecoration: 'none', color: 'inherit'}}>
-                    <HeaderButton icon='signIn' name='登入'/>
+                <Link to={_.isNull(jwt) ? '/signIn' : '/account'} style={{ textDecoration: 'none', color: 'inherit'}}>
+                    <HeaderButton icon='signIn' name={_.isNull(jwt) ? '登入' : '帳戶管理'}/>
                 </Link>
             </Buttons>
         </Container>

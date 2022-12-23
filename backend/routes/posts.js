@@ -107,6 +107,7 @@ router.delete('/:post_id', authentication(), async function(req, res, next) {
 
     try {
         const deletePost = await Post.deleteOne({ _id: post_id });
+        updateDB();
 		return res.status(200).json({ message: 'Delete Success' });
 	}
 	catch (error) {

@@ -56,45 +56,50 @@ const authentication = () => {
 
 const updateDB = async () => {
     let posts = await Post.find();
-    let ages = await Age.find();
-    let animals = await Animal.find();
-    let locations = await Location.find();
-    let allAges = [], allAnimals = [], allLocations = [];
-    ages.forEach(obj => { allAges.push(obj.age) });
-    animals.forEach(obj => { allAnimals.push(obj.animal) });
-    locations.forEach(obj => { allLocations
-        .push(obj.location) });
-    console.log(allAges)
-    console.log(allAnimals)
-    console.log(allLocations)
+    let allAges = [], allAnimals = {}, allLocations = [];
+    let insertAges = [], insertLocations = [];
 
-    /* // Check whether a new age
-    const existAge = await Age.find({ age });
-    if(existAge.length === 0) {
-        const newAge = new Age({ age });
-        const addAge = await newAge.save();
+    for (let index = 0; index < posts.length; index++) {
+        if(!allAges.includes(posts[index].age) && posts[index].age && posts[index].age !== undefined) {
+            allAges.push(posts[index].age)
+            insertAges.push({ age: posts[index].age })
+        }
+        if(!Object.keys(allAnimals).includes(posts[index].animal) && posts[index].animal && posts[index].animal !== undefined) {
+            if(posts[index].breed && posts[index].breed !== undefined) {
+                allAnimals[posts[index].animal] = [posts[index].breed];
+            }
+            else
+                allAnimals[posts[index].animal] = [];
+        } 
+        else {
+            if(!allAnimals[posts[index].animal].includes(posts[index].breed) && posts[index].breed && posts[index].breed !== undefined) {
+                allAnimals[posts[index].animal].push(posts[index].breed)
+            }
+        }
+        if(!allLocations.includes(posts[index].location) && posts[index].location && posts[index].location !== undefined) {
+            allLocations.push(posts[index].location)
+            insertLocations.push({ location: posts[index].location })
+        }      
     }
 
-    // Check whether a new animal
-    const existAnimal = await Animal.find({ animal });
-    if(existAnimal.length === 0) {
-        const newAnimal = new Animal({ animal });
-        const addAnimal = await newAnimal.save();
-    }
+    try {
+        await Age.deleteMany({});
+        await Age.insertMany(insertAges);
+        await Animal.deleteMany({});
+        for (const [key, value] of Object.entries(allAnimals)) {
+            const newAnimal = new Animal({ 
+                animal: key,
+                breeds: value,
+            });
+            await newAnimal.save();
+          }
+        await Location.deleteMany({});
+        await Location.insertMany(insertLocations);
+     } catch (e) {
+        console.log(e);
+     }
+    
 
-    // Check whether a new breed
-    const existBreed = await Breed.find({ breed });
-    if(existBreed.length === 0) {
-        const newBreed = new Breed({ breed });
-        const addBreed = await newBreed.save();
-    }
-
-    // Check whether a new location
-    const existLocation = await Location.find({ location });
-    if(existLocation.length === 0) {
-        const newLocation = new Location({ location });
-        const addLocation = await newLocation.save();
-    } */
 };
 
 export { authentication, updateDB };

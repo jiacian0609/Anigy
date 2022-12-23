@@ -34,12 +34,17 @@ router.get('/all', async function(req, res, next) {
 });
 
 /* GET a post data by post_id */
-router.get('/:post_id', async function(req, res, next) {
+router.get('/:post_id', authentication(), async function(req, res, next) {
+    const user_id = req.user_id;
     const { post_id } = req.params
 
     try {
         let post = await Post.find({ _id: post_id });
-        return res.status(200).json({ data: post[0] });
+        let role = post[0].user_id === user_id ? 'WRITE' : 'READ';
+        return res.status(200).json({ 
+            data: post[0],
+            role,
+        });
 	}
 	catch (error) {
         //console.log(error.message)
@@ -50,16 +55,18 @@ router.get('/:post_id', async function(req, res, next) {
 /* POST a new post */
 router.post('/', authentication(), async function(req, res, next) {
     const user_id = req.user_id;
-    const { animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url } = req.body
+    const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url } = req.body
 
     try {
         const newPost = new Post({ 
-            user_id, 
-            animal: animal ?? null, 
+            user_id,
+            animal: animal ?? null,
+            breed: breed ?? null,
             color: color ?? null,
             age: age ?? null,
             sex: sex ?? null,
-            image: image ?? null,
+            cover_image: cover_image ?? null,
+            images: images ?? [],
             neutered: neutered ?? null,
             location: location ?? null,
             contact: contact ?? null,
@@ -67,7 +74,7 @@ router.post('/', authentication(), async function(req, res, next) {
             other_info: other_info ?? null,
             origin_url: origin_url ?? null,
         });
-        //const addPost = await newPost.save();
+        const addPost = await newPost.save();
         updateDB();
 		return res.status(200).json({ data: addPost, message: 'Add Success' });
 	}

@@ -8,10 +8,14 @@ import Location from "../models/Location.js";
 
 const authentication = () => {
     return async function (req, res, next) {
-        var JWT = req.headers.authorization
-        JWT = JWT.replace('Bearer ', '');
-        var payload = jwt.verify(JWT, process.env.TOKEN_SECRET);
-        req.user_id = payload.Uid;
+        try {
+            var JWT = req.headers.authorization
+            JWT = JWT.replace('Bearer ', '');
+            var payload = jwt.verify(JWT, process.env.TOKEN_SECRET);
+            req.user_id = payload.Uid;
+        } catch(e) {
+            //console.log(e)
+        }
         next();
         //var user_id = payload.Uid;
         /* let accessToken = req.get('Authorization');

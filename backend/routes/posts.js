@@ -2,9 +2,8 @@ import { Router } from "express";
 import Post from "../models/Post.js";
 import Age from "../models/Age.js";
 import Animal from "../models/Animal.js";
-import Breed from "../models/Breed.js";
 import Location from "../models/Location.js";
-import { authentication } from "../utils/util.js";
+import { authentication, updateDB } from "../utils/util.js";
 
 const router = Router();
 
@@ -68,37 +67,8 @@ router.post('/', authentication(), async function(req, res, next) {
             other_info: other_info ?? null,
             origin_url: origin_url ?? null,
         });
-        const addPost = await newPost.save();
-
-        // Check whether a new age
-        const existAge = await Age.find({ age });
-        if(existAge.length === 0) {
-            const newAge = new Age({ age });
-            const addAge = await newAge.save();
-        }
-
-        // Check whether a new animal
-        const existAnimal = await Animal.find({ animal });
-        if(existAnimal.length === 0) {
-            const newAnimal = new Animal({ animal });
-            const addAnimal = await newAnimal.save();
-        }
-
-        // Check whether a new breed
-        /* const existBreed = await Breed.find({ breed });
-        if(existBreed.length === 0) {
-            const newBreed = new Breed({ breed });
-            const addBreed = await newBreed.save();
-        } */
-
-        // Check whether a new location
-        const existLocation = await Location.find({ location });
-        if(existLocation.length === 0) {
-            const newLocation = new Location({ location });
-            const addLocation = await newLocation.save();
-        }
-
-
+        //const addPost = await newPost.save();
+        updateDB();
 		return res.status(200).json({ data: addPost, message: 'Add Success' });
 	}
 	catch (error) {

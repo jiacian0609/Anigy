@@ -1,6 +1,10 @@
 import dotenv from "dotenv-defaults";
 dotenv.config();
 import jwt from 'jsonwebtoken'
+import Post from "../models/Post.js";
+import Age from "../models/Age.js";
+import Animal from "../models/Animal.js";
+import Location from "../models/Location.js";
 
 const authentication = () => {
     return async function (req, res, next) {
@@ -12,12 +16,6 @@ const authentication = () => {
         //var user_id = payload.Uid;
         /* let accessToken = req.get('Authorization');
         if (!accessToken) {
-            res.status(401).send({error: 'Unauthorized'});
-            return;
-        }
-
-        accessToken = accessToken.replace('Bearer ', '');
-        if (accessToken == 'null') {
             res.status(401).send({error: 'Unauthorized'});
             return;
         }
@@ -52,4 +50,47 @@ const authentication = () => {
     }; 
 };
 
-export { authentication };
+const updateDB = async () => {
+    let posts = await Post.find();
+    let ages = await Age.find();
+    let animals = await Animal.find();
+    let locations = await Location.find();
+    let allAges = [], allAnimals = [], allLocations = [];
+    ages.forEach(obj => { allAges.push(obj.age) });
+    animals.forEach(obj => { allAnimals.push(obj.animal) });
+    locations.forEach(obj => { allLocations
+        .push(obj.location) });
+    console.log(allAges)
+    console.log(allAnimals)
+    console.log(allLocations)
+
+    /* // Check whether a new age
+    const existAge = await Age.find({ age });
+    if(existAge.length === 0) {
+        const newAge = new Age({ age });
+        const addAge = await newAge.save();
+    }
+
+    // Check whether a new animal
+    const existAnimal = await Animal.find({ animal });
+    if(existAnimal.length === 0) {
+        const newAnimal = new Animal({ animal });
+        const addAnimal = await newAnimal.save();
+    }
+
+    // Check whether a new breed
+    const existBreed = await Breed.find({ breed });
+    if(existBreed.length === 0) {
+        const newBreed = new Breed({ breed });
+        const addBreed = await newBreed.save();
+    }
+
+    // Check whether a new location
+    const existLocation = await Location.find({ location });
+    if(existLocation.length === 0) {
+        const newLocation = new Location({ location });
+        const addLocation = await newLocation.save();
+    } */
+};
+
+export { authentication, updateDB };

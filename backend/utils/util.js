@@ -17,40 +17,6 @@ const authentication = () => {
             //console.log(e)
         }
         next();
-        //var user_id = payload.Uid;
-        /* let accessToken = req.get('Authorization');
-        if (!accessToken) {
-            res.status(401).send({error: 'Unauthorized'});
-            return;
-        }
-
-        try {
-            const user = await promisify(jwt.verify)(accessToken, TOKEN_SECRET);
-            req.user = user;
-            console.log(user)
-            if (roleId == null) {
-                next();
-            } else {
-                let userDetail;
-                if (roleId == User.USER_ROLE.ALL) {
-                    userDetail = await User.getUserDetail(user.email);
-                } else {
-                    userDetail = await User.getUserDetail(user.email, roleId);
-                }
-                if (!userDetail) {
-                    res.status(403).send({error: 'Forbidden'});
-                } else {
-                    req.user.id = userDetail.id;
-                    req.user.role_id = userDetail.role_id;
-                    next();
-                }
-            }
-            return;
-        } catch(err) {
-            console.log(err)
-            res.status(403).send({error: 'Forbidden'});
-            return;
-        }*/
     }; 
 };
 
@@ -98,8 +64,6 @@ const updateDB = async () => {
      } catch (e) {
         console.log(e);
      }
-    
-
 };
 
 export { authentication, updateDB };

@@ -19,6 +19,7 @@ const Title = styled.div `
     font-size: 27px;
     font-weight: bold;
     color: #619E5C;
+    margin-left: 50px;
 `
 
 const FormContainer = styled.div `

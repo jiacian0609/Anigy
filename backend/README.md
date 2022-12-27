@@ -1,7 +1,12 @@
 # Backend API 文件
 ## 總覽
-- [GET `http://localhost:4000/api/posts`](##get-httplocalhost4000apiposts)
-- [POST http://localhost:4000/api/posts](#post-httplocalhost4000apiposts)
+- [GET `http://localhost:4000/api/posts`](#get-httplocalhost4000apiposts)
+- [POST `http://localhost:4000/api/posts`](#post-httplocalhost4000apiposts)
+- [GET `http://localhost:4000/api/posts/all`](#get-httplocalhost4000apipostsall)
+- [GET `http://localhost:4000/api/posts/{post_id}`](#get-httplocalhost4000apipostspost_id)
+- [PATCH `http://localhost:4000/api/posts/{post_id}`](#patch-httplocalhost4000apipostspost_id)
+- [DELETE `http://localhost:4000/api/posts/{post_id}`](#delete-httplocalhost4000apipostspost_id)
+- [GET `http://localhost:4000/api/filters`](#get-httplocalhost4000apifilters)
 
 ## GET `http://localhost:4000/api/posts`
 ### Request

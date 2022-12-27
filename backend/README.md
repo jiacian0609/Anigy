@@ -9,5 +9,6 @@
 ## DELETE `http://localhost:4000/api/posts/{post_id}`
 
 ## GET `http://localhost:4000/api/filters`
-
+### Reponse
+![](https://i.imgur.com/ugHulum.png)
 

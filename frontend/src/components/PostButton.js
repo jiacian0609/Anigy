@@ -5,6 +5,8 @@ import styled from "styled-components";
 const Container = styled.div `
     width: 230px;
 
+    margin-top: 40px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +21,7 @@ const Img = styled.img `
     position: absolute;
     z-index: 1;
     
-    background-color: #365A33;
+    background-color: #E2E2E2;
 `
 
 const ContentBox = styled.div `
@@ -61,9 +63,9 @@ const Text = styled.div `
 
 function PostButton({ post }) {
     return (
-        <Link to={`/post/${post.id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
+        <Link to={`/post/${post._id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
             <Container>
-                <Img alt={post.id} />
+                <Img alt={post._id} src={post.cover_image} />
                 <ContentBox>
                     <Row>
                         <Field>動物</Field>

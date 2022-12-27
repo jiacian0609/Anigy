@@ -24,7 +24,7 @@ const Title = styled.div`
 `
 
 const Content = styled.div `
-    width: 70%;
+    width: 40%;
     display: flex;
     margin-top: 40px;
     align-items: center;
@@ -32,8 +32,7 @@ const Content = styled.div `
 
 const Value = styled.div`
     background-color: #F1F1F1;
-    width: 70%;
-    margin-right: 30px;
+    width: 100%;
     border-radius: 30px;
     font-size: 24px;
     padding: 10px 20px;
@@ -53,13 +52,34 @@ const Div = styled.div`
     display: flex;
     align-items: center;
 `
-
+const Logout = styled.button`
+    background-color: white;
+    border-radius: 30px;
+    width: 60px;
+    height: 40px;
+    border: 2px solid #619E5C;
+    color: #619E5C;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 50px;
+    margin-top: 40px;
+    &:hover {
+        background-color: #619E5C;
+        color: #F1F1F1;
+    }
+`
 
 function Account() {
     const [name, setName] = useState('fake name');
     const [email, setEmail] = useState('fake email');
     const [phone, setPhone] = useState('fake phone');
     const navigate = useNavigate();
+
+    const logout = () => {
+        //console.log(window.localStorage.getItem("JWT"));
+        window.localStorage.removeItem("JWT");
+        //console.log(window.localStorage.getItem("JWT"));
+    }
 
     return (
         <Container>
@@ -81,9 +101,12 @@ function Account() {
                 <Value>{email}</Value>
             </Content>
             <Title>電話號碼</Title>
-            <Content>
-                <Value>{phone}</Value>
-            </Content>
+            <Div>
+                <Content>
+                    <Value>{phone}</Value>
+                </Content>
+                <Logout onClick={() => logout()}>登出</Logout>
+            </Div>
         </Container>
     )
 }

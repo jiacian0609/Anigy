@@ -91,11 +91,11 @@ router.post('/', authentication(), async function(req, res, next) {
 router.patch('/:post_id', authentication(), async function(req, res, next) {
 	const user_id = req.user_id;
 	const { post_id } = req.params
-	const { animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url } = req.body
+	const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url } = req.body
 
 	try {
-		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, color, age, sex, image, neutered, location, contact, status, other_info, origin_url }});
-		if(updatePost.modifiedCount === 0) {
+		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url }});
+		if(updatePost.matchedCount === 0) {
 			return res.status(403).json({ error: 'Update Forbidden' });
 		}
 		else {

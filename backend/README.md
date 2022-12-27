@@ -129,6 +129,36 @@
 ```
 
 ## PATCH `http://localhost:4000/api/posts/{post_id}`
+### Request
+```json
+{
+    "header": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+    },
+    "body": {
+        "animal": "貓頭鷹", 
+        "breed": "短耳貓頭鷹", 
+        "color": "紅", 
+        "age": "幼年", 
+        "sex": "M", 
+        "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", 
+        "images": ["https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5"], 
+        "neutered": true, 
+        "location": "台北市", 
+        "contact": null, 
+        "status": "已領養", 
+        "other_info": null, 
+        "origin_url": null
+    }
+}
+```
+### Reponse
+```json
+{
+    "message": "Update Success"
+}
+```
+
 ## DELETE `http://localhost:4000/api/posts/{post_id}`
 
 ## GET `http://localhost:4000/api/filters`

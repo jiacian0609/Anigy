@@ -160,6 +160,20 @@
 ```
 
 ## DELETE `http://localhost:4000/api/posts/{post_id}`
+### Request
+```json
+{
+    "header": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+    }
+}
+```
+### Reponse
+```json
+{
+    "message": "Delete Success"
+}
+```
 
 ## GET `http://localhost:4000/api/filters`
 ### Reponse

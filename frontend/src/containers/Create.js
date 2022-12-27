@@ -18,7 +18,7 @@ const Container = styled.div `
 const Title = styled.div `
     font-size: 27px;
     font-weight: bold;
-    color: #619E5C;
+    color: #365A33;
     margin-left: 50px;
 `
 

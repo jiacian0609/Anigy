@@ -17,7 +17,7 @@ const Container = styled.div `
 
 const CreateButton = styled.div `
     padding: 15px 50px;
-    background-color: #619E5C;
+    background-color: #365A33;
     box-shadow: 0px 3px 3px grey;
     border: solid 3px #000000;
     border-radius: 50px;
@@ -26,7 +26,7 @@ const CreateButton = styled.div `
 
     &:hover {
         background-color: #FFFFFF;
-        border: solid 3px #619E5C;
+        border: solid 3px #365A33;
         color: #000000;
     }
 `

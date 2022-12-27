@@ -17,7 +17,7 @@ const Content = styled.div`
     padding-left: 100px;
 `
 const Title = styled.h1`
-    color: #619E5C;
+    color: #365A33;
     font-size: 30px;
     font-weight: bold;
     width: 300px;
@@ -58,11 +58,11 @@ const SaveBt = styled.button`
     width: 50px;
     height: 30px;
     border-radius: 30px;
-    border: #619E5C 1px solid;
+    border: #365A33 1px solid;
     background: white;
     font-weight: bold;
     &:hover {
-        background-color: #619E5C;
+        background-color: #365A33;
         color: #F1F1F1;
     }
 `

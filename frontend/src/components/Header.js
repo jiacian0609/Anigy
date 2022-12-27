@@ -10,7 +10,7 @@ const Container = styled.div `
     height: 100px;
     z-index: 1;
     padding: 10px;
-    background-color: #619E5C;
+    background-color: #365A33;
 
     display: flex;
     align-items: center;

@@ -19,7 +19,7 @@ const Img = styled.img `
     position: absolute;
     z-index: 1;
     
-    background-color: #619E5C;
+    background-color: #365A33;
 `
 
 const ContentBox = styled.div `
@@ -49,7 +49,7 @@ const Row = styled.div `
 const Field = styled.div `
     padding: 2px 5px;
 
-    background-color: #619E5C;
+    background-color: #365A33;
     border-radius: 3px;
     color: #FFFFFF;
 `

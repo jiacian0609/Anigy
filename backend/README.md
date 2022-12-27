@@ -1,7 +1,7 @@
 # Backend API 文件
 ## 總覽
-- [GET `http://localhost:4000/api/posts`](##get-http://localhost:4000/api/posts)
-- [POST http://localhost:4000/api/posts](##post-http://localhost:4000/api/posts)
+- [GET `http://localhost:4000/api/posts`](##get-httplocalhost4000apiposts)
+- [POST http://localhost:4000/api/posts](#post-httplocalhost4000apiposts)
 
 ## GET `http://localhost:4000/api/posts`
 ### Request

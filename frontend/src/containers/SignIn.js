@@ -67,7 +67,7 @@ function SignIn() {
 
     const handleSubmit = ( username, password) => {
         console.log('username', username);
-        axios.post("http://localhost:4000/api/login", {
+        axios.post("http://localhost:4000/api/user/signIn", {
             "username": username,
             "password": password
         })

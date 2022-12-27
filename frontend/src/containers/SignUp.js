@@ -79,7 +79,7 @@ function SignUp() {
             return;
         }
         
-        axios.post("http://localhost:4000/api/signup", {
+        axios.post("http://localhost:4000/api/user/signUp", {
             "email": email,
             "username": username,
             "password": password,

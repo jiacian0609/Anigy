@@ -7,8 +7,7 @@ import accountRouter from './account.js'
 const router = Router();
 const basePath = '/api'
 
-router.use(basePath + '/login', userRouter);
-router.use(basePath + '/signup', userRouter);
+router.use(basePath + '/user', userRouter);
 router.use(basePath + '/posts', postsRouter);
 router.use(basePath + '/filters', filtersRouter);
 router.use(basePath + '/account', accountRouter)

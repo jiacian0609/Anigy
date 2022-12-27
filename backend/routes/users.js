@@ -5,8 +5,8 @@ import User from '../models/User.js'
 
 const router = Router();
 
-//signup
-router.post('/', async function (req, res) {
+// sign up
+router.post('/signUp', async function (req, res) {
 	console.log('start signup');
 	const username = req.body.username;
 	let password = req.body.password;
@@ -62,8 +62,8 @@ router.post('/', async function (req, res) {
 	res.send({'message': 'Sign up successfully.', 'JWT': token})
 });
 
-//login
-router.post('/', async (req, res) => {
+// sign in
+router.post('/signIn', async (req, res) => {
     console.log('start login');
     try {
       const { username, password } = req.body;

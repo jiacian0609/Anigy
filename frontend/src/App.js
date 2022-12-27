@@ -10,7 +10,7 @@ import Post from './containers/Post';
 import Manage from './containers/Manage';
 import Create from './containers/Create';
 import Edit from './containers/Edit';
-import Account from './containers/account';
+import Account from './containers/Account';
 import Modal from './components/AccountModal';
 import NotFound from './containers/NotFound.js'
 

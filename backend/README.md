@@ -1,5 +1,55 @@
 # Backend API 文件
 ## GET `http://localhost:4000/api/posts`
+### Request
+```json
+{
+    "header": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+    }
+}
+```
+### Reponse
+```json
+{
+    "data": [
+        {
+            "_id": "63a5dbcfd574e98153f97241",
+            "user_id": "63a5ca04a6955aef5e115744",
+            "animal": "貓頭鷹",
+            "breed": "短耳貓頭鷹",
+            "color": "紅",
+            "age": "老",
+            "sex": "M",
+            "cover_image": null,
+            "images": [],
+            "neutered": null,
+            "location": "台北市",
+            "contact": null,
+            "status": null,
+            "other_info": null,
+            "origin_url": null
+        },
+        {
+            "_id": "63a5dc1acf63d387ba8da0c5",
+            "user_id": "63a5ca04a6955aef5e115744",
+            "animal": "貓頭鷹",
+            "breed": "短耳貓頭鷹",
+            "color": "紅",
+            "age": "老",
+            "sex": "M",
+            "cover_image": null,
+            "images": [],
+            "neutered": null,
+            "location": "台北市",
+            "contact": null,
+            "status": null,
+            "other_info": null,
+            "origin_url": null
+        }
+    ]
+}
+```
+
 ## POST `http://localhost:4000/api/posts`
 
 ## GET `http://localhost:4000/api/posts/all`
@@ -10,7 +60,7 @@
 
 ## GET `http://localhost:4000/api/filters`
 ### Reponse
-```JSON
+```json
 {
     "data": {
         "ages": [

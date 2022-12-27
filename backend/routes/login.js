@@ -19,7 +19,6 @@ router.post('/', async (req, res) => {
     if ( user[0] === undefined) { 
       return res.status(404).send('Username does not exist.');
     } else {
-      console.log('?');
       encryptedPassword = user[0].password;
     }
 

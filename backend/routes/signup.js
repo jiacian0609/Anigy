@@ -60,31 +60,6 @@ router.post('/', async function (req, res) {
 	//Store token in cookie
 	res.send({'message': 'Sign up successfully.', 'JWT': token})
 
-	
-	/* Check input correctness
-	req.checkBody('username', 'user name is required').Notempty()
-	req.checkBody('password', 'password is required').Notempty()
-	req.checkBody('email', 'email is required').Notempty()
-	req.checkBody('email', 'email is not vaild').isEmail()
-	
-	let errors = req.validationErrors();
-
-	if(errors){
-		res.render('signup', {
-			errors:errors
-		});
-	} else{
-		let newUser = new User({
-			username:username,
-			password:password,
-			email:email
-		});
-	}
-	*/
-
-	//應該不用bcrypt加密吧 D:
-	//req.flash('success', 'You are now signed up and can login');
-	//res.redirect('/login');
 })
 
 export default router;

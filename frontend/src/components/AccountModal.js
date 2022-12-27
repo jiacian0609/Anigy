@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import axios from 'axios';
+import { message } from "antd";
 
 
 const Content = styled.div`
@@ -78,7 +79,9 @@ function Modal() {
 
 
     const handleSave = () => {
-        axios.post("http://localhost:4000/api/account", {
+        const user_id = '1' //要parse jwt?
+        axios.patch("http://localhost:4000/api/account", {
+            "user_id": user_id,
             "username": name,
             "email": email,
             "phone": phone
@@ -86,6 +89,9 @@ function Modal() {
         .then( (response) => {
 			/*window.localStorage.setItem('JWT', response.data.JWT)
             window.location.href = "/"*/
+            console.log(response);
+            window.alert(response.data)
+            navigate('/account')
 		})
 		.catch( (error) => {
 			window.alert(error.response.data)

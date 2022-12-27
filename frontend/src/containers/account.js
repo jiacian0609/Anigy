@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
-import Modal from '../components/AccountModal'
-
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { message, Upload, Select, Input } from 'antd';
-
-import SubmitButton from "../components/SubmitButton";
 
 const Container = styled.div `
     width: 100%;

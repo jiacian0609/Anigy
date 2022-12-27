@@ -7,13 +7,13 @@ import axios from 'axios';
 const Content = styled.div`
     width: 600px;
     margin: 0 auto;
-    align-items: center;
-    border: #619E5C 1px solid;
-    border-radius: 30px;
+    border-radius: 10%;
     margin-top: 100px;
     padding: 50px 0;
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 3px 5px grey;
+    padding-left: 100px;
 `
 const Title = styled.h1`
     color: #619E5C;
@@ -23,30 +23,24 @@ const Title = styled.h1`
     margin-left: 120px;
 `
 const SubTitle = styled.div`
-    border: #619E5C 1px solid;
     width: 100px;
     height: 40px;
-    padding-top: 6px;
-    border-radius: 30px;
-    text-align: center;
-    margin: 20px 0px;
+    padding-top: 10px;
+    margin: 10px 20px;
 `
 const Input = styled.input`
     background-color: #F1F1F1;
     box-shadow: 0px 3px 3px grey;
     border: 0px;
     border-radius: 30px;
-    padding: 5px 10px;
+    padding: 0px 10px;
     margin-left: 20px;
     height: 30px;
-`
-const Column = styled.div`
-    display: flex;
-    align-items: center;
+    width: 300px;
 `
 const Bt = styled.div`
-    padding-left: 150px;
-    margin-top: 30px;
+    padding-left: 250px;
+    margin-top: 60px;
 `
 const CancelBt = styled.button`
     width: 50px;
@@ -111,18 +105,12 @@ function Modal() {
     return (
         <Content>
             <Title>編輯個人資訊</Title>
-            <Column>
-                <SubTitle>使用者名稱</SubTitle>
-                <Input value={name} onChange={handleNameChange}/>
-            </Column>
-            <Column>
-                <SubTitle>電子信箱</SubTitle>
-                <Input value={email} onChange={handleEmailChange}/>
-            </Column>
-            <Column>
-                <SubTitle>電話號碼</SubTitle>
-                <Input value={phone} onChange={handlePhoneChange}/>
-            </Column>
+            <SubTitle>使用者名稱</SubTitle>
+            <Input value={name} onChange={handleNameChange}/>
+            <SubTitle>電子信箱</SubTitle>
+            <Input value={email} onChange={handleEmailChange}/>
+            <SubTitle>電話號碼</SubTitle>
+            <Input value={phone} onChange={handlePhoneChange}/>
             <Bt>
                 <CancelBt onClick={() => navigate('/account')}>取消</CancelBt>
                 <SaveBt onClick={() => handleSave()}>確定</SaveBt>

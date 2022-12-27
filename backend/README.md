@@ -53,6 +53,47 @@
 ## POST `http://localhost:4000/api/posts`
 
 ## GET `http://localhost:4000/api/posts/all`
+### Reponse
+```json
+{
+    "data": [
+        {
+            "_id": "63821f3e91031cd386cb8266",
+            "user_id": "63a313fca9f8cad1c7f579cc",
+            "animal": "貓",
+            "breed": "混種貓",
+            "color": "黃虎斑色",
+            "age": "幼年",
+            "sex": "M",
+            "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/19903ac3-9ec5-402d-89b0-9fbf0e223644_org.jpg?alt=media&token=0d238a35-5f97-447a-8fb5-7d164d8ec3a3",
+            "images": [],
+            "neutered": false,
+            "location": "臺北市動物之家",
+            "contact": "",
+            "status": "待領養",
+            "other_info": "",
+            "origin_url": "https://www.afurkid.com/Adoption/Details?id=78220",
+        },
+        {
+            "_id": "63a5dc1acf63d387ba8da0c5",
+            "user_id": "63a5ca04a6955aef5e115744",
+            "animal": "貓頭鷹",
+            "breed": "短耳貓頭鷹",
+            "color": "紅",
+            "age": "老",
+            "sex": "M",
+            "cover_image": null,
+            "images": [],
+            "neutered": null,
+            "location": "台北市",
+            "contact": null,
+            "status": null,
+            "other_info": null,
+            "origin_url": null
+        }
+    ]
+}
+```
 
 ## GET `http://localhost:4000/api/posts/{post_id}`
 ## PATCH `http://localhost:4000/api/posts/{post_id}`

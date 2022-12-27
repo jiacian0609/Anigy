@@ -1,0 +1,814 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "User API",
+		"description": "Simple RESTful API in Node.js with TypeScript"
+	},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"name": "Authorization",
+				"in": "header",
+				"type": "http",
+				"scheme": "bearer",
+				"description": "JWT Authorization header"
+			}
+		}
+	}, 
+	"tags": [
+		{
+			"name": "user",
+			"description": "Operations about user"
+		},
+		{
+			"name": "post",
+			"description": "Operations about post"
+		},
+		{
+			"name": "filter",
+			"description": "Operations about filter"
+		}
+	],
+	"paths": {
+		"/api/users/signup": {
+			"post": {
+				"tags": [
+					"user"
+				],
+				"summary": "Create new user",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/signup"
+							}  
+						}
+					}
+				},
+				"responses": {}
+			}
+		},
+		"/api/users/login": {
+			"post": {
+				"tags": [
+					"user"
+				],
+				"summary": "Log into app",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/login"
+							}  
+						}
+					}
+				},
+				"responses": {}
+			}
+		},
+		"/api/users": {
+			"post": {
+				"security": [{
+					"bearerAuth": []
+				}],
+				"tags": [
+					"user"
+				],
+				"summary": "Change password",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"old_password": {
+										"type": "string",
+										"example": "test"
+									},
+									"new_password": {
+										"type": "string",
+										"example": "123"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successfully change password",
+						"content": {   
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid status value"
+					}
+				}
+			},
+            "patch": {
+				"security": [{
+					"bearerAuth": []
+				}],
+				"tags": [
+					"user"
+				],
+				"summary": "Change password",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"old_password": {
+										"type": "string",
+										"example": "test"
+									},
+									"new_password": {
+										"type": "string",
+										"example": "123"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successfully change password",
+						"content": {   
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid status value"
+					}
+				}
+			}
+		},
+		"/api/posts": {
+			"get": {
+				"security": [{
+					"bearerAuth": []
+				}],
+				"tags": [
+					"post"
+				],
+				"summary": "Get all posts data with user_id",
+				"responses": {
+					"200": {
+						"description": "Successfully get all posts",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/post"
+                                            }
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+                    "400":  {
+						"description": "Unsuccessfully get all posts",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Get user's posts error"
+                                        }
+                                    }
+                                }
+							}
+						}
+					}
+				}
+			},
+            "post": {
+				"security": [{
+					"bearerAuth": []
+				}],
+				"tags": [
+					"post"
+				],
+				"summary": "Post a new post",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"animal": {
+                                        "type": "string",
+                                        "example": "貓"
+                                    },
+                                    "breed": {
+                                        "type": "string",
+                                        "example": "混種貓"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "黃虎斑色"
+                                    },
+                                    "age": {
+                                        "type": "string",
+                                        "example": "幼年"
+                                    },
+                                    "sex": {
+                                        "type": "string",
+                                        "example": "M"
+                                    },
+                                    "cover_image": {
+                                        "type": "string",
+                                        "example": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/19903ac3-9ec5-402d-89b0-9fbf0e223644_org.jpg?alt=media&token=0d238a35-5f97-447a-8fb5-7d164d8ec3a3"
+                                    },
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/19903ac3-9ec5-402d-89b0-9fbf0e223644_org.jpg?alt=media&token=0d238a35-5f97-447a-8fb5-7d164d8ec3a3"
+                                        }
+                                    },
+                                    "neutered": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "臺北市動物之家"
+                                    },
+                                    "contact": {
+                                        "type": "string",
+                                        "example": "0912-345-678"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "待領養"
+                                    },
+                                    "other_info": {
+                                        "type": "string",
+                                        "example": "很健康"
+                                    },
+                                    "origin_url": {
+                                        "type": "string",
+                                        "example": "https://www.afurkid.com/Adoption/Details?id=78220"
+                                    }
+								}
+							}  
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successfully post a new post",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "$ref": "#/definitions/post"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "exmaple": "Add Success"
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+					"400":  {
+						"description": "Unsuccessfully post a new post",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Add a post error"
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+					"403":  {
+						"description": "Unsuccessfully post a new post without login",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Add Forbidden"
+                                        }
+                                    }
+                                }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/posts/all": {
+			"get": {
+				"tags": [
+					"post"
+				],
+				"summary": "Get all posts data",
+				"responses": {
+					"200": {
+						"description": "Successfully get all posts",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/post"
+                                            }
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+                    "400":  {
+						"description": "Unsuccessfully get all posts",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Get all posts error"
+                                        }
+                                    }
+                                }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/posts/{post_id}": {
+			"get": {
+				"security": [{
+					"bearerAuth": []
+				}],
+				"tags": [
+					"post"
+				],
+				"summary": "Get a post data by post_id",
+                "parameters":[  
+                    {  
+                        "name": "post_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+				"responses": {
+					"200": {
+						"description": "Successfully get a post by post_id",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "$ref": "#/definitions/post"
+                                            }
+                                        },
+                                        "role": {
+                                            "type": "string",
+                                            "exmaple": "READ"
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+					"400":  {
+						"description": "Unsuccessfully get a post by post_id",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Get a post error"
+                                        }
+                                    }
+                                }
+							}
+						}
+					}
+				}
+			},
+            "patch": {
+				"security": [{
+					"bearerAuth": []
+				}],
+				"tags": [
+					"post"
+				],
+				"summary": "Patch a post",
+                "parameters":[  
+                    {  
+                        "name": "post_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"animal": {
+                                        "type": "string",
+                                        "example": "貓"
+                                    },
+                                    "breed": {
+                                        "type": "string",
+                                        "example": "混種貓"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "黃虎斑色"
+                                    },
+                                    "age": {
+                                        "type": "string",
+                                        "example": "幼年"
+                                    },
+                                    "sex": {
+                                        "type": "string",
+                                        "example": "M"
+                                    },
+                                    "cover_image": {
+                                        "type": "string",
+                                        "example": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/19903ac3-9ec5-402d-89b0-9fbf0e223644_org.jpg?alt=media&token=0d238a35-5f97-447a-8fb5-7d164d8ec3a3"
+                                    },
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/19903ac3-9ec5-402d-89b0-9fbf0e223644_org.jpg?alt=media&token=0d238a35-5f97-447a-8fb5-7d164d8ec3a3"
+                                        }
+                                    },
+                                    "neutered": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "臺北市動物之家"
+                                    },
+                                    "contact": {
+                                        "type": "string",
+                                        "example": "0912-345-678"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "待領養"
+                                    },
+                                    "other_info": {
+                                        "type": "string",
+                                        "example": "很健康"
+                                    },
+                                    "origin_url": {
+                                        "type": "string",
+                                        "example": "https://www.afurkid.com/Adoption/Details?id=78220"
+                                    }
+								}
+							}  
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successfully patch a post",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "exmaple": "Update Success"
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+					"400":  {
+						"description": "Unsuccessfully patch a post",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Update a post error"
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+					"403":  {
+						"description": "Unsuccessfully patch a post without login",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Update Forbidden"
+                                        }
+                                    }
+                                }
+							}
+						}
+					}
+				}
+			},
+            "delete": {
+				"security": [{
+					"bearerAuth": []
+				}],
+				"tags": [
+					"post"
+				],
+				"summary": "DELETE a post",
+                "parameters":[  
+                    {  
+                        "name": "post_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+				"responses": {
+					"200": {
+						"description": "Successfully delete a post",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "exmaple": "Delete Success"
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+					"400":  {
+						"description": "Unsuccessfully delete a post",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Delete a post error"
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+					"403":  {
+						"description": "Unsuccessfully delete a post without login",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Delete Forbidden"
+                                        }
+                                    }
+                                }
+							}
+						}
+					}
+				}
+			}
+		},
+        "/api/filters": {
+			"get": {
+				"tags": [
+					"filter"
+				],
+				"summary": "Get all filters",
+				"responses": {
+					"200": {
+						"description": "Successfully get all filters",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "ages": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "exmaple": "幼年"
+                                            }
+                                        },
+                                        "animals": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "animal": {
+                                                        "type": "string",
+                                                        "example": "貓"
+                                                    },
+                                                    "breed": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "exmaple": "混種貓"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "locations": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "exmaple": "臺北市動物之家"
+                                            }
+                                        }
+                                    }
+                                }
+							}
+						}
+					},
+                    "400":  {
+						"description": "Unsuccessfully get all filters",
+						"content": {   
+							"application/json": {
+								"schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "exmaple": "Get all posts error"
+                                        }
+                                    }
+                                }
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"signup": {
+			"type": "object",
+			"properties": {
+				"password": {
+					"type": "string",
+					"example": "test"
+				},
+				"email": {
+					"type": "string",
+					"example": "newTest@gmail.com"
+				}
+			}
+		},
+		"login": {
+			"type": "object",
+			"properties": {
+				"email": {
+					"type": "string",
+					"example": "test@gmail.com"
+				},
+				"password": {
+					"type": "string",
+					"example": "test"
+				}
+			}
+		},
+		"post": {
+			"type": "object",
+			"properties": {
+                "_id": {
+					"type": "string",
+					"example": "63821f3e91031cd386cb8266"
+				},
+                "user_id": {
+					"type": "string",
+					"example": "63a313fca9f8cad1c7f579cc"
+				},
+				"animal": {
+					"type": "string",
+					"example": "貓"
+				},
+                "breed": {
+					"type": "string",
+					"example": "混種貓"
+				},
+				"color": {
+					"type": "string",
+					"example": "黃虎斑色"
+				},
+                "age": {
+					"type": "string",
+					"example": "幼年"
+				},
+				"sex": {
+					"type": "string",
+					"example": "M"
+				},
+                "cover_image": {
+					"type": "string",
+					"example": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/19903ac3-9ec5-402d-89b0-9fbf0e223644_org.jpg?alt=media&token=0d238a35-5f97-447a-8fb5-7d164d8ec3a3"
+				},
+                "images": {
+					"type": "array",
+                    "items": {
+                        "type": "string",
+                        "example": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/19903ac3-9ec5-402d-89b0-9fbf0e223644_org.jpg?alt=media&token=0d238a35-5f97-447a-8fb5-7d164d8ec3a3"
+                    }
+				},
+                "neutered": {
+					"type": "boolean",
+					"example": false
+				},
+				"location": {
+					"type": "string",
+					"example": "臺北市動物之家"
+				},
+                "contact": {
+					"type": "string",
+					"example": "0912-345-678"
+				},
+				"status": {
+					"type": "string",
+					"example": "待領養"
+				},
+                "other_info": {
+					"type": "string",
+					"example": "很健康"
+				},
+				"origin_url": {
+					"type": "string",
+					"example": "https://www.afurkid.com/Adoption/Details?id=78220"
+				}
+			}
+		}
+	}
+}

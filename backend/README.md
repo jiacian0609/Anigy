@@ -1,10 +1,13 @@
 # Backend API 文件
-## `http://localhost:4000/api/posts`
+## GET `http://localhost:4000/api/posts`
+## POST `http://localhost:4000/api/posts`
 
-## `http://localhost:4000/api/posts/all`
+## GET `http://localhost:4000/api/posts/all`
 
-## `http://localhost:4000/api/posts/{post_id}`
+## GET `http://localhost:4000/api/posts/{post_id}`
+## PATCH `http://localhost:4000/api/posts/{post_id}`
+## DELETE `http://localhost:4000/api/posts/{post_id}`
 
-## `http://localhost:4000/api/filters`
+## GET `http://localhost:4000/api/filters`
 
 

@@ -51,6 +51,52 @@
 ```
 
 ## POST `http://localhost:4000/api/posts`
+### Request
+```json
+{
+    "header": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+    },
+    "body": {
+        "animal": "貓頭鷹", 
+        "breed": "短耳貓頭鷹", 
+        "color": "紅", 
+        "age": "老", 
+        "sex": "M", 
+        "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", 
+        "images": null, 
+        "neutered": true, 
+        "location": "台北市", 
+        "contact": null, 
+        "status": "待領養", 
+        "other_info": null, 
+        "origin_url": null
+    }
+}
+```
+### Reponse
+```json
+{
+    "data": {
+        "user_id": "63a5ca04a6955aef5e115744",
+        "animal": "貓頭鷹",
+        "breed": "短耳貓頭鷹",
+        "color": "紅",
+        "age": "老",
+        "sex": "M",
+        "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
+        "images": [],
+        "neutered": true,
+        "location": "台北市",
+        "contact": null,
+        "status": "待領養",
+        "other_info": null,
+        "origin_url": null,
+        "_id": "63ab1fc72b48ef214c792c4c"
+    },
+    "message": "Add Success"
+}
+```
 
 ## GET `http://localhost:4000/api/posts/all`
 ### Reponse

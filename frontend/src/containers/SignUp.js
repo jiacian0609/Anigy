@@ -51,7 +51,7 @@ const Submit = styled.button`
     font-size: 25px;
     color: white;
     font-weight: bolder;
-    background-color: #619E5C;
+    background-color: #365A33;
     border-radius: 50px;
     margin-top: 20px;
     border: 0px;
@@ -79,7 +79,7 @@ function SignUp() {
             return;
         }
         
-        axios.post("http://localhost:4000/api/signup", {
+        axios.post("http://localhost:4000/api/user/signUp", {
             "email": email,
             "username": username,
             "password": password,

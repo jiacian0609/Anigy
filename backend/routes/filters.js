@@ -9,15 +9,14 @@ const router = Router();
 router.get('/', async function(req, res, next) {
     try {
         let ages = await Age.find({}, { _id: 0, age: 1});
-        let animals = await Animal.find({}, { _id: 0, animal: 1});
+        let animals = await Animal.find({}, { _id: 0, animal: 1, breeds: 1});
         let locations = await Location.find({}, { _id: 0, location: 1});
-        let ageFilter = [], animalFilter = [], locationFilter = [];
+        let ageFilter = [], locationFilter = [];
         ages.forEach(obj => { ageFilter.push(obj.age) });
-        animals.forEach(obj => { animalFilter.push(obj.animal) });
         locations.forEach(obj => { locationFilter.push(obj.location) });
         return res.status(200).json({ data: {
             ages: ageFilter,
-            animals: animalFilter,
+            animals,
             locations: locationFilter,
         } });
 	}

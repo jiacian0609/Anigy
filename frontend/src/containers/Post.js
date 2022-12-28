@@ -46,7 +46,7 @@ const Field = styled.div `
     width: 130px;
     padding: 2px 5px;
 
-    background-color: #619E5C;
+    background-color: #365A33;
     border-radius: 3px;
     text-align: center;
     font-size: 25px;

@@ -8,9 +8,9 @@ import HeaderButton from "./HeaderButton";
 const Container = styled.div `
     width: 100%;
     height: 100px;
-    z-index: 1;
-    padding: 10px;
-    background-color: #619E5C;
+    z-index: 100;
+    padding: 40px;
+    background-color: #365A33;
 
     display: flex;
     align-items: center;
@@ -44,8 +44,8 @@ function Header() {
     const jwt = localStorage.getItem('JWT');
     return (
         <Container>
-            <Logo alt='logo' />
-            <Title>流浪動物收養平台</Title>
+            {/* <Logo alt='logo' /> */}
+            <Title>Anigy 流浪動物收養平台</Title>
             <Buttons>
                 <Link to='/' style={{ textDecoration: 'none', color: 'inherit'}}>
                     <HeaderButton icon='main' name='首頁'/>

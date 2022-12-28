@@ -5,7 +5,7 @@ const Container = styled.div `
     width: 60%;
     margin: 0 auto;
     padding: 15px 50px;
-    background-color: #619E5C;
+    background-color: #365A33;
     box-shadow: 0px 3px 3px grey;
     border-radius: 50px;
     font-size: 20px;

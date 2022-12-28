@@ -51,7 +51,7 @@ const Submit = styled.button`
     font-size: 25px;
     color: white;
     font-weight: bolder;
-    background-color: #619E5C;
+    background-color: #365A33;
     border-radius: 50px;
     border: 0px;
     margin-bottom: 10px;
@@ -67,7 +67,7 @@ function SignIn() {
 
     const handleSubmit = ( username, password) => {
         console.log('username', username);
-        axios.post("http://localhost:4000/api/login", {
+        axios.post("http://localhost:4000/api/user/signIn", {
             "username": username,
             "password": password
         })

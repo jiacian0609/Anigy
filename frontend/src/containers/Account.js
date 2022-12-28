@@ -72,7 +72,8 @@ function Account() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/account")
+        const jwt = window.localStorage.getItem("JWT")
+        axios.get("http://localhost:4000/api/account", { headers: {'authorization': 'Bearer ' + jwt} })
         .then(res => {
             console.log(res.data);
             const {username, useremail, userphone} = res.data

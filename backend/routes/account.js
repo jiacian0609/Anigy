@@ -5,7 +5,7 @@ import { authentication, updateDB } from '../utils/util.js';
 const router = Router();
 
 //get user info
-router.get('/', authentication(), async function(req, res, next)  {
+router.get('/', authentication, async function(req, res, next)  {
     try{
         console.log('get user info');
         const user_id = req.user_id;
@@ -21,7 +21,7 @@ router.get('/', authentication(), async function(req, res, next)  {
     }
 });
 
-router.patch('/', authentication(), async function(req, res, next)  {
+router.patch('/', authentication, async function(req, res, next)  {
     console.log('update user info');
     console.log('req header', req.headers);
     const user_id = req.user_id;

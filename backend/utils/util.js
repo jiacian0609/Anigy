@@ -12,12 +12,13 @@ const authentication = () => {
             var JWT = req.headers.authorization
             JWT = JWT.replace('Bearer ', '');
             var payload = jwt.verify(JWT, process.env.TOKEN_SECRET);
-            console.log('payload', payload)
+            console.log('JWT', JWT)
             req.user_id = payload.Uid;
         } catch(e) {
             //console.log(e)
         }
         next();
+        
     }; 
 };
 

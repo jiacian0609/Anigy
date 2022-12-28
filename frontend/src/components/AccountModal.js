@@ -84,7 +84,7 @@ function Modal() {
             "username": name,
             "email": email,
             "phone": phone
-        }, { headers: {'arthorization': jwt} })
+        }, { headers: {'authorization': 'Bearer ' + jwt} })
         .then( (response) => {
 			/*window.localStorage.setItem('JWT', response.data.JWT)
             window.location.href = "/"*/
@@ -95,7 +95,6 @@ function Modal() {
 		.catch( (error) => {
 			window.alert(error.response.data)
 		})
-        navigate('/account')
     }
     const handleNameChange = event => {
         setName(event.target.value);

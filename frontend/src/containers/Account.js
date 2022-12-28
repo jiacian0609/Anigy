@@ -10,16 +10,11 @@ const Container = styled.div `
 `
 
 const Title = styled.div`
-    border: #365A33 1px solid;
     width: 200px;
     font-size: 24px;
     padding-top: 10px;
     padding-bottom: 10px;
-    text-align: center;
-    border-radius: 30px;
     font-weight: bold;
-    color: #365A33;
-    padding: 0 auto;
     margin-top: 50px;
 `
 

@@ -1,14 +1,14 @@
 import { Router } from 'express'
 import User from '../models/User.js'
-import { updateDB } from '../utils/util.js';
+import { authentication, updateDB } from '../utils/util.js';
 
 const router = Router();
 
 //get user info
-router.get('/', async (req, res) => {
+router.get('/', authentication(), async function(req, res, next)  {
     try{
         console.log('get user info');
-        const user_id = req.body;
+        const user_id = req.user_id;
         console.log('user id', user_id);
         const user = await User.find({ _id: user_id })
         console.log(user[0])
@@ -21,9 +21,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.patch('/', async (req, res) => {
+router.patch('/', authentication(), async function(req, res, next)  {
     console.log('update user info');
-    const {user_id, username, email, phone} = req.body;
+    console.log('req header', req.headers);
+    const user_id = req.user_id;
+    console.log('user_id', user_id)
+    const { username, email, phone} = req.body;
     console.log( user_id, username, email, phone );
     try {
         

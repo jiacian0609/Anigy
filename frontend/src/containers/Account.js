@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Container = styled.div `
     width: 100%;
@@ -69,6 +70,17 @@ function Account() {
     const [email, setEmail] = useState('fake email');
     const [phone, setPhone] = useState('fake phone');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get("http://localhost:4000/api/account")
+        .then(res => {
+            console.log(res.data);
+            const {username, useremail, userphone} = res.data
+            setName(username)
+            setEmail(useremail)
+            setPhone(userphone)
+        })
+    })
 
     const signOut = () => {
         //console.log(window.localStorage.getItem("JWT"));

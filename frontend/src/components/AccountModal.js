@@ -79,13 +79,12 @@ function Modal() {
 
 
     const handleSave = () => {
-        const user_id = '1' //要parse jwt?
+        const jwt = window.localStorage.getItem("JWT")
         axios.patch("http://localhost:4000/api/account", {
-            "user_id": user_id,
             "username": name,
             "email": email,
             "phone": phone
-        })
+        }, { headers: {'arthorization': jwt} })
         .then( (response) => {
 			/*window.localStorage.setItem('JWT', response.data.JWT)
             window.location.href = "/"*/

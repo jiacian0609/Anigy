@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from 'react-router-dom';
 import styled from "styled-components";
+import _ from "lodash";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from 'react-responsive-carousel';
@@ -173,7 +174,7 @@ function Post() {
                 </Row>
                 <Row>
                     <Field>外觀特徵</Field>
-                    <Text>{post.detail}</Text>
+                    <Text>{_.isEmpty(post.detail) ? '無資訊' : post.detail}</Text>
                 </Row>
                 <Row>
                     <Field>領養狀態</Field>

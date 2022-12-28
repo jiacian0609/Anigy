@@ -17,5 +17,12 @@ export const api = {
             .catch(err => console.log(err))
         )
     },
+    getFilter() {
+        return (
+            axios.get(`${hostname}/filters`)
+            .then(res => res.data)
+            .catch(err => console.log(err))
+        )
+    },
 };
   

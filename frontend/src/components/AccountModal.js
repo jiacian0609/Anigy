@@ -26,7 +26,7 @@ const Title = styled.h1`
 const SubTitle = styled.div`
     width: 100px;
     height: 40px;
-    padding-top: 10px;
+    padding-top: 20px;
     margin: 10px 20px;
 `
 const Input = styled.input`

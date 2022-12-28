@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload, Select, Input } from 'antd';
 
 import SubmitButton from "../components/SubmitButton";
+
+import { api } from "../api";
 
 const { TextArea } = Input;
 
@@ -101,10 +103,42 @@ function Create() {
           status: 'error',
         },
     ]);
-    const [post, setPost] = useState({
-        sex: 'M',
-        neutured: true
+    const [filter, setFilter] = useState({
+        animals: [],
+        breeds: [],
+        ages: [],
+        locations: []
     });
+    const [animalFilter, setAnimalFilter] = useState([]);
+    const [showText, setShowText] = useState({
+        animals: false,
+        breeds: false,
+        ages: false,
+        locations: false
+    });
+    const [post, setPost] = useState({
+        animal: '',
+        breed: '',
+        age: '',
+        location: '',
+        sex: 'M',
+        neutured: true,
+        contact: '',
+        others: ''
+    });
+
+    useEffect(() => {
+        api.getFilter()
+        .then(res => {
+            setFilter({
+                animals: [...res.data.animals.map(item => { return {value: item.animal, label: item.animal} }), {value: 'Others', label: '其他'}],
+                // breeds: [{value: 'All', label: '全部'}],
+                ages: [ ...res.data.ages.map(item => { return {value: item, label: item} }), {value: 'Others', label: '其他'}],
+                locations: [ ...res.data.locations.map(item => { return {value: item, label: item} }), {value: 'Others', label: '其他'}],
+            })
+            setAnimalFilter(res.data.animals)
+        });
+    }, []);
 
 
     const handleCoverImageChange = (info) => {
@@ -121,6 +155,10 @@ function Create() {
         }
     };
     const handleImagesChange = ({ fileList: newFileList }) => setImages(newFileList);
+
+    const onSubmit = async () => {
+
+    }
 
     const uploadButton = (
         <div>
@@ -143,7 +181,7 @@ function Create() {
                             <Upload
                                 name="coverImage"
                                 listType="picture-card"
-                                className="avatar-uploader"
+                                // className="avatar-uploader"
                                 showUploadList={false}
                                 // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                 beforeUpload={beforeUpload}
@@ -180,6 +218,35 @@ function Create() {
                             <Text>動物</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
+                                options={filter.animals}
+                                placeholder='請選擇...'
+                                // defaultValue={filter.animals[0]}
+                                onChange={value => {
+                                    if (value === 'Others') {
+                                        setFilter({
+                                            ...filter,
+                                            breeds: [{value: 'Others', label: '其他'}],
+                                        });
+                                        setShowText({
+                                            ...showText,
+                                            animals: true
+                                        });
+                                    }
+                                    else {
+                                        setFilter({
+                                            ...filter,
+                                            breeds: [
+                                                ...animalFilter.filter(item => item.animal === value)[0].breeds
+                                                .map(item => { return {value: item, label: item} }),
+                                                {value: 'Others', label: '其他'}
+                                            ]
+                                        });
+                                        setShowText({
+                                            ...showText,
+                                            animals: false
+                                        });
+                                    }
+                                }}
                             ></Select>
                             <Input
                                 bordered={false}
@@ -187,7 +254,8 @@ function Create() {
                                 style={{
                                     width: '100%', 
                                     borderBottom: 'solid 1px #ECECEC',
-                                    borderRadius: 0
+                                    borderRadius: 0,
+                                    visibility: showText.animals ? '' : 'hidden'
                                 }}
                             ></Input>
                         </SubColumn>
@@ -195,6 +263,22 @@ function Create() {
                             <Text>品種</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
+                                options={filter.breeds}
+                                placeholder='請選擇...'
+                                onChange={value => {
+                                    if (value === 'Others') {
+                                        setShowText({
+                                            ...showText,
+                                            breeds: true
+                                        });
+                                    }
+                                    else {
+                                        setShowText({
+                                            ...showText,
+                                            breeds: false
+                                        });
+                                    }
+                                }}
                             ></Select>
                             <Input
                                 bordered={false}
@@ -202,7 +286,8 @@ function Create() {
                                 style={{
                                     width: '100%', 
                                     borderBottom: 'solid 1px #ECECEC',
-                                    borderRadius: 0
+                                    borderRadius: 0,
+                                    visibility: showText.breeds ? '' : 'hidden'
                                 }}
                             ></Input>
                         </SubColumn>
@@ -214,6 +299,22 @@ function Create() {
                             <Text>年齡</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
+                                options={filter.ages}
+                                placeholder='請選擇...'
+                                onChange={value => {
+                                    if (value === 'Others') {
+                                        setShowText({
+                                            ...showText,
+                                            ages: true
+                                        });
+                                    }
+                                    else {
+                                        setShowText({
+                                            ...showText,
+                                            ages: false
+                                        });
+                                    }
+                                }}
                             ></Select>
                             <Input
                                 bordered={false}
@@ -221,7 +322,8 @@ function Create() {
                                 style={{
                                     width: '100%', 
                                     borderBottom: 'solid 1px #ECECEC',
-                                    borderRadius: 0
+                                    borderRadius: 0,
+                                    visibility: showText.ages ? '' : 'hidden'
                                 }}
                             ></Input>
                         </SubColumn>
@@ -229,6 +331,22 @@ function Create() {
                             <Text>地區</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
+                                options={filter.locations}
+                                placeholder='請選擇...'
+                                onChange={value => {
+                                    if (value === 'Others') {
+                                        setShowText({
+                                            ...showText,
+                                            locations: true
+                                        });
+                                    }
+                                    else {
+                                        setShowText({
+                                            ...showText,
+                                            locations: false
+                                        });
+                                    }
+                                }}
                             ></Select>
                             <Input
                                 bordered={false}
@@ -236,7 +354,8 @@ function Create() {
                                 style={{
                                     width: '100%', 
                                     borderBottom: 'solid 1px #ECECEC',
-                                    borderRadius: 0
+                                    borderRadius: 0,
+                                    visibility: showText.locations ? '' : 'hidden'
                                 }}
                             ></Input>
                         </SubColumn>
@@ -294,7 +413,7 @@ function Create() {
                         >
                         </TextArea>
                     </div>
-                    <SubmitButton name='新增貼文' />
+                    <SubmitButton name='新增貼文' onClick={onSubmit}/>
                 </FormColumn>
             </FormContainer>
         </Container>

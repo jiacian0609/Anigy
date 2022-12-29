@@ -73,13 +73,13 @@ function Account() {
 
     useEffect(() => {
         const jwt = window.localStorage.getItem("JWT")
-        axios.get("http://localhost:4000/api/account", { headers: {'authorization': 'Bearer ' + jwt} })
+        axios.get("http://localhost:4000/api/account", { headers: { Authorization: 'Bearer ' + jwt } })
         .then(res => {
             console.log(res.data);
-            const {username, useremail, userphone} = res.data
+            const {username, email, mobile} = res.data.info
             setName(username)
-            setEmail(useremail)
-            setPhone(userphone)
+            setEmail(email)
+            setPhone(mobile)
         })
     })
 

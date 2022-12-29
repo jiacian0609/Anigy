@@ -74,7 +74,7 @@ function Modal() {
     console.log('state', location)
     const [name, setName] = useState(location.state.name);
     const [email, setEmail] = useState(location.state.email);
-    const [phone, setPhone] = useState(location.state.phone);
+    const [mobile, setPhone] = useState(location.state.phone);
 
 
 
@@ -83,17 +83,19 @@ function Modal() {
         axios.patch("http://localhost:4000/api/account", {
             "username": name,
             "email": email,
-            "phone": phone
-        }, { headers: {'authorization': 'Bearer ' + jwt} })
+            "mobile": mobile
+        }, { headers: { authorization: 'Bearer ' + jwt } })
         .then( (response) => {
 			/*window.localStorage.setItem('JWT', response.data.JWT)
             window.location.href = "/"*/
             console.log(response);
-            window.alert(response.data)
             navigate('/account')
 		})
 		.catch( (error) => {
-			window.alert(error.response.data)
+            console.log(error);
+            if (error.response.data.error === "Update Forbidden") {
+                navigate('/account')
+            }
 		})
     }
     const handleNameChange = event => {
@@ -114,7 +116,7 @@ function Modal() {
             <SubTitle>電子信箱</SubTitle>
             <Input value={email} onChange={handleEmailChange}/>
             <SubTitle>電話號碼</SubTitle>
-            <Input value={phone} onChange={handlePhoneChange}/>
+            <Input value={mobile} onChange={handlePhoneChange}/>
             <Bt>
                 <CancelBt onClick={() => navigate('/account')}>取消</CancelBt>
                 <SaveBt onClick={() => handleSave()}>確定</SaveBt>

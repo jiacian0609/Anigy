@@ -128,7 +128,6 @@ function Post() {
 
         api.getPostDetail(id)
         .then(res => {
-            console.log(res.data);
             setPost(res.data);
         })
         .catch(err => console.log(err));
@@ -170,7 +169,7 @@ function Post() {
                 </Row>
                 <Row>
                     <Field>聯絡資訊</Field>
-                    <Text>{post.mobile}</Text>
+                    <Text>{post.contact}</Text>
                 </Row>
                 <Row>
                     <Field>外觀特徵</Field>

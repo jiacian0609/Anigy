@@ -6,6 +6,7 @@ import _ from "lodash";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from 'react-responsive-carousel';
 
+import Loading from "../components/Loading";
 import { api } from "../api";
 
 const Container = styled.div `
@@ -98,6 +99,7 @@ function Post() {
     }
 
     const { id } = useParams();
+    const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({
         id: 0,
         animal: '',
@@ -130,7 +132,10 @@ function Post() {
         .then(res => {
             setPost(res.data);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            window.location.href = '/404';
+        });
     }, [])
 
     return (

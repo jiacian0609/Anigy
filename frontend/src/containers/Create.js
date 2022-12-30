@@ -470,11 +470,11 @@ function Create() {
                             onChange={e => {
                                 if (e.target.value === '')
                                     setPost(curPost => {
-                                        const {others, ...rest} = curPost;
+                                        const {other_info, ...rest} = curPost;
                                         return rest;
                                     });
                                 else
-                                    handlePostChange({others: e.target.value});
+                                    handlePostChange({other_info: e.target.value});
                             }}
                         />
                     </div>

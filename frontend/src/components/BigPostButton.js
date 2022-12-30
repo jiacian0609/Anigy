@@ -89,10 +89,12 @@ const DeleteButton = styled.div `
     height: 20px;
     background-image: url('/icons/delete.png');
     background-size: contain;
+
+    cursor: pointer;
 `
 
 
-function BigPostButton({ post }) {
+function BigPostButton({ post, onDelete }) {
     return (
         <Container>
             <Img alt={post.id} src={post.cover_image} />
@@ -145,7 +147,7 @@ function BigPostButton({ post }) {
                     <Link to={`/edit/${post.id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
                         <EditButton />
                     </Link>
-                    <DeleteButton />
+                    <DeleteButton onClick={onDelete}/>
                 </Buttons>
             </ContentBox>
         </Container>

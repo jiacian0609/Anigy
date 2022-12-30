@@ -53,6 +53,14 @@ function Manage() {
         .then(res => setPosts(res.data));
     }, []);
 
+    const onDelete = (post_id) => {
+        api.deletePost(post_id)
+        .then(res => console.log(res));
+
+        api.getUserPost()
+        .then(res => setPosts(res.data));
+    }
+
     return (
         <Container>
             <Link to='/create' style={{ textDecoration: 'none', color: 'inherit'}}>
@@ -64,6 +72,7 @@ function Manage() {
                     <BigPostButton 
                         key={p._id}
                         post={p}
+                        onDelete={() => onDelete(p._id)}
                     />)
             }
         </Container>

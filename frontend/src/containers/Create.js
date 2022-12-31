@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { message, Upload, Select, Input } from 'antd';
+import { message, Upload, Select, Input, Radio } from 'antd';
 
 import SubmitButton from "../components/SubmitButton";
 
@@ -116,16 +116,7 @@ function Create() {
         ages: false,
         locations: false
     });
-    const [post, setPost] = useState({
-        animal: '',
-        breed: '',
-        age: '',
-        location: '',
-        sex: 'M',
-        neutured: true,
-        contact: '',
-        others: ''
-    });
+    const [post, setPost] = useState({});
 
     useEffect(() => {
         api.getFilter()
@@ -135,8 +126,8 @@ function Create() {
                 // breeds: [{value: 'All', label: '全部'}],
                 ages: [ ...res.data.ages.map(item => { return {value: item, label: item} }), {value: 'Others', label: '其他'}],
                 locations: [ ...res.data.locations.map(item => { return {value: item, label: item} }), {value: 'Others', label: '其他'}],
-            })
-            setAnimalFilter(res.data.animals)
+            });
+            setAnimalFilter(res.data.animals);
         });
     }, []);
 
@@ -154,7 +145,15 @@ function Create() {
             });
         }
     };
+
     const handleImagesChange = ({ fileList: newFileList }) => setImages(newFileList);
+
+    const handlePostChange = (payload) => {
+        setPost({
+            ...post,
+            ...payload
+        });
+    };
 
     const onSubmit = async () => {
 
@@ -220,9 +219,12 @@ function Create() {
                                 style={{ width: '100%', marginBottom: '10px' }}
                                 options={filter.animals}
                                 placeholder='請選擇...'
-                                // defaultValue={filter.animals[0]}
                                 onChange={value => {
                                     if (value === 'Others') {
+                                        setPost(curPost => {
+                                            const {animal, ...rest} = curPost;
+                                            return rest;
+                                        });
                                         setFilter({
                                             ...filter,
                                             breeds: [{value: 'Others', label: '其他'}],
@@ -233,6 +235,7 @@ function Create() {
                                         });
                                     }
                                     else {
+                                        handlePostChange({animal: value});
                                         setFilter({
                                             ...filter,
                                             breeds: [
@@ -247,7 +250,7 @@ function Create() {
                                         });
                                     }
                                 }}
-                            ></Select>
+                            />
                             <Input
                                 bordered={false}
                                 placeholder='自行輸入...'
@@ -257,7 +260,16 @@ function Create() {
                                     borderRadius: 0,
                                     visibility: showText.animals ? '' : 'hidden'
                                 }}
-                            ></Input>
+                                onChange={e => {
+                                    if (e.target.value === '')
+                                        setPost(curPost => {
+                                            const {animal, ...rest} = curPost;
+                                            return rest;
+                                        });
+                                    else
+                                        handlePostChange({animal: e.target.value});
+                                }}
+                            />
                         </SubColumn>
                         <SubColumn>
                             <Text>品種</Text>
@@ -267,19 +279,24 @@ function Create() {
                                 placeholder='請選擇...'
                                 onChange={value => {
                                     if (value === 'Others') {
+                                        setPost(curPost => {
+                                            const {breed, ...rest} = curPost;
+                                            return rest;
+                                        });
                                         setShowText({
                                             ...showText,
                                             breeds: true
                                         });
                                     }
                                     else {
+                                        handlePostChange({breed: value});
                                         setShowText({
                                             ...showText,
                                             breeds: false
                                         });
                                     }
                                 }}
-                            ></Select>
+                            />
                             <Input
                                 bordered={false}
                                 placeholder='自行輸入...'
@@ -289,7 +306,16 @@ function Create() {
                                     borderRadius: 0,
                                     visibility: showText.breeds ? '' : 'hidden'
                                 }}
-                            ></Input>
+                                onChange={e => {
+                                    if (e.target.value === '')
+                                        setPost(curPost => {
+                                            const {breed, ...rest} = curPost;
+                                            return rest;
+                                        });
+                                    else
+                                        handlePostChange({breed: e.target.value});
+                                }}
+                            />
                         </SubColumn>
                     </Row>
                     
@@ -303,19 +329,24 @@ function Create() {
                                 placeholder='請選擇...'
                                 onChange={value => {
                                     if (value === 'Others') {
+                                        setPost(curPost => {
+                                            const {age, ...rest} = curPost;
+                                            return rest;
+                                        });
                                         setShowText({
                                             ...showText,
                                             ages: true
                                         });
                                     }
                                     else {
+                                        handlePostChange({age: value});
                                         setShowText({
                                             ...showText,
                                             ages: false
                                         });
                                     }
                                 }}
-                            ></Select>
+                            />
                             <Input
                                 bordered={false}
                                 placeholder='自行輸入...'
@@ -325,7 +356,16 @@ function Create() {
                                     borderRadius: 0,
                                     visibility: showText.ages ? '' : 'hidden'
                                 }}
-                            ></Input>
+                                onChange={e => {
+                                    if (e.target.value === '')
+                                        setPost(curPost => {
+                                            const {age, ...rest} = curPost;
+                                            return rest;
+                                        });
+                                    else
+                                        handlePostChange({age: e.target.value});
+                                }}
+                            />
                         </SubColumn>
                         <SubColumn>
                             <Text>地區</Text>
@@ -335,19 +375,24 @@ function Create() {
                                 placeholder='請選擇...'
                                 onChange={value => {
                                     if (value === 'Others') {
+                                        setPost(curPost => {
+                                            const {location, ...rest} = curPost;
+                                            return rest;
+                                        });
                                         setShowText({
                                             ...showText,
                                             locations: true
                                         });
                                     }
                                     else {
+                                        handlePostChange({location: value});
                                         setShowText({
                                             ...showText,
                                             locations: false
                                         });
                                     }
                                 }}
-                            ></Select>
+                            />
                             <Input
                                 bordered={false}
                                 placeholder='自行輸入...'
@@ -357,7 +402,16 @@ function Create() {
                                     borderRadius: 0,
                                     visibility: showText.locations ? '' : 'hidden'
                                 }}
-                            ></Input>
+                                onChange={e => {
+                                    if (e.target.value === '')
+                                        setPost(curPost => {
+                                            const {location, ...rest} = curPost;
+                                            return rest;
+                                        });
+                                    else
+                                        handlePostChange({location: e.target.value});
+                                }}
+                            />
                         </SubColumn>
                     </Row>
                 </FormColumn>
@@ -378,8 +432,8 @@ function Create() {
                                         label: '母'
                                     }
                                 ]}
-                                defaultValue='M'
-                                onChange={value => setPost({...post, sex: value})}
+                                placeholder='請選擇...'
+                                onChange={value => handlePostChange({sex: value})}
                             />
                         </SubColumn>
                         <SubColumn>
@@ -396,22 +450,33 @@ function Create() {
                                         label: '否'
                                     }
                                 ]}
-                                defaultValue={true}
-                                onChange={value => setPost({...post, neutured: value})}
+                                placeholder='請選擇...'
+                                onChange={value => handlePostChange({neutured: value})}
                             />
                         </SubColumn>
                     </Row>
                     <div>
                         <Text>聯絡資訊</Text>
-                        <Input></Input>
+                        <Radio.Group onChange={e => handlePostChange({contact: e.target.value})} value={post.contact}>
+                            <Radio value='mobile'>電話</Radio>
+                            <Radio value='email'>E-mail</Radio>
+                        </Radio.Group>
                     </div>
                     <div>
                         <Text>外觀特徵</Text>
                         <TextArea
                             showCount
                             style={{ height: 250, marginBottom: 24, resize: 'none' }}
-                        >
-                        </TextArea>
+                            onChange={e => {
+                                if (e.target.value === '')
+                                    setPost(curPost => {
+                                        const {other_info, ...rest} = curPost;
+                                        return rest;
+                                    });
+                                else
+                                    handlePostChange({other_info: e.target.value});
+                            }}
+                        />
                     </div>
                     <SubmitButton name='新增貼文' onClick={onSubmit}/>
                 </FormColumn>

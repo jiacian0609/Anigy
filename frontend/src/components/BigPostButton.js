@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from "styled-components";
+import styled from 'styled-components';
+import _ from 'lodash';
 
 const Container = styled.div `
     min-width: 65%;
@@ -88,13 +89,15 @@ const DeleteButton = styled.div `
     height: 20px;
     background-image: url('/icons/delete.png');
     background-size: contain;
+
+    cursor: pointer;
 `
 
 
-function BigPostButton({ post }) {
+function BigPostButton({ post, onDelete }) {
     return (
         <Container>
-            <Img alt={post.id} />
+            <Img alt={post.id} src={post.cover_image} />
             <ContentBox>
                 <Column>
                     <Row>
@@ -129,11 +132,11 @@ function BigPostButton({ post }) {
                     </Row>
                     <Row>
                         <Field>聯絡資訊</Field>
-                        <Text>{post.mobile}</Text>
+                        <Text>{post.contact}</Text>
                     </Row>
                     <Row>
                         <Field>外觀特徵</Field>
-                        <Text>{post.detail}</Text>
+                        <Text>{_.isEmpty(post.other_info) ? '無資訊' : post.other_info}</Text>
                     </Row>
                     <Row>
                         <Field>領養狀態</Field>
@@ -144,7 +147,7 @@ function BigPostButton({ post }) {
                     <Link to={`/edit/${post.id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
                         <EditButton />
                     </Link>
-                    <DeleteButton />
+                    <DeleteButton onClick={onDelete}/>
                 </Buttons>
             </ContentBox>
         </Container>

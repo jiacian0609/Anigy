@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { api } from "../api";
 
 const Container = styled.div `
     width: 100%;
@@ -73,7 +74,8 @@ function Account() {
 
     useEffect(() => {
         const jwt = window.localStorage.getItem("JWT")
-        axios.get("http://localhost:4000/api/account", { headers: { Authorization: 'Bearer ' + jwt } })
+        api.patchInfo(jwt)
+        axios.get("http://localhost:4000/api/user/getInfo", { headers: { Authorization: 'Bearer ' + jwt } })
         .then(res => {
             console.log(res.data);
             const {username, email, mobile} = res.data.info

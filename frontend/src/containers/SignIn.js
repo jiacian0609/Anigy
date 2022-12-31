@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components'
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { api } from '../api'
 
 
 const Base = styled.div`
@@ -66,11 +66,7 @@ const Signup = styled.button`
 function SignIn() {
 
     const handleSubmit = ( username, password) => {
-        console.log('username', username);
-        axios.post("http://localhost:4000/api/user/signIn", {
-            "username": username,
-            "password": password
-        })
+        api.login(username, password)
         .then( (response) => {
 			window.localStorage.setItem('JWT', response.data.JWT)
             window.location.href = "/"
@@ -82,6 +78,8 @@ function SignIn() {
 				window.alert('會員密碼錯誤！')
 			else window.alert(error.response.data)
 		})
+        console.log('username', username);
+        
     }
     const navigate = useNavigate();
 

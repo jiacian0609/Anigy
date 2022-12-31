@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { api } from '../api'
 
 const Base = styled.div`
     width: 100%;
@@ -78,13 +79,7 @@ function SignUp() {
             window.alert('請同意公開資訊');
             return;
         }
-        
-        axios.post("http://localhost:4000/api/user/signUp", {
-            "email": email,
-            "username": username,
-            "password": password,
-            "mobile": phone
-        })
+        api.signup(email, username, password, phone)
         .then( (response) => {
 			window.localStorage.setItem('JWT', response.data.JWT)
             window.location.href = "/"

@@ -10,7 +10,7 @@ const basePath = '/api'
 router.use(basePath + '/user', userRouter);
 router.use(basePath + '/posts', postsRouter);
 router.use(basePath + '/filters', filtersRouter);
-router.use(basePath + '/account', accountRouter)
+router.use(basePath + '/user', userRouter)
 
 
 export default router;

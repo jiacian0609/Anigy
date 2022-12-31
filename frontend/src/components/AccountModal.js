@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import axios from 'axios';
-import { message } from "antd";
+import { api } from '../api'
 
 
 const Content = styled.div`
@@ -80,11 +80,7 @@ function Modal() {
 
     const handleSave = () => {
         const jwt = window.localStorage.getItem("JWT")
-        axios.patch("http://localhost:4000/api/account", {
-            "username": name,
-            "email": email,
-            "mobile": mobile
-        }, { headers: { authorization: 'Bearer ' + jwt } })
+        api.patchInfo(name, email, mobile, jwt)
         .then( (response) => {
 			/*window.localStorage.setItem('JWT', response.data.JWT)
             window.location.href = "/"*/

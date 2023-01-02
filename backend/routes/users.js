@@ -137,4 +137,5 @@ router.patch('/', authentication(), async function(req, res, next)  {
 		return res.status(500).json({error: '修改使用者資訊失敗'})
 	}
 });
+
 export default router;

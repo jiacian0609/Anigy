@@ -137,44 +137,53 @@
 
 ## GET `http://localhost:4000/api/posts/all`
 ### Reponse
+#### 200
 ```json
 {
     "data": [
         {
-            "_id": "63821f3e91031cd386cb8266",
-            "user_id": "63a313fca9f8cad1c7f579cc",
-            "animal": "貓",
-            "breed": "混種貓",
-            "color": "黃虎斑色",
-            "age": "幼年",
-            "sex": "M",
-            "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/19903ac3-9ec5-402d-89b0-9fbf0e223644_org.jpg?alt=media&token=0d238a35-5f97-447a-8fb5-7d164d8ec3a3",
-            "images": [],
-            "neutered": false,
-            "location": "臺北市動物之家",
-            "contact": "",
-            "status": "待領養",
-            "other_info": "",
-            "origin_url": "https://www.afurkid.com/Adoption/Details?id=78220",
-        },
-        {
-            "_id": "63a5dc1acf63d387ba8da0c5",
+            "_id": "63b2cd433617b3abdfd667b2",
             "user_id": "63a5ca04a6955aef5e115744",
             "animal": "貓頭鷹",
             "breed": "短耳貓頭鷹",
             "color": "紅",
             "age": "老",
             "sex": "M",
-            "cover_image": null,
+            "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
             "images": [],
-            "neutered": null,
+            "neutered": true,
             "location": "台北市",
-            "contact": null,
-            "status": null,
+            "contact": "mobile",
+            "contact_content": "0912345678",
+            "status": "待領養",
+            "other_info": null,
+            "origin_url": null
+        },
+        {
+            "_id": "63b2cd973617b3abdfd667c8",
+            "user_id": "63a5ca04a6955aef5e115744",
+            "animal": "貓頭鷹",
+            "breed": "短耳貓頭鷹",
+            "color": "紅",
+            "age": "老",
+            "sex": "M",
+            "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
+            "images": [],
+            "neutered": true,
+            "location": "台北市",
+            "contact": "email",
+            "contact_content": "cy9815526@gmail.com",
+            "status": "待領養",
             "other_info": null,
             "origin_url": null
         }
     ]
+}
+```
+#### 500
+```json
+{
+    "error": "取得全部貼文失敗"
 }
 ```
 

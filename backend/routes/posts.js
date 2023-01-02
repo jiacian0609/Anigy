@@ -1,8 +1,6 @@
 import { Router } from "express";
 import Post from "../models/Post.js";
-import Age from "../models/Age.js";
-import Animal from "../models/Animal.js";
-import Location from "../models/Location.js";
+import User from "../models/User.js";
 import { authentication, updateDB } from "../utils/util.js";
 
 const router = Router();
@@ -55,35 +53,43 @@ router.get('/:post_id', authentication(), async function(req, res, next) {
 /* POST a new post */
 router.post('/', authentication(), async function(req, res, next) {
 	const user_id = req.user_id;
-	const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url } = req.body
+	const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, other_info, origin_url } = req.body
 
 	try {
 		if(!user_id)
-			return res.status(403).json({ error: 'Add Forbidden' });
+			return res.status(403).json({ error: '請先登入以新增貼文' });
 
+		// Check the necessary variables
+		if(!animal || !breed || !color || !age || !sex || !cover_image || !neutered || !location || !contact)
+			return res.status(400).json({ error: '請輸入必填欄位' });
+		
+		// Add a new post
+		let user = await User.find({ _id: user_id });
 		const newPost = new Post({ 
 			user_id,
-			animal: animal ?? null,
-			breed: breed ?? null,
-			color: color ?? null,
-			age: age ?? null,
-			sex: sex ?? null,
-			cover_image: cover_image ?? null,
+			animal: animal ?? null, // necessary
+			breed: breed ?? null, // necessary
+			color: color ?? null, // necessary
+			age: age ?? null, // necessary
+			sex: sex ?? null, // necessary
+			cover_image: cover_image ?? null, // necessary
 			images: images ?? [],
-			neutered: neutered ?? null,
-			location: location ?? null,
-			contact: contact ?? null,
-			status: status ?? null,
+			neutered: neutered ?? null, // necessary
+			location: location ?? null, // necessary
+			contact: contact ?? null, // necessary
+			contact_content: contact === 'mobile' ? user[0].mobile : user[0].email,
+			status: '待領養',
 			other_info: other_info ?? null,
 			origin_url: origin_url ?? null,
 		});
 		const addPost = await newPost.save();
 		updateDB();
-		return res.status(200).json({ data: addPost, message: 'Add Success' });
+
+		return res.status(200).json({ data: addPost, message: '新增貼文成功' });
 	}
 	catch (error) {
 		console.log(error.message)
-		return res.status(400).json({ error: 'Add a post error' });
+		return res.status(500).json({ error: '新增貼文失敗' });
 	}
 });
 

@@ -6,7 +6,7 @@ import _ from "lodash";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from 'react-responsive-carousel';
 
-import Loading from "../components/Loading";
+//import Loading from "../components/Loading";
 import { api } from "../api";
 
 const Container = styled.div `

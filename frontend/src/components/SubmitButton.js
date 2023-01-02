@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div `
-    width: 60%;
+    width: ${props => props.width ? props.width : `60%`};
     margin: 0 auto;
     padding: 15px 50px;
     background-color: #365A33;
@@ -11,6 +11,7 @@ const Container = styled.div `
     font-size: 20px;
     text-align: center;
     color: #FFFFFF;
+    cursor: pointer;
 
     &:hover {
         background-color: #F2F2F2;
@@ -18,10 +19,10 @@ const Container = styled.div `
     }
 `
 
-function SubmitButton({name, onClick}) {
+function SubmitButton({name, width, onClick}) {
 
     return (
-        <Container onClick={onClick}>
+        <Container onClick={onClick} width={width}>
             {name}
         </Container>
     )

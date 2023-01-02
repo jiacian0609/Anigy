@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 import BigPostButton from "../components/BigPostButton";
 
@@ -46,9 +47,16 @@ function Manage() {
         detail: '下巴有痣',
         status: '開放'
     }
+    const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
 
+
     useEffect(() => {
+        if (!localStorage.getItem('JWT')) {
+            toast.error('請先登入');
+            navigate('/signIn');
+        }
+
         api.getUserPost()
         .then(res => setPosts(res.data));
     }, []);

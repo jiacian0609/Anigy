@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import Header from './components/Header';
@@ -43,6 +45,7 @@ function App() {
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </div>
+        <ToastContainer position='bottom-right'/>
       </Router>
     </ConfigProvider>
   );

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from 'styled-components'
 import { useNavigate } from "react-router-dom";
-import { api } from '../api'
+import { toast } from "react-toastify";
 
+import { api } from '../api'
 
 const Base = styled.div`
     width: 100%;
@@ -64,27 +65,19 @@ const Signup = styled.button`
 `
 
 function SignIn() {
-
-    const handleSubmit = ( username, password) => {
-        api.login(username, password)
-        .then( (response) => {
-			window.localStorage.setItem('JWT', response.data.JWT)
-            window.location.href = "/"
-		})
-		.catch( (error) => {
-			if(error.response.data === 'Username does not exist.')
-				window.alert('會員帳號不存在！')
-			else if(error.response.data === 'Password is wrong :(')
-				window.alert('會員密碼錯誤！')
-			else window.alert(error.response.data)
-		})
-        console.log('username', username);
-        
-    }
     const navigate = useNavigate();
 
-
-
+    const handleSubmit = ( username, password) => {
+        api.signIn(username, password)
+        .then(response => {
+			window.localStorage.setItem('JWT', response.JWT);
+            toast.success('登入成功');
+            navigate('/');
+		})
+		.catch(error => console.log(error))
+        // console.log('username', username);
+    }
+    
     return (
         <Base>
             <SignInBox>

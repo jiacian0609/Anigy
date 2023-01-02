@@ -25,7 +25,11 @@ export const api = {
     },
     getPostDetail(post_id) {
         return (
-            axios.get(`${hostname}/posts/${post_id}`)
+            axios.get(`${hostname}/posts/${post_id}`, {
+                headers: {
+                    authorization: `Bearer ${jwt}`
+                }
+            })
             .then(res => res.data)
             .catch(err => console.log(err))
         )

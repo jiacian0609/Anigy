@@ -63,7 +63,7 @@ function Manage() {
 
     const onDelete = (post_id) => {
         api.deletePost(post_id)
-        .then(res => console.log(res));
+        .then(res => toast.success(res.message));
 
         api.getUserPost()
         .then(res => setPosts(res.data));
@@ -81,6 +81,7 @@ function Manage() {
                         key={p._id}
                         post={p}
                         onDelete={() => onDelete(p._id)}
+                        onClick={() => navigate(`/post/${p._id}`)}
                     />)
             }
         </Container>

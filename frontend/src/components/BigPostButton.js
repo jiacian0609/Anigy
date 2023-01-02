@@ -12,6 +12,8 @@ const Container = styled.div `
     align-items: center;
 
     position: relative;
+
+    cursor: pointer;
 `
 
 const Img = styled.img `
@@ -94,9 +96,9 @@ const DeleteButton = styled.div `
 `
 
 
-function BigPostButton({ post, onDelete }) {
+function BigPostButton({ post, onDelete, onClick }) {
     return (
-        <Container>
+        <Container onClick={onClick}>
             <Img alt={post.id} src={post.cover_image} />
             <ContentBox>
                 <Column>

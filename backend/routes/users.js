@@ -4,6 +4,7 @@ import { Router } from "express";
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs';
 import User from '../models/User.js'
+import Post from "../models/Post.js";
 import { authentication, updateDB } from '../utils/util.js';
 
 const router = Router();
@@ -64,7 +65,7 @@ router.post('/signIn', async (req, res) => {
 		
 		// Check whether the username exists
 		const user = await User.find({ username: username });
-		if ( user[0] === undefined) { 
+		if (user[0] === undefined) { 
 			return res.status(400).json({ error: '使用者名稱不存在'});
 		} else {
 			encryptedPassword = user[0].password;
@@ -114,22 +115,26 @@ router.get('/', authentication(), async function(req, res, next)  {
 	}
 });
 
-//patch user info
+/* PATCH a user's info */
 router.patch('/', authentication(), async function(req, res, next)  {
 	const user_id = req.user_id;
 	const { username, email, mobile} = req.body;
+
 	try {
+		if(!user_id)
+			return res.status(403).json({ error: '請先登入' });
 		
-		const updateUser = await User.updateOne({ _id: user_id }, {$set: { username, email, mobile }})
-		if(updateUser.modifiedCount === 0) {
-			return res.status(403).json({error: '更新失敗'})
-		}
-		else {
-			updateDB();
-			return res.status(200).json({ message: '更新成功'})
-		}
+		// Update the user's info
+		await User.updateOne({ _id: user_id }, {$set: { username, email, mobile }})
+
+		// Update the user's contact info in post collection
+		await Post.updateMany({ user_id, contact: 'mobile'}, { $set: { contact_content: mobile }})
+		await Post.updateMany({ user_id, contact: 'email'}, { $set: { contact_content: email }})
+
+		return res.status(200).json({ message: '修改使用者資訊成功'})
 	} catch (err) {
-		return res.status(400).json({error: '更新失敗'})
+		console.error(err.message);
+		return res.status(500).json({error: '修改使用者資訊失敗'})
 	}
 });
 export default router;

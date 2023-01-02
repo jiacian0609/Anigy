@@ -77,7 +77,7 @@ function Account() {
         api.patchInfo(jwt)
         axios.get("http://localhost:4000/api/user/getInfo", { headers: { Authorization: 'Bearer ' + jwt } })
         .then(res => {
-            console.log(res.data);
+            console.log(res);
             const {username, email, mobile} = res.data.info
             setName(username)
             setEmail(email)

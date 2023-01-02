@@ -112,10 +112,7 @@ export const api = {
     getInfo(jwt) {
         return (
             axios.get("http://localhost:4000/api/user/getInfo", { headers: { Authorization: 'Bearer ' + jwt } })
-            .then(res => {
-                console.log(res.data);
-                const {username, email, mobile} = res.data.info
-            })
+            .then(res => res.data)
         )
     },
     patchInfo(name, email, mobile, jwt) {
@@ -125,16 +122,8 @@ export const api = {
                 "email": email,
                 "mobile": mobile
             }, { headers: { authorization: 'Bearer ' + jwt } })
-            .then( (response) => {
-                /*window.localStorage.setItem('JWT', response.data.JWT)
-                window.location.href = "/"*/
-                console.log(response);
-            })
-            .catch( (error) => {
-                console.log(error);
-                if (error.response.data.error === "Update Forbidden") {
-                }
-            })
+            .then( (response) => response.data)
+            .catch( (error) => console.log(error))
         )
     }
 };

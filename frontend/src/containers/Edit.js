@@ -484,13 +484,38 @@ function Edit() {
                             />
                         </SubColumn>
                     </Row>
-                    <div>
-                        <Text>聯絡資訊</Text>
-                        <Radio.Group onChange={e => handlePostChange({contact: e.target.value})} value={post.contact}>
-                            <Radio value='mobile'>電話</Radio>
-                            <Radio value='email'>E-mail</Radio>
-                        </Radio.Group>
-                    </div>
+                    <Row>
+                        <SubColumn>
+                            <Text>聯絡資訊</Text>
+                            <Radio.Group onChange={e => handlePostChange({contact: e.target.value})} value={post.contact}>
+                                <Radio value='mobile'>電話</Radio>
+                                <Radio value='email'>E-mail</Radio>
+                            </Radio.Group>
+                        </SubColumn>
+                        <SubColumn>
+                            <Text>狀態</Text>
+                            <Select
+                                style={{ width: '100%' }}
+                                value={post.status}
+                                options={[
+                                    {
+                                        value: '待領養',
+                                        label: '待領養'
+                                    },
+                                    {
+                                        value: '送養中',
+                                        label: '送養中'
+                                    },
+                                    {
+                                        value: '已送養',
+                                        label: '已送養'
+                                    }
+                                ]}
+                                placeholder='請選擇...'
+                                onChange={value => handlePostChange({status: value})}
+                            />
+                        </SubColumn>
+                    </Row>
                     <div>
                         <Text>外觀特徵</Text>
                         <TextArea

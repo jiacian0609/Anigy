@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { toast } from "react-toastify";
+import { Config } from './Config';
 
-const hostname = 'http://localhost:4000/api';
+const hostname = Config.hostname;
 const jwt = localStorage.getItem('JWT');
 
 export const api = {

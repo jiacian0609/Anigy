@@ -81,11 +81,10 @@ function Account({setJwt}) {
         }
 
         const jwt = window.localStorage.getItem("JWT")
-        api.patchInfo(jwt);
-        axios.get("http://localhost:4000/api/user/getInfo", { headers: { Authorization: 'Bearer ' + jwt } })
+        api.getInfo(jwt)
         .then(res => {
             console.log(res);
-            const {username, email, mobile} = res.data.info
+            const {username, email, mobile} = res.info
             setName(username)
             setEmail(email)
             setPhone(mobile)

@@ -7,6 +7,8 @@
 - [PATCH `http://localhost:4000/api/posts/{post_id}`](#patch-httplocalhost4000apipostspost_id)
 - [DELETE `http://localhost:4000/api/posts/{post_id}`](#delete-httplocalhost4000apipostspost_id)
 - [GET `http://localhost:4000/api/filters`](#get-httplocalhost4000apifilters)
+- [POST `http://localhost:4000/api/user/signUp`]
+(#post-httplocalhost4000apiusersignUp)
 
 ## GET `http://localhost:4000/api/posts`
 ### Request
@@ -27,7 +29,6 @@
             "user_id": "63a5ca04a6955aef5e115744",
             "animal": "貓頭鷹",
             "breed": "短耳貓頭鷹",
-            "color": "紅",
             "age": "老",
             "sex": "M",
             "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -45,7 +46,6 @@
             "user_id": "63a5ca04a6955aef5e115744",
             "animal": "貓頭鷹",
             "breed": "短耳貓頭鷹",
-            "color": "紅",
             "age": "老",
             "sex": "M",
             "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -78,7 +78,6 @@
     "body": {
         "animal": "貓頭鷹", // 必填
         "breed": "短耳貓頭鷹", // 必填
-        "color": "紅", // 必填
         "age": "老", // 必填
         "sex": "M", // 必填
         "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", // 必填
@@ -99,7 +98,6 @@
         "user_id": "63a5ca04a6955aef5e115744",
         "animal": "貓頭鷹",
         "breed": "短耳貓頭鷹",
-        "color": "紅",
         "age": "老",
         "sex": "M",
         "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -146,7 +144,6 @@
             "user_id": "63a5ca04a6955aef5e115744",
             "animal": "貓頭鷹",
             "breed": "短耳貓頭鷹",
-            "color": "紅",
             "age": "老",
             "sex": "M",
             "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -164,7 +161,6 @@
             "user_id": "63a5ca04a6955aef5e115744",
             "animal": "貓頭鷹",
             "breed": "短耳貓頭鷹",
-            "color": "紅",
             "age": "老",
             "sex": "M",
             "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -205,7 +201,6 @@
         "user_id": "63a5ca04a6955aef5e115744",
         "animal": "貓頭鷹",
         "breed": "短耳貓頭鷹",
-        "color": "紅",
         "age": "老",
         "sex": "M",
         "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -238,7 +233,6 @@
     "body": {
         "animal": "貓頭鷹", 
         "breed": "短耳貓頭鷹", 
-        "color": "紅", 
         "age": "幼年", 
         "sex": "M", 
         "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", 
@@ -342,3 +336,23 @@
 }
 ```
 
+## POST `http://localhost:4000/api/user/signUp`
+### Request
+```json
+{
+    "body" : {
+        "username": "1234",
+        "password": ,
+        "email": "1234",
+        "mobile": "1234",
+    }
+}
+```
+### Response
+#### 200
+```json
+{
+    "message": "Sign up successfully.",
+    "jwt": token
+}
+```

@@ -42,7 +42,11 @@ export const api = {
                 }
             })
             .then(res => res.data)
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                if (err.response)
+                    toast.error(err.response.data.error)
+            })
         )
     },
     editPost(post_id, body) {
@@ -53,7 +57,11 @@ export const api = {
                 }
             })
             .then(res => res.data)
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                if (err.response)
+                    toast.error(err.response.data.error)
+            })
         )
     },
     deletePost(post_id) {
@@ -76,7 +84,7 @@ export const api = {
     },
     signIn(username, password) {
         return (
-            axios.post("http://localhost:4000/api/user/signIn", {
+            axios.post(`${hostname}/user/signIn`, {
                 "username": username,
                 "password": password
             })
@@ -92,7 +100,7 @@ export const api = {
     }, 
     signup(email, username, password, phone) {
         return (
-            axios.post("http://localhost:4000/api/user/signUp", {
+            axios.post(`${hostname}/user/signUp`, {
                 "email": email,
                 "username": username,
                 "password": password,
@@ -117,7 +125,7 @@ export const api = {
     },
     patchInfo(name, email, mobile, jwt) {
         return (
-            axios.patch("http://localhost:4000/api/user/patchInfo", {
+            axios.patch(`${hostname}/user/patchInfo`, {
                 "username": name,
                 "email": email,
                 "mobile": mobile

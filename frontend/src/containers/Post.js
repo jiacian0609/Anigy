@@ -41,12 +41,13 @@ const ContentContainer = styled.div `
 const Row = styled.div `
     width: 100%;
     display: flex;
+    align-items: center;
     gap: 12px;
 `
 
 const Field = styled.div `
     width: 130px;
-    padding: 2px 5px;
+    padding: 8px 5px;
 
     background-color: #365A33;
     border-radius: 3px;
@@ -84,24 +85,9 @@ const DeleteButton = styled.div `
 `
 
 function Post() {
-    const samplePost = {
-        id: 1,
-        animal: '貓',
-        breed: '混種貓',
-        cover_image: '/images/login_img.png',
-        images: ['/images/login_img.png', '/images/login_img.png'],
-        sex: 'F',
-        age: '1歲',
-        neutered: true,
-        location: '台北動物之家',
-        mobile: '0900-000-000',
-        detail: '下巴有痣',
-        status: '開放',
-    }
 
     const { id } = useParams();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({
         id: 0,
         animal: '',
@@ -185,7 +171,7 @@ function Post() {
                 </Row>
                 <Row>
                     <Field>外觀特徵</Field>
-                    <Text>{_.isEmpty(post.detail) ? '無資訊' : post.detail}</Text>
+                    <Text>{_.isEmpty(post.other_info) ? '無資訊' : post.other_info}</Text>
                 </Row>
                 <Row>
                     <Field>領養狀態</Field>

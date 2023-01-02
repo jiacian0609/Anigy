@@ -89,7 +89,7 @@ export const api = {
                 else toast.error(error.response);
             })
         )
-    },
+    }, 
     signup(email, username, password, phone) {
         return (
             axios.post("http://localhost:4000/api/user/signUp", {
@@ -112,7 +112,7 @@ export const api = {
     getInfo(jwt) {
         return (
             axios.get("http://localhost:4000/api/user/getInfo", { headers: { Authorization: 'Bearer ' + jwt } })
-            .then(res => res.data)
+            .then(res =>res.data)
         )
     },
     patchInfo(name, email, mobile, jwt) {

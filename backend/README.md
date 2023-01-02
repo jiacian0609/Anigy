@@ -7,6 +7,8 @@
 - [PATCH `http://localhost:4000/api/posts/{post_id}`](#patch-httplocalhost4000apipostspost_id)
 - [DELETE `http://localhost:4000/api/posts/{post_id}`](#delete-httplocalhost4000apipostspost_id)
 - [GET `http://localhost:4000/api/filters`](#get-httplocalhost4000apifilters)
+- [POST `http://localhost:4000/api/user/signUp`]
+(#post-httplocalhost4000apiusersignUp)
 
 ## GET `http://localhost:4000/api/posts`
 ### Request
@@ -342,3 +344,23 @@
 }
 ```
 
+## POST `http://localhost:4000/api/user/signUp`
+### Request
+```json
+{
+    "body" : {
+        "username": "1234",
+        "password": ,
+        "email": "1234",
+        "mobile": "1234",
+    }
+}
+```
+### Response
+#### 200
+```json
+{
+    "message": "Sign up successfully.",
+    "jwt": token
+}
+```

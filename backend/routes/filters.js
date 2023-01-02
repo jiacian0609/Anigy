@@ -22,7 +22,7 @@ router.get('/', async function(req, res, next) {
 	}
 	catch (error) {
         console.log(error.message)
-		return res.status(400).json({ error: "Get filters error" });
+		return res.status(500).json({ error: "取得篩選欄位失敗" });
 	}
 });
 

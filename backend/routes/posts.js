@@ -1,8 +1,6 @@
 import { Router } from "express";
 import Post from "../models/Post.js";
-import Age from "../models/Age.js";
-import Animal from "../models/Animal.js";
-import Location from "../models/Location.js";
+import User from "../models/User.js";
 import { authentication, updateDB } from "../utils/util.js";
 
 const router = Router();
@@ -17,7 +15,7 @@ router.get('/', authentication(), async function(req, res, next) {
 	}
 	catch (error) {
 		console.log(error.message)
-		return res.status(400).json({ error: "Get user's posts error" });
+		return res.status(500).json({ error: "取得使用者貼文失敗" });
 	}
 });
 
@@ -29,7 +27,7 @@ router.get('/all', async function(req, res, next) {
 	}
 	catch (error) {
 		//console.log(error.message)
-		return res.status(400).json({ error: 'Get all posts error' });
+		return res.status(500).json({ error: '取得全部貼文失敗' });
 	}
 });
 
@@ -48,42 +46,50 @@ router.get('/:post_id', authentication(), async function(req, res, next) {
 	}
 	catch (error) {
 		//console.log(error.message)
-		return res.status(400).json({ error: 'Get a post error' });
+		return res.status(500).json({ error: '取得貼文失敗' });
 	}
 });
 
 /* POST a new post */
 router.post('/', authentication(), async function(req, res, next) {
 	const user_id = req.user_id;
-	const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url } = req.body
+	const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, other_info, origin_url } = req.body
 
 	try {
 		if(!user_id)
-			return res.status(403).json({ error: 'Add Forbidden' });
+			return res.status(403).json({ error: '請先登入以新增貼文' });
 
+		// Check the necessary variables
+		if(!animal || !breed || !color || !age || !sex || !cover_image || !neutered || !location || !contact)
+			return res.status(400).json({ error: '請輸入必填欄位' });
+
+		// Add a new post
+		let user = await User.find({ _id: user_id });
 		const newPost = new Post({ 
 			user_id,
-			animal: animal ?? null,
-			breed: breed ?? null,
-			color: color ?? null,
-			age: age ?? null,
-			sex: sex ?? null,
-			cover_image: cover_image ?? null,
+			animal: animal, // necessary
+			breed: breed, // necessary
+			color: color, // necessary
+			age: age, // necessary
+			sex: sex, // necessary
+			cover_image: cover_image, // necessary
 			images: images ?? [],
-			neutered: neutered ?? null,
-			location: location ?? null,
-			contact: contact ?? null,
-			status: status ?? null,
+			neutered: neutered, // necessary
+			location: location, // necessary
+			contact: contact, // necessary
+			contact_content: contact === 'mobile' ? user[0].mobile : user[0].email,
+			status: '待領養',
 			other_info: other_info ?? null,
 			origin_url: origin_url ?? null,
 		});
 		const addPost = await newPost.save();
 		updateDB();
-		return res.status(200).json({ data: addPost, message: 'Add Success' });
+
+		return res.status(200).json({ data: addPost, message: '新增貼文成功' });
 	}
 	catch (error) {
 		console.log(error.message)
-		return res.status(400).json({ error: 'Add a post error' });
+		return res.status(500).json({ error: '新增貼文失敗' });
 	}
 });
 
@@ -94,18 +100,20 @@ router.patch('/:post_id', authentication(), async function(req, res, next) {
 	const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url } = req.body
 
 	try {
-		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url }});
+		let user = await User.find({ _id: user_id });
+		const contact_content = contact === 'mobile' ? user[0].mobile : user[0].email;
+		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, contact_content, status, other_info, origin_url }});
 		if(updatePost.matchedCount === 0) {
-			return res.status(403).json({ error: 'Update Forbidden' });
+			return res.status(403).json({ error: '請先登入以修改貼文' });
 		}
 		else {
 			updateDB();
-			return res.status(200).json({ message: 'Update Success' });
+			return res.status(200).json({ message: '修改貼文成功' });
 		}
 	}
 	catch (error) {
 		//console.log(error.message)
-		return res.status(400).json({ error: 'Update a post error' });
+		return res.status(500).json({ error: '修改貼文失敗' });
 	}
 });
 
@@ -117,16 +125,16 @@ router.delete('/:post_id', authentication(), async function(req, res, next) {
 	try {
 		const deletePost = await Post.deleteOne({ _id: post_id, user_id });
 		if(deletePost.deletedCount === 0) {
-			return res.status(403).json({ error: 'Delete Forbidden' });
+			return res.status(403).json({ error: '請先登入以刪除貼文' });
 		}
 		else {
 			updateDB();
-			return res.status(200).json({ message: 'Delete Success' });
+			return res.status(200).json({ message: '刪除貼文成功' });
 		}
 	}
 	catch (error) {
 		//console.log(error.message)
-		return res.status(400).json({ error: 'Delete a post error' });
+		return res.status(500).json({ error: '刪除貼文失敗' });
 	}
 });
 

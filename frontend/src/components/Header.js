@@ -42,6 +42,7 @@ const Buttons = styled.div `
 
 function Header() {
     const jwt = localStorage.getItem('JWT');
+    console.log('header jwt', jwt)
     return (
         <Container>
             {/* <Logo alt='logo' /> */}

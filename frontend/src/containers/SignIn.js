@@ -70,7 +70,8 @@ function SignIn() {
     const handleSubmit = ( username, password) => {
         api.signIn(username, password)
         .then(response => {
-			window.localStorage.setItem('JWT', response.JWT);
+            console.log(response.JWT);
+			localStorage.setItem('JWT', response.JWT);
             toast.success('登入成功');
             navigate('/');
 		})

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
+import { toast } from "react-toastify";
+import _ from "lodash";
 
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { message, Upload, Select, Input, Radio } from 'antd';
+import { Upload, Select, Input, Radio } from 'antd';
 
 import SubmitButton from "../components/SubmitButton";
 
 import { api } from "../api";
+import { uploadImage } from "../firebase/upload";
 
 const { TextArea } = Input;
 
@@ -60,49 +64,26 @@ const Text = styled.div `
     margin-bottom: 10px;
 `
 
-const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-};
-
 const beforeUpload = (file) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
-        message.error('You can only upload JPG/PNG file!');
+        toast.error('僅能上傳 JPG 或 PNG 檔案');
     }
 
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+        toast.error('檔案必須小於 2MB');
     }
 
     return isJpgOrPng && isLt2M;
 };
 
 function Create() {
+    const navigate = useNavigate();
+
     const [loading, setLoading] = useState(false);
-    const [coverImage, setCoverImage] = useState();
-    const [images, setImages] = useState([
-        {
-          uid: '-1',
-          name: 'image.png',
-          status: 'done',
-          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        },
-        {
-          uid: '-xxx',
-          percent: 50,
-          name: 'image.png',
-          status: 'uploading',
-          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        },
-        {
-          uid: '-5',
-          name: 'image.png',
-          status: 'error',
-        },
-    ]);
+    const [coverImage, setCoverImage] = useState('');
+    const [images, setImages] = useState([]);
     const [filter, setFilter] = useState({
         animals: [],
         breeds: [],
@@ -119,6 +100,11 @@ function Create() {
     const [post, setPost] = useState({});
 
     useEffect(() => {
+        if (!localStorage.getItem('JWT')) {
+            toast.error('請先登入');
+            navigate('/signIn');
+        }
+
         api.getFilter()
         .then(res => {
             setFilter({
@@ -132,21 +118,22 @@ function Create() {
     }, []);
 
 
-    const handleCoverImageChange = (info) => {
-        if (info.file.status === 'uploading') {
-            setLoading(true);
-            return;
-        }
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            getBase64(info.file.originFileObj, (url) => {
-                setLoading(false);
-                setCoverImage(url);
-            });
-        }
+    const handleCoverImageChange = ({file}) => {
+        setCoverImage({
+            name: file.name,
+            file: file.originFileObj,
+            url: URL.createObjectURL(file.originFileObj)
+        });
     };
 
-    const handleImagesChange = ({ fileList: newFileList }) => setImages(newFileList);
+    const handleImagesChange = ({fileList}) => {
+        setImages(fileList.map(file => {
+            file.file = file.originFileObj;
+            file.url = URL.createObjectURL(file.originFileObj);
+            file.status = '';
+            return file;
+        }));
+    };
 
     const handlePostChange = (payload) => {
         setPost({
@@ -156,7 +143,26 @@ function Create() {
     };
 
     const onSubmit = async () => {
+        if(_.isEmpty(coverImage)) {
+            toast.error('請選擇封面照片');
+            return;
+        }
 
+        const coverImageUrl = await uploadImage(coverImage);
+        const imagesUrl = await Promise.all(
+            images.map(async image => await uploadImage(image))
+        )
+        // console.log(coverImageUrl, imagesUrl);
+
+        await api.createPost({
+            ...post,
+            cover_image: coverImageUrl,
+            images: imagesUrl
+        })
+        .then(res => {
+            toast.success(res.message);
+            navigate('/manage');
+        })
     }
 
     const uploadButton = (
@@ -180,15 +186,13 @@ function Create() {
                             <Upload
                                 name="coverImage"
                                 listType="picture-card"
-                                // className="avatar-uploader"
                                 showUploadList={false}
-                                // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                 beforeUpload={beforeUpload}
                                 onChange={handleCoverImageChange}
                             >
                                 {coverImage ? (
                                     <img
-                                        src={coverImage}
+                                        src={coverImage.url}
                                         alt="avatar"
                                         style={{
                                             width: '100%',
@@ -201,9 +205,9 @@ function Create() {
                             <OtherImages>
                                 <Text>其他照片</Text>
                                 <Upload
-                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                     listType="picture-card"
                                     fileList={images}
+                                    beforeUpload={beforeUpload}
                                     onChange={handleImagesChange}
                                 >
                                     {images.length >= 4 ? null : uploadButton}
@@ -317,8 +321,7 @@ function Create() {
                                 }}
                             />
                         </SubColumn>
-                    </Row>
-                    
+                    </Row>               
                     {/* 年齡 & 地區 */}
                     <Row>
                         <SubColumn>

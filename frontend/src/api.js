@@ -76,7 +76,7 @@ export const api = {
     },
     signIn(username, password) {
         return (
-            axios.post("http://localhost:4000/api/user/signIn", {
+            axios.post(`${hostname}/user/signIn`, {
                 "username": username,
                 "password": password
             })
@@ -92,7 +92,7 @@ export const api = {
     },
     signup(email, username, password, phone) {
         return (
-            axios.post("http://localhost:4000/api/user/signUp", {
+            axios.post(`${hostname}/user/signUp`, {
                 "email": email,
                 "username": username,
                 "password": password,
@@ -111,13 +111,17 @@ export const api = {
     },
     getInfo(jwt) {
         return (
-            axios.get("http://localhost:4000/api/user/getInfo", { headers: { Authorization: 'Bearer ' + jwt } })
+            axios.get(`${hostname}/user/getInfo`, {
+                headers: {
+                    authorization: `Bearer ${jwt}`
+                }
+            })
             .then(res => res.data)
         )
     },
     patchInfo(name, email, mobile, jwt) {
         return (
-            axios.patch("http://localhost:4000/api/user/patchInfo", {
+            axios.patch(`${hostname}/user/patchInfo`, {
                 "username": name,
                 "email": email,
                 "mobile": mobile

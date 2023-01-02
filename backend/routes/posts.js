@@ -15,7 +15,7 @@ router.get('/', authentication(), async function(req, res, next) {
 	}
 	catch (error) {
 		console.log(error.message)
-		return res.status(400).json({ error: "Get user's posts error" });
+		return res.status(500).json({ error: "取得使用者貼文失敗" });
 	}
 });
 
@@ -27,7 +27,7 @@ router.get('/all', async function(req, res, next) {
 	}
 	catch (error) {
 		//console.log(error.message)
-		return res.status(400).json({ error: 'Get all posts error' });
+		return res.status(500).json({ error: '取得全部貼文失敗' });
 	}
 });
 
@@ -46,7 +46,7 @@ router.get('/:post_id', authentication(), async function(req, res, next) {
 	}
 	catch (error) {
 		//console.log(error.message)
-		return res.status(400).json({ error: 'Get a post error' });
+		return res.status(500).json({ error: '取得貼文失敗' });
 	}
 });
 
@@ -102,16 +102,16 @@ router.patch('/:post_id', authentication(), async function(req, res, next) {
 	try {
 		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url }});
 		if(updatePost.matchedCount === 0) {
-			return res.status(403).json({ error: 'Update Forbidden' });
+			return res.status(403).json({ error: '請先登入以修改貼文' });
 		}
 		else {
 			updateDB();
-			return res.status(200).json({ message: 'Update Success' });
+			return res.status(200).json({ message: '修改貼文成功' });
 		}
 	}
 	catch (error) {
 		//console.log(error.message)
-		return res.status(400).json({ error: 'Update a post error' });
+		return res.status(500).json({ error: '修改貼文失敗' });
 	}
 });
 
@@ -123,16 +123,16 @@ router.delete('/:post_id', authentication(), async function(req, res, next) {
 	try {
 		const deletePost = await Post.deleteOne({ _id: post_id, user_id });
 		if(deletePost.deletedCount === 0) {
-			return res.status(403).json({ error: 'Delete Forbidden' });
+			return res.status(403).json({ error: '請先登入以刪除貼文' });
 		}
 		else {
 			updateDB();
-			return res.status(200).json({ message: 'Delete Success' });
+			return res.status(200).json({ message: '刪除貼文成功' });
 		}
 	}
 	catch (error) {
 		//console.log(error.message)
-		return res.status(400).json({ error: 'Delete a post error' });
+		return res.status(500).json({ error: '刪除貼文失敗' });
 	}
 });
 

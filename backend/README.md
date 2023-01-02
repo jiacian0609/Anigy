@@ -197,26 +197,34 @@
 }
 ```
 ### Reponse
+#### 200
 ```json
 {
     "data": {
-        "_id": "63a5dc1acf63d387ba8da0c5",
+        "_id": "63b2cd973617b3abdfd667c8",
         "user_id": "63a5ca04a6955aef5e115744",
         "animal": "貓頭鷹",
         "breed": "短耳貓頭鷹",
         "color": "紅",
         "age": "老",
         "sex": "M",
-        "cover_image": null,
+        "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
         "images": [],
-        "neutered": null,
+        "neutered": true,
         "location": "台北市",
-        "contact": null,
-        "status": null,
+        "contact": "email",
+        "contact_content": "cy9815526@gmail.com",
+        "status": "待領養",
         "other_info": null,
         "origin_url": null
     },
     "role": "WRITE"
+}
+```
+#### 500
+```json
+{
+    "error": "取得貼文失敗"
 }
 ```
 
@@ -237,7 +245,7 @@
         "images": ["https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5"], 
         "neutered": true, 
         "location": "台北市", 
-        "contact": null, 
+        "contact": "email", 
         "status": "已領養", 
         "other_info": null, 
         "origin_url": null
@@ -245,9 +253,22 @@
 }
 ```
 ### Reponse
+#### 200
 ```json
 {
     "message": "Update Success"
+}
+```
+#### 403
+```json
+{
+    "error": "請先登入以修改貼文"
+}
+```
+#### 500
+```json
+{
+    "error": "修改貼文失敗"
 }
 ```
 

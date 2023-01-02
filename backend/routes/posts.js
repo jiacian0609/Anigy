@@ -5,7 +5,7 @@ import { authentication, updateDB } from "../utils/util.js";
 
 const router = Router();
 
-/* GET all posts data with user_id*/
+/* GET all posts data with user_id */
 router.get('/', authentication(), async function(req, res, next) {
 	const user_id = req.user_id;
 

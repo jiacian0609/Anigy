@@ -2,7 +2,6 @@ import { Router } from 'express';
 import postsRouter from './posts.js';
 import filtersRouter from './filters.js';
 import userRouter from './users.js';
-import accountRouter from './account.js'
 
 const router = Router();
 const basePath = '/api'

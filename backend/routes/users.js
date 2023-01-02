@@ -1,3 +1,5 @@
+import dotenv from "dotenv-defaults";
+dotenv.config();
 import { Router } from "express";
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs';
@@ -6,32 +8,36 @@ import { authentication, updateDB } from '../utils/util.js';
 
 const router = Router();
 
-// sign up
+/* POST Sign Up */
 router.post('/signUp', async function (req, res) {
 	const username = req.body.username;
 	let password = req.body.password;
 	const email = req.body.email;
-	const mobile = req.body.mobile
-	//Check whether the username and email exists
+	const mobile = req.body.mobile;
+
+	// Check whether the username and email exists
 	let user = await User.find({ username: username })
 	if(user[0]) {
 		return res.status(400).json({ error: '使用者名稱已經使用過'})
 	}
 	user = await User.find({ email: email })
 	if(user[0]) {
-		return res.status(400).json({ error: 'email已經使用過'})
+		return res.status(400).json({ error: 'Email 已經使用過'})
 	}
+
+	// Create a new user
 	password = await bcrypt.hash(password, 10);
 	try {
 		const newUser = new User({ username, email, password, mobile })
 		const addUser = await newUser.save();	
 	}
 	catch ( error ) {
-		return res.status(400).json({ error: '註冊失敗'})
+		return res.status(500).json({ error: '註冊失敗'})
 	}
-	user = await User.find({username: username})
-	let user_id = user[0]._id
+
 	//Create token
+	user = await User.find({ username: username })
+	let user_id = user[0]._id
 	var token = await jwt.sign(
 		{
 			Uid: user_id,
@@ -39,17 +45,18 @@ router.post('/signUp', async function (req, res) {
 			Email: email,
 			Mobile: mobile
 		},
-		"b7b16ad9db0ca7c5705cba37840e4ec310740c62beea61cfd9bdcee0720797a6c8bb1b3ffc0d781601fb77dbdaa899acfd08ac560aec19f2d18bb3b6e25beb7a",
+		process.env.TOKEN_SECRET,
 		{
 			algorithm: 'HS256',
 			expiresIn: "3h"
 		}
 	);
-	//Store token in cookie
-	res.send({'message': '註冊成功', 'JWT': token})
+
+	// Return jwt
+	return res.status(200).send({'message': '註冊成功', 'JWT': token})
 });
 
-// sign in
+/* POST Sign In */
 router.post('/signIn', async (req, res) => {
     try {
       const { username, password } = req.body;
@@ -63,9 +70,9 @@ router.post('/signIn', async (req, res) => {
         console.log('?');
         encryptedPassword = user[0].password;
       }
-  
+	  console.log(process.env.TOKEN_SECRET)
       const compare = await bcrypt.compare(password, encryptedPassword)
-      if(!compare)//比對加密前後
+      if(!compare) // 比對加密前後
         return res.status(403).send('密碼錯誤');
    
       var token = await jwt.sign(

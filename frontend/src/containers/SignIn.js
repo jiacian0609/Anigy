@@ -62,14 +62,15 @@ const Signup = styled.button`
     }
 `
 
-function SignIn() {
+function SignIn({setJwt}) {
     const navigate = useNavigate();
 
     const handleSubmit = ( username, password) => {
         api.signIn(username, password)
         .then(response => {
-            console.log(response.JWT);
+            // console.log(response.JWT);
 			localStorage.setItem('JWT', response.JWT);
+            setJwt(response.JWT);
             toast.success('登入成功');
             navigate('/');
 		})

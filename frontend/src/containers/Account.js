@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+
 import { api } from "../api";
 
 const Container = styled.div `
@@ -66,15 +68,20 @@ const Logout = styled.button`
     }
 `
 
-function Account() {
+function Account({setJwt}) {
     const [name, setName] = useState('fake name');
     const [email, setEmail] = useState('fake email');
     const [phone, setPhone] = useState('fake phone');
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!localStorage.getItem('JWT')) {
+            toast.error('請先登入');
+            navigate('/signIn');
+        }
+
         const jwt = window.localStorage.getItem("JWT")
-        api.patchInfo(jwt)
+        api.patchInfo(jwt);
         axios.get("http://localhost:4000/api/user/getInfo", { headers: { Authorization: 'Bearer ' + jwt } })
         .then(res => {
             console.log(res);
@@ -86,10 +93,10 @@ function Account() {
     })
 
     const signOut = () => {
-        //console.log(window.localStorage.getItem("JWT"));
         window.localStorage.removeItem("JWT");
-        window.location = '/';
-        //console.log(window.localStorage.getItem("JWT"));
+        setJwt('');
+        toast.success('登出成功');
+        navigate('/');
     }
 
     return (

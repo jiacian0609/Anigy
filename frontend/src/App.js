@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { ToastContainer } from 'react-toastify';
@@ -19,6 +19,10 @@ import Modal from './components/AccountModal';
 import NotFound from './containers/NotFound.js'
 
 function App() {
+  const [jwt, setJwt] = useState('');
+
+  useEffect(() => setJwt(localStorage.getItem('JWT')), []);
+
   return (
     <ConfigProvider
       theme={{
@@ -30,17 +34,17 @@ function App() {
       }}
     >
       <Router>
-        <Header />
+        <Header jwt={jwt} />
         <div style={{paddingTop: '100px'}}>
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/signIn" element={<SignIn setJwt={setJwt} />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/post/:id" element={<Post />} />
             <Route path="/manage" element={<Manage />} />
             <Route path="/create" element={<Create />} />
             <Route path="/edit/:id" element={<Edit />} />
-            <Route path="/account" element={<Account />} />
+            <Route path="/account" element={<Account setJwt={setJwt} />} />
             <Route path="/account/Modal" element={<Modal />} />
             <Route path="/*" element={<NotFound />} />
           </Routes>

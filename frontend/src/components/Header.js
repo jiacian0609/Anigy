@@ -40,9 +40,7 @@ const Buttons = styled.div `
     bottom: 18px;
 `
 
-function Header() {
-    const jwt = localStorage.getItem('JWT');
-    console.log('header jwt', jwt)
+function Header({jwt}) {
     return (
         <Container>
             {/* <Logo alt='logo' /> */}
@@ -54,8 +52,8 @@ function Header() {
                 <Link to='/manage' style={{ textDecoration: 'none', color: 'inherit'}}>
                     <HeaderButton icon='manage' name='我的貼文'/>
                 </Link>
-                <Link to={_.isNull(jwt) ? '/signIn' : '/account'} style={{ textDecoration: 'none', color: 'inherit'}}>
-                    <HeaderButton icon='signIn' name={_.isNull(jwt) ? '登入' : '帳戶管理'}/>
+                <Link to={_.isEmpty(jwt) ? '/signIn' : '/account'} style={{ textDecoration: 'none', color: 'inherit'}}>
+                    <HeaderButton icon='signIn' name={_.isEmpty(jwt) ? '登入' : '帳戶管理'}/>
                 </Link>
             </Buttons>
         </Container>

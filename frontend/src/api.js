@@ -119,7 +119,7 @@ export const api = {
     },
     getInfo(jwt) {
         return (
-            axios.get("http://localhost:4000/api/user/getInfo", { headers: { Authorization: 'Bearer ' + jwt } })
+            axios.get(`${hostname}/user/getInfo`, { headers: { Authorization: 'Bearer ' + jwt } })
             .then(res =>res.data)
         )
     },

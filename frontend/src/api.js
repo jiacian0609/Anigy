@@ -45,6 +45,17 @@ export const api = {
             .catch(err => console.log(err))
         )
     },
+    editPost(post_id, body) {
+        return (
+            axios.patch(`${hostname}/posts/${post_id}`, body, {
+                headers: {
+                    authorization: `Bearer ${jwt}`
+                }
+            })
+            .then(res => res.data)
+            .catch(err => console.log(err))
+        )
+    },
     deletePost(post_id) {
         return (
             axios.delete(`${hostname}/posts/${post_id}`, {

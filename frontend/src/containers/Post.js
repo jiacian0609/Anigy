@@ -181,7 +181,7 @@ function Post() {
                 </Row>
                 <Row>
                     <Field>聯絡資訊</Field>
-                    <Text>{post.contact}</Text>
+                    <Text>{post.contact_content}</Text>
                 </Row>
                 <Row>
                     <Field>外觀特徵</Field>

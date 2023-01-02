@@ -151,7 +151,7 @@ function Create() {
         const coverImageUrl = await uploadImage(coverImage);
         const imagesUrl = await Promise.all(
             images.map(async image => await uploadImage(image))
-        )
+        );
         // console.log(coverImageUrl, imagesUrl);
 
         await api.createPost({
@@ -454,7 +454,7 @@ function Create() {
                                     }
                                 ]}
                                 placeholder='請選擇...'
-                                onChange={value => handlePostChange({neutured: value})}
+                                onChange={value => handlePostChange({neutered: value})}
                             />
                         </SubColumn>
                     </Row>

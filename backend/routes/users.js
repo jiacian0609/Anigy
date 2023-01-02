@@ -35,7 +35,7 @@ router.post('/signUp', async function (req, res) {
 		return res.status(500).json({ error: '註冊失敗'})
 	}
 
-	//Create token
+	// Create jwt
 	user = await User.find({ username: username })
 	let user_id = user[0]._id
 	var token = await jwt.sign(
@@ -53,74 +53,77 @@ router.post('/signUp', async function (req, res) {
 	);
 
 	// Return jwt
-	return res.status(200).send({'message': '註冊成功', 'JWT': token})
+	return res.status(200).json({ message: '註冊成功', JWT: token})
 });
 
 /* POST Sign In */
 router.post('/signIn', async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      console.log('name, password: ', username, password);
-      var encryptedPassword = null;
-  
-      const user = await User.find({ username: username })
-      if ( user[0] === undefined) { 
-        return res.status(404).send('使用者名稱不存在');
-      } else {
-        console.log('?');
-        encryptedPassword = user[0].password;
-      }
-	  console.log(process.env.TOKEN_SECRET)
-      const compare = await bcrypt.compare(password, encryptedPassword)
-      if(!compare) // 比對加密前後
-        return res.status(403).send('密碼錯誤');
-   
-      var token = await jwt.sign(
-        {
-          Uid: user[0]._id,
-          Username: username,
-          Email: user[0].email,
-          Mobile: user[0].mobile
-        },
-        "b7b16ad9db0ca7c5705cba37840e4ec310740c62beea61cfd9bdcee0720797a6c8bb1b3ffc0d781601fb77dbdaa899acfd08ac560aec19f2d18bb3b6e25beb7a",
-        {
-          algorithm: 'HS256',
-          expiresIn: '2h'
-        }
-      );
-  
-      res.send({'message': '登入成功', 'JWT': token})
-    } catch (err) {
-      console.error(err.message);
-    }
+	try {
+		const { username, password } = req.body;
+		var encryptedPassword = null;
+		
+		// Check whether the username exists
+		const user = await User.find({ username: username });
+		if ( user[0] === undefined) { 
+			return res.status(400).json({ error: '使用者名稱不存在'});
+		} else {
+			encryptedPassword = user[0].password;
+		}
+
+		// Check whether the password is correct
+		const compare = await bcrypt.compare(password, encryptedPassword);
+		if(!compare)
+			return res.status(403).json({ error: '密碼錯誤'});
+		
+		// Create jwt 
+		var token = await jwt.sign(
+			{
+				Uid: user[0]._id,
+				Username: username,
+				Email: user[0].email,
+				Mobile: user[0].mobile
+			},
+			process.env.TOKEN_SECRET,
+			{
+				algorithm: 'HS256',
+				expiresIn: '2h'
+			}
+		);
+		
+		// Return jwt
+		return res.status(200).send({ message: '登入成功', JWT: token})
+	} catch (err) {
+	  	console.error(err.message);
+		return res.status(500).json({ error: '登入失敗'})
+	}
   });
 
 //get user info
 router.get('/', authentication(), async function(req, res, next)  {
-    try{
-        const user_id = req.user_id;
-        const user = await User.find({ _id: user_id })
-        res.send({'message': '成功找到使用者資訊', 'info': user[0]})    
-    } catch (err) {
-        console.error(err.message)
-    }
+	try{
+		const user_id = req.user_id;
+		const user = await User.find({ _id: user_id })
+		res.send({'message': '成功找到使用者資訊', 'info': user[0]})    
+	} catch (err) {
+		console.error(err.message)
+	}
 });
 //patch user info
 router.patch('/', authentication(), async function(req, res, next)  {
-    const user_id = req.user_id;
-    const { username, email, mobile} = req.body;
-    try {
-        
-        const updateUser = await User.updateOne({ _id: user_id }, {$set: { username, email, mobile }})
-        if(updateUser.modifiedCount === 0) {
-            return res.status(403).json({error: '更新失敗'})
-        }
-        else {
-            updateDB();
-            return res.status(200).json({ message: '更新成功'})
-        }
-    } catch (err) {
-        return res.status(400).json({error: '更新失敗'})
-    }
+	const user_id = req.user_id;
+	const { username, email, mobile} = req.body;
+	try {
+		
+		const updateUser = await User.updateOne({ _id: user_id }, {$set: { username, email, mobile }})
+		if(updateUser.modifiedCount === 0) {
+			return res.status(403).json({error: '更新失敗'})
+		}
+		else {
+			updateDB();
+			return res.status(200).json({ message: '更新成功'})
+		}
+	} catch (err) {
+		return res.status(400).json({error: '更新失敗'})
+	}
 });
 export default router;

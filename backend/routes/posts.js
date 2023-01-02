@@ -53,14 +53,14 @@ router.get('/:post_id', authentication(), async function(req, res, next) {
 /* POST a new post */
 router.post('/', authentication(), async function(req, res, next) {
 	const user_id = req.user_id;
-	const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, other_info, origin_url } = req.body
+	const { animal, breed, age, sex, cover_image, images, neutered, location, contact, other_info, origin_url } = req.body
 
 	try {
 		if(!user_id)
 			return res.status(403).json({ error: '請先登入以新增貼文' });
 
 		// Check the necessary variables
-		if(!animal || !breed || !color || !age || !sex || !cover_image || !neutered || !location || !contact)
+		if(!animal || !breed || !age || !sex || !cover_image || !neutered || !location || !contact)
 			return res.status(400).json({ error: '請輸入必填欄位' });
 
 		// Add a new post
@@ -69,7 +69,6 @@ router.post('/', authentication(), async function(req, res, next) {
 			user_id,
 			animal: animal, // necessary
 			breed: breed, // necessary
-			color: color, // necessary
 			age: age, // necessary
 			sex: sex, // necessary
 			cover_image: cover_image, // necessary
@@ -97,12 +96,12 @@ router.post('/', authentication(), async function(req, res, next) {
 router.patch('/:post_id', authentication(), async function(req, res, next) {
 	const user_id = req.user_id;
 	const { post_id } = req.params
-	const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url } = req.body
+	const { animal, breed, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url } = req.body
 
 	try {
 		let user = await User.find({ _id: user_id });
 		const contact_content = contact === 'mobile' ? user[0].mobile : user[0].email;
-		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, contact_content, status, other_info, origin_url }});
+		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, breed, age, sex, cover_image, images, neutered, location, contact, contact_content, status, other_info, origin_url }});
 		if(updatePost.matchedCount === 0) {
 			return res.status(403).json({ error: '請先登入以修改貼文' });
 		}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from "react-toastify";
 
 const hostname = 'http://localhost:4000/api';
 const jwt = localStorage.getItem('JWT');
@@ -24,7 +25,11 @@ export const api = {
     },
     getPostDetail(post_id) {
         return (
-            axios.get(`${hostname}/posts/${post_id}`)
+            axios.get(`${hostname}/posts/${post_id}`, {
+                headers: {
+                    authorization: `Bearer ${jwt}`
+                }
+            })
             .then(res => res.data)
             .catch(err => console.log(err))
         )
@@ -47,22 +52,19 @@ export const api = {
             .catch(err => console.log(err))
         )
     },
-    login(username, password) {
+    signIn(username, password) {
         return (
             axios.post("http://localhost:4000/api/user/signIn", {
                 "username": username,
                 "password": password
             })
-            .then( (response) => {
-                window.localStorage.setItem('JWT', response.data.JWT)
-                window.location.href = "/"
-            })
+            .then(res => res.data)
             .catch( (error) => {
                 if(error.response.data === 'Username does not exist.')
-                    window.alert('會員帳號不存在！')
+                    toast.error('會員帳號不存在！');
                 else if(error.response.data === 'Password is wrong :(')
-                    window.alert('會員密碼錯誤！')
-                else window.alert(error.response.data)
+                    toast.error('會員密碼錯誤！');
+                else toast.error(error.response);
             })
         )
     },
@@ -74,16 +76,13 @@ export const api = {
                 "password": password,
                 "mobile": phone
             })
-            .then( (response) => {
-                window.localStorage.setItem('JWT', response.data.JWT)
-                window.location.href = "/"
-            })
+            .then(res => res.data)
             .catch( (error) => {
                 console.log(error);
                 if(error.response.data.error === 'Username exists.')
-                    window.alert('會員帳號已存在！')
+                    toast.error('會員帳號已存在！');
                 else if(error.response.data.error === 'email exists.')
-                    window.alert('信箱已存在！')
+                    toast.error('信箱已存在！');
                 else window.alert(error.response.data)
             })
         )

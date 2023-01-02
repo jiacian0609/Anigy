@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import styled from "styled-components";
 import _ from "lodash";
+import { toast } from "react-toastify";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from 'react-responsive-carousel';
 
-//import Loading from "../components/Loading";
 import { api } from "../api";
 
 const Container = styled.div `
@@ -80,6 +80,7 @@ const DeleteButton = styled.div `
     height: 40px;
     background-image: url('/icons/delete.png');
     background-size: contain;
+    cursor: pointer;
 `
 
 function Post() {
@@ -99,6 +100,7 @@ function Post() {
     }
 
     const { id } = useParams();
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({
         id: 0,
@@ -115,7 +117,12 @@ function Post() {
         status: '',
     });
 
-    const user_id = '63a313fca9f8cad1c7f579cc';
+    const onDelete = (post_id) => {
+        api.deletePost(post_id)
+        .then(res => toast.success(res.message));
+
+        navigate('/manage');
+    }
     
     useEffect(() => {
         if (document.getElementsByClassName('thumbs animated')) {
@@ -130,7 +137,7 @@ function Post() {
 
         api.getPostDetail(id)
         .then(res => {
-            setPost(res.data);
+            setPost({...res.data, role: res.role});
         })
         .catch(err => {
             console.log(err);
@@ -185,12 +192,12 @@ function Post() {
                     <Text>{post.status}</Text>
                 </Row>
             </ContentContainer>
-            {user_id === post.user_id &&
+            {post.role === 'WRITE' &&
                 <Buttons>
                     <Link to={`/edit/${post._id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
                         <EditButton />
                     </Link>
-                    <DeleteButton />
+                    <DeleteButton onClick={() => onDelete(post._id)}/>
                 </Buttons>
             }
         </Container>

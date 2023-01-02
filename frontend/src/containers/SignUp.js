@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { api } from '../api'
+import { toast } from "react-toastify";
 
 const Base = styled.div`
     width: 100%;
@@ -76,22 +77,15 @@ function SignUp() {
         var chked = document.querySelectorAll("[type=checkbox]");
         console.log(chked[0].checked);
         if(!chked[0].checked) {
-            window.alert('請同意公開資訊');
+            toast.error('請同意公開資訊');
             return;
         }
         api.signup(email, username, password, phone)
-        .then( (response) => {
-			window.localStorage.setItem('JWT', response.data.JWT)
-            window.location.href = "/"
+        .then(response => {
+			window.localStorage.setItem('JWT', response.JWT);
+            navigate('/');
 		})
-		.catch( (error) => {
-            console.log(error);
-			if(error.response.data.error === 'Username exists.')
-				window.alert('會員帳號已存在！')
-			else if(error.response.data.error === 'email exists.')
-				window.alert('信箱已存在！')
-			else window.alert(error.response.data)
-		})
+		.catch(error => console.log(error))
     }
 
     return (

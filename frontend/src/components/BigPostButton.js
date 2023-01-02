@@ -147,7 +147,7 @@ function BigPostButton({ post, onDelete, onClick }) {
                 </Column>
             </ContentBox>
             <Buttons>
-                <Link to={`/edit/${post.id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
+                <Link to={`/edit/${post._id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
                     <EditButton />
                 </Link>
                 <DeleteButton onClick={onDelete}/>

@@ -84,7 +84,7 @@ function Modal() {
 		})
 		.catch( (error) => {
             console.log(error);
-            if (error.response.data.error === "Update Forbidden") {
+            if (error.response.data.error === "更新失敗") {
                 navigate('/account');
             }
 		})

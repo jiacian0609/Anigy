@@ -8,41 +8,28 @@ const router = Router();
 
 // sign up
 router.post('/signUp', async function (req, res) {
-	console.log('start signup');
 	const username = req.body.username;
 	let password = req.body.password;
 	const email = req.body.email;
 	const mobile = req.body.mobile
-
-	console.log(username, password, email, mobile);
 	//Check whether the username and email exists
 	let user = await User.find({ username: username })
-	console.log(user[0]);
 	if(user[0]) {
-		console.log('??');
-		return res.status(400).json({ error: 'Username exists.'})
+		return res.status(400).json({ error: '使用者名稱已經使用過'})
 	}
 	user = await User.find({ email: email })
 	if(user[0]) {
-		console.log('???');
-		return res.status(400).json({ error: 'email exists.'})
+		return res.status(400).json({ error: 'email已經使用過'})
 	}
-		
-	//Encrypt password
-	console.log('encrypt');
 	password = await bcrypt.hash(password, 10);
-	console.log(password);
-	//Insert data into DB
 	try {
 		const newUser = new User({ username, email, password, mobile })
 		const addUser = await newUser.save();	
 	}
 	catch ( error ) {
-		console.log(error.message );
-		return res.status(400).json({ error: 'Add a user error'})
+		return res.status(400).json({ error: '註冊失敗'})
 	}
 	user = await User.find({username: username})
-	console.log(user);
 	let user_id = user[0]._id
 	//Create token
 	var token = await jwt.sign(
@@ -58,34 +45,28 @@ router.post('/signUp', async function (req, res) {
 			expiresIn: "3h"
 		}
 	);
-
 	//Store token in cookie
-	res.send({'message': 'Sign up successfully.', 'JWT': token})
+	res.send({'message': '註冊成功', 'JWT': token})
 });
 
 // sign in
 router.post('/signIn', async (req, res) => {
-    console.log('start login');
     try {
       const { username, password } = req.body;
       console.log('name, password: ', username, password);
       var encryptedPassword = null;
   
-      //check the user
       const user = await User.find({ username: username })
-      console.log(user[0]);
       if ( user[0] === undefined) { 
-        return res.status(404).send('Username does not exist.');
+        return res.status(404).send('使用者名稱不存在');
       } else {
         console.log('?');
         encryptedPassword = user[0].password;
       }
   
-      console.log(encryptedPassword);
-      //check the password
       const compare = await bcrypt.compare(password, encryptedPassword)
       if(!compare)//比對加密前後
-        return res.status(403).send('Password is wrong :(');
+        return res.status(403).send('密碼錯誤');
    
       var token = await jwt.sign(
         {
@@ -101,7 +82,7 @@ router.post('/signIn', async (req, res) => {
         }
       );
   
-      res.send({'message': 'Login successfully.', 'JWT': token})
+      res.send({'message': '登入成功', 'JWT': token})
     } catch (err) {
       console.error(err.message);
     }
@@ -110,39 +91,29 @@ router.post('/signIn', async (req, res) => {
 //get user info
 router.get('/', authentication(), async function(req, res, next)  {
     try{
-        console.log('get user info');
         const user_id = req.user_id;
-        console.log('user id', user_id);
         const user = await User.find({ _id: user_id })
-        console.log(user[0])
-        if( user[0] === undefined ) {
-            return res.status(404).send('User does not exist.');
-        }
-        res.send({'message': 'find user info successfully.', 'info': user[0]})    
+        res.send({'message': '成功找到使用者資訊', 'info': user[0]})    
     } catch (err) {
         console.error(err.message)
     }
 });
 //patch user info
 router.patch('/', authentication(), async function(req, res, next)  {
-    console.log('update user info');
-    console.log('req headers', req.headers);
     const user_id = req.user_id;
-    console.log('user_id', user_id)
     const { username, email, mobile} = req.body;
-    console.log( user_id, username, email, mobile );
     try {
         
         const updateUser = await User.updateOne({ _id: user_id }, {$set: { username, email, mobile }})
         if(updateUser.modifiedCount === 0) {
-            return res.status(403).json({error: 'Update Forbidden'})
+            return res.status(403).json({error: '更新失敗'})
         }
         else {
             updateDB();
-            return res.status(200).json({ message: 'Update Success'})
+            return res.status(200).json({ message: '更新成功'})
         }
     } catch (err) {
-        return res.status(400).json({error: 'Update a user error'})
+        return res.status(400).json({error: '更新失敗'})
     }
 });
 export default router;

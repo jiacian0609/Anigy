@@ -1,5 +1,9 @@
 # Backend API 文件
 ## 總覽
+- [POST `http://localhost:4000/api/user/signUp`](#post-httplocalhost4000apiusersignUp)
+- [POST `http://localhost:4000/api/user/signIn`](#post-httplocalhost4000apiusersignIn)
+- [GET `http://localhost:4000/api/user`](#get-httplocalhost4000apiuser)
+- [PATCH `http://localhost:4000/api/user`](#patch-httplocalhost4000apiuser)
 - [GET `http://localhost:4000/api/posts`](#get-httplocalhost4000apiposts)
 - [POST `http://localhost:4000/api/posts`](#post-httplocalhost4000apiposts)
 - [GET `http://localhost:4000/api/posts/all`](#get-httplocalhost4000apipostsall)
@@ -7,8 +11,130 @@
 - [PATCH `http://localhost:4000/api/posts/{post_id}`](#patch-httplocalhost4000apipostspost_id)
 - [DELETE `http://localhost:4000/api/posts/{post_id}`](#delete-httplocalhost4000apipostspost_id)
 - [GET `http://localhost:4000/api/filters`](#get-httplocalhost4000apifilters)
-- [POST `http://localhost:4000/api/user/signUp`]
-(#post-httplocalhost4000apiusersignUp)
+
+## POST `http://localhost:4000/api/user/signUp`
+### Request
+```json
+{
+    "body" : {
+        "username": "1234",
+        "password": "1234",
+        "email": "1234",
+        "mobile": "1234",
+    }
+}
+```
+### Response
+#### 200
+```json
+{
+    "message": "註冊成功",
+    "jwt": "<jwt>"
+}
+```
+#### 400
+```json
+{
+    "error": "註冊失敗"
+}
+```
+```json
+{
+    "error": "使用者名稱已經使用過"
+}
+```
+```json
+{
+    "error": "email已經使用過"
+}
+```
+
+## POST `http://localhost:4000/api/user/signIn`
+### Request
+```json
+{
+    "body" : {
+        "username": "1234",
+        "password": "1234",
+    }
+}
+```
+### Response
+#### 200
+```json
+{
+    "message": "登入成功",
+    "jwt": "<jwt>"
+}
+```
+#### 404
+```json
+{
+    "error": "使用者名稱不存在"
+}
+```
+#### 403
+```json
+{
+    "error": "密碼錯誤"
+}
+```
+
+## GET `http://localhost:4000/api/user`
+### Request
+```json
+{
+    "headers": {
+        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+    }
+}
+```
+### Response
+#### 200
+```json
+{
+    "info": {
+        "username": 1234,
+        "email": 1234,
+        "mobile": 1234
+    },
+    "message": "成功找到使用者資訊"
+}
+```
+
+## PATCH `http://localhost:4000/api/user`
+### Request
+```json
+{
+    "headers": {
+        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+    },
+    "body" : {
+        "username": "name",
+        "email": "email",
+        "mobile": "mobile"
+    }
+}
+```
+### Response
+#### 200
+```json
+{
+    "message": "更新成功"
+}
+```
+#### 400
+```json
+{
+    "message": "更新失敗"
+}
+```
+#### 403
+```json
+{
+    "message": "更新失敗"
+}
+```
 
 ## GET `http://localhost:4000/api/posts`
 ### Request
@@ -344,23 +470,3 @@
 }
 ```
 
-## POST `http://localhost:4000/api/user/signUp`
-### Request
-```json
-{
-    "body" : {
-        "username": "1234",
-        "password": ,
-        "email": "1234",
-        "mobile": "1234",
-    }
-}
-```
-### Response
-#### 200
-```json
-{
-    "message": "Sign up successfully.",
-    "jwt": token
-}
-```

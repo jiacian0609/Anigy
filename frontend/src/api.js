@@ -90,9 +90,9 @@ export const api = {
             })
             .then(res => res.data)
             .catch( (error) => {
-                if(error.response.data === 'Username does not exist.')
+                if(error.response.data === '使用者名稱不存在')
                     toast.error('會員帳號不存在！');
-                else if(error.response.data === 'Password is wrong :(')
+                else if(error.response.data === '密碼錯誤')
                     toast.error('會員密碼錯誤！');
                 else toast.error(error.response);
             })
@@ -109,9 +109,9 @@ export const api = {
             .then(res => res.data)
             .catch( (error) => {
                 console.log(error);
-                if(error.response.data.error === 'Username exists.')
+                if(error.response.data.error === '使用者名稱已經使用過')
                     toast.error('會員帳號已存在！');
-                else if(error.response.data.error === 'email exists.')
+                else if(error.response.data.error === 'email已經使用過')
                     toast.error('信箱已存在！');
                 else window.alert(error.response.data)
             })

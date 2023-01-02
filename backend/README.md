@@ -256,7 +256,7 @@
 #### 200
 ```json
 {
-    "message": "Update Success"
+    "message": "修改貼文成功"
 }
 ```
 #### 403
@@ -282,14 +282,28 @@
 }
 ```
 ### Reponse
+#### 200
 ```json
 {
-    "message": "Delete Success"
+    "message": "刪除貼文成功"
+}
+```
+#### 403
+```json
+{
+    "error": "請先登入以刪除貼文"
+}
+```
+#### 500
+```json
+{
+    "error": "刪除貼文失敗"
 }
 ```
 
 ## GET `http://localhost:4000/api/filters`
 ### Reponse
+#### 200
 ```json
 {
     "data": {
@@ -319,6 +333,12 @@
             "台北市"
         ]
     }
+}
+```
+#### 500
+```json
+{
+    "error": "取得篩選欄位失敗"
 }
 ```
 

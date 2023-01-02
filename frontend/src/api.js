@@ -42,7 +42,11 @@ export const api = {
                 }
             })
             .then(res => res.data)
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                if (err.response)
+                    toast.error(err.response.data.error)
+            })
         )
     },
     editPost(post_id, body) {
@@ -53,7 +57,11 @@ export const api = {
                 }
             })
             .then(res => res.data)
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                if (err.response)
+                    toast.error(err.response.data.error)
+            })
         )
     },
     deletePost(post_id) {
@@ -89,7 +97,7 @@ export const api = {
                 else toast.error(error.response);
             })
         )
-    },
+    }, 
     signup(email, username, password, phone) {
         return (
             axios.post(`${hostname}/user/signUp`, {
@@ -111,17 +119,13 @@ export const api = {
     },
     getInfo(jwt) {
         return (
-            axios.get(`${hostname}/user/getInfo`, {
-                headers: {
-                    authorization: `Bearer ${jwt}`
-                }
-            })
-            .then(res => res.data)
+            axios.get(`${hostname}/user/`, { headers: { Authorization: 'Bearer ' + jwt } })
+            .then(res =>res.data)
         )
     },
     patchInfo(name, email, mobile, jwt) {
         return (
-            axios.patch(`${hostname}/user/patchInfo`, {
+            axios.patch(`${hostname}/user/`, {
                 "username": name,
                 "email": email,
                 "mobile": mobile

@@ -90,15 +90,6 @@ function Main() {
         locations: []
     });
     const [animalFilter, setAnimalFilter] = useState([]);
-    const samplePost = {
-        id: 1,
-        animal: '貓',
-        breed: '混種貓',
-        sex: 'F',
-        age: '1歲',
-        neutered: true,
-        location: '台北動物之家'
-    }
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {

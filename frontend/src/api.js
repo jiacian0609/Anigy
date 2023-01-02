@@ -42,7 +42,11 @@ export const api = {
                 }
             })
             .then(res => res.data)
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                if (err.response)
+                    toast.error(err.response.data.error)
+            })
         )
     },
     editPost(post_id, body) {
@@ -53,7 +57,11 @@ export const api = {
                 }
             })
             .then(res => res.data)
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                if (err.response)
+                    toast.error(err.response.data.error)
+            })
         )
     },
     deletePost(post_id) {

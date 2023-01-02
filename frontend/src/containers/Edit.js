@@ -196,13 +196,13 @@ function Edit() {
 
     return (
         <Container>
-            <Title>新增送養貼文</Title>
+            <Title>編輯送養貼文</Title>
             <FormContainer>
                 <FormColumn>
                     {/* 照片 */}
                     <Row>
                         <SubColumn>
-                            <Text>封面照片</Text>
+                            <Text>封面照片*</Text>
                             <Upload
                                 name="coverImage"
                                 listType="picture-card"
@@ -238,7 +238,7 @@ function Edit() {
                     {/* 動物 & 品種 */}
                     <Row>
                         <SubColumn>
-                            <Text>動物</Text>
+                            <Text>動物*</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
                                 value={post.animal}
@@ -297,7 +297,7 @@ function Edit() {
                             />
                         </SubColumn>
                         <SubColumn>
-                            <Text>品種</Text>
+                            <Text>品種*</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
                                 value={post.breed}
@@ -347,7 +347,7 @@ function Edit() {
                     {/* 年齡 & 地區 */}
                     <Row>
                         <SubColumn>
-                            <Text>年齡</Text>
+                            <Text>年齡*</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
                                 value={post.age}
@@ -394,7 +394,7 @@ function Edit() {
                             />
                         </SubColumn>
                         <SubColumn>
-                            <Text>地區</Text>
+                            <Text>地區*</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
                                 value={post.location}
@@ -446,7 +446,7 @@ function Edit() {
                     {/* 性別 & 結紮 */}
                     <Row>
                         <SubColumn>
-                            <Text>性別</Text>
+                            <Text>性別*</Text>
                             <Select
                                 style={{ width: '100%' }}
                                 value={post.sex}
@@ -465,7 +465,7 @@ function Edit() {
                             />
                         </SubColumn>
                         <SubColumn>
-                            <Text>結紮</Text>
+                            <Text>結紮*</Text>
                             <Select
                                 style={{ width: '100%' }}
                                 value={post.neutered}
@@ -486,14 +486,14 @@ function Edit() {
                     </Row>
                     <Row>
                         <SubColumn>
-                            <Text>聯絡資訊</Text>
+                            <Text>聯絡資訊*</Text>
                             <Radio.Group onChange={e => handlePostChange({contact: e.target.value})} value={post.contact}>
                                 <Radio value='mobile'>電話</Radio>
                                 <Radio value='email'>E-mail</Radio>
                             </Radio.Group>
                         </SubColumn>
                         <SubColumn>
-                            <Text>狀態</Text>
+                            <Text>狀態*</Text>
                             <Select
                                 style={{ width: '100%' }}
                                 value={post.status}

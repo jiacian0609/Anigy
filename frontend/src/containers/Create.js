@@ -181,7 +181,7 @@ function Create() {
                     {/* 照片 */}
                     <Row>
                         <SubColumn>
-                            <Text>封面照片</Text>
+                            <Text>封面照片*</Text>
                             <Upload
                                 name="coverImage"
                                 listType="picture-card"
@@ -217,7 +217,7 @@ function Create() {
                     {/* 動物 & 品種 */}
                     <Row>
                         <SubColumn>
-                            <Text>動物</Text>
+                            <Text>動物*</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
                                 options={filter.animals}
@@ -275,7 +275,7 @@ function Create() {
                             />
                         </SubColumn>
                         <SubColumn>
-                            <Text>品種</Text>
+                            <Text>品種*</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
                                 options={filter.breeds}
@@ -324,7 +324,7 @@ function Create() {
                     {/* 年齡 & 地區 */}
                     <Row>
                         <SubColumn>
-                            <Text>年齡</Text>
+                            <Text>年齡*</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
                                 options={filter.ages}
@@ -370,7 +370,7 @@ function Create() {
                             />
                         </SubColumn>
                         <SubColumn>
-                            <Text>地區</Text>
+                            <Text>地區*</Text>
                             <Select
                                 style={{ width: '100%', marginBottom: '10px' }}
                                 options={filter.locations}
@@ -421,7 +421,7 @@ function Create() {
                     {/* 性別 & 結紮 */}
                     <Row>
                         <SubColumn>
-                            <Text>性別</Text>
+                            <Text>性別*</Text>
                             <Select
                                 style={{ width: '100%' }}
                                 options={[
@@ -439,7 +439,7 @@ function Create() {
                             />
                         </SubColumn>
                         <SubColumn>
-                            <Text>結紮</Text>
+                            <Text>結紮*</Text>
                             <Select
                                 style={{ width: '100%' }}
                                 options={[
@@ -458,7 +458,7 @@ function Create() {
                         </SubColumn>
                     </Row>
                     <div>
-                        <Text>聯絡資訊</Text>
+                        <Text>聯絡資訊*</Text>
                         <Radio.Group onChange={e => handlePostChange({contact: e.target.value})} value={post.contact}>
                             <Radio value='mobile'>電話</Radio>
                             <Radio value='email'>E-mail</Radio>

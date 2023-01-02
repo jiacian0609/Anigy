@@ -50,6 +50,13 @@ function Manage() {
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
 
+    const onDelete = (post_id) => {
+        api.deletePost(post_id)
+        .then(res => toast.success(res.message));
+
+        api.getUserPost()
+        .then(res => setPosts(res.data));
+    }
 
     useEffect(() => {
         if (!localStorage.getItem('JWT')) {
@@ -59,15 +66,7 @@ function Manage() {
 
         api.getUserPost()
         .then(res => setPosts(res.data));
-    }, []);
-
-    const onDelete = (post_id) => {
-        api.deletePost(post_id)
-        .then(res => toast.success(res.message));
-
-        api.getUserPost()
-        .then(res => setPosts(res.data));
-    }
+    }, [onDelete]);
 
     return (
         <Container>

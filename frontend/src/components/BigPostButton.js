@@ -98,9 +98,9 @@ const DeleteButton = styled.div `
 
 function BigPostButton({ post, onDelete, onClick }) {
     return (
-        <Container onClick={onClick}>
+        <Container>
             <Img alt={post.id} src={post.cover_image} />
-            <ContentBox>
+            <ContentBox onClick={onClick}>
                 <Column>
                     <Row>
                         <Field>動物</Field>
@@ -145,13 +145,13 @@ function BigPostButton({ post, onDelete, onClick }) {
                         <Text>{post.status}</Text>
                     </Row>
                 </Column>
-                <Buttons>
-                    <Link to={`/edit/${post.id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
-                        <EditButton />
-                    </Link>
-                    <DeleteButton onClick={onDelete}/>
-                </Buttons>
             </ContentBox>
+            <Buttons>
+                <Link to={`/edit/${post.id}`} style={{ textDecoration: 'none', color: 'inherit'}}>
+                    <EditButton />
+                </Link>
+                <DeleteButton onClick={onDelete}/>
+            </Buttons>
         </Container>
     )
 }

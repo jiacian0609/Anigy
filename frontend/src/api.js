@@ -119,13 +119,13 @@ export const api = {
     },
     getInfo(jwt) {
         return (
-            axios.get(`${hostname}/user/getInfo`, { headers: { Authorization: 'Bearer ' + jwt } })
+            axios.get(`${hostname}/user/`, { headers: { Authorization: 'Bearer ' + jwt } })
             .then(res =>res.data)
         )
     },
     patchInfo(name, email, mobile, jwt) {
         return (
-            axios.patch(`${hostname}/user/patchInfo`, {
+            axios.patch(`${hostname}/user/`, {
                 "username": name,
                 "email": email,
                 "mobile": mobile

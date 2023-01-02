@@ -43,6 +43,10 @@ const InputBar = styled.input`
     border: 0px;
     background-color: #F1F1F1;
     box-shadow: 0px 3px 3px grey;
+
+    &:focus {
+        outline: solid 2px #365A33;
+    }
 `
 
 const Signup = styled.button`

@@ -19,13 +19,6 @@ const Container = styled.div `
     position: fixed;
 `
 
-const Logo = styled.img `
-    width: 80px;
-    height: 80px;
-    margin-left: 15px;
-    background-color: #FFFFFF;
-`
-
 const Title = styled.div `
     font-size: 33px;
     color: #FFFFFF;

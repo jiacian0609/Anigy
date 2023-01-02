@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
-import axios from 'axios';
 import { api } from '../api'
 
 
@@ -69,9 +68,8 @@ const SaveBt = styled.button`
 
 
 function Modal() {
-    const location = useLocation()
-    const navigate = useNavigate()
-    console.log('state', location)
+    const location = useLocation();
+    const navigate = useNavigate();
     const [name, setName] = useState(location.state.name);
     const [email, setEmail] = useState(location.state.email);
     const [mobile, setPhone] = useState(location.state.phone);
@@ -79,18 +77,15 @@ function Modal() {
 
 
     const handleSave = () => {
-        const jwt = window.localStorage.getItem("JWT")
+        const jwt = window.localStorage.getItem("JWT");
         api.patchInfo(name, email, mobile, jwt)
         .then( (response) => {
-			/*window.localStorage.setItem('JWT', response.data.JWT)
-            window.location.href = "/"*/
-            console.log(response);
-            navigate('/account')
+            navigate('/account');
 		})
 		.catch( (error) => {
             console.log(error);
             if (error.response.data.error === "Update Forbidden") {
-                navigate('/account')
+                navigate('/account');
             }
 		})
     }

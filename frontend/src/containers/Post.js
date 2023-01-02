@@ -84,24 +84,9 @@ const DeleteButton = styled.div `
 `
 
 function Post() {
-    const samplePost = {
-        id: 1,
-        animal: '貓',
-        breed: '混種貓',
-        cover_image: '/images/login_img.png',
-        images: ['/images/login_img.png', '/images/login_img.png'],
-        sex: 'F',
-        age: '1歲',
-        neutered: true,
-        location: '台北動物之家',
-        mobile: '0900-000-000',
-        detail: '下巴有痣',
-        status: '開放',
-    }
 
     const { id } = useParams();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({
         id: 0,
         animal: '',

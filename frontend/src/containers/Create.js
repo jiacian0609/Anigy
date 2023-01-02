@@ -81,7 +81,6 @@ const beforeUpload = (file) => {
 function Create() {
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(false);
     const [coverImage, setCoverImage] = useState('');
     const [images, setImages] = useState([]);
     const [filter, setFilter] = useState({
@@ -167,7 +166,7 @@ function Create() {
 
     const uploadButton = (
         <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <PlusOutlined />
             <div style={{marginTop: 8}}>
                 Upload
             </div>

@@ -82,7 +82,6 @@ function Edit() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(false);
     const [coverImage, setCoverImage] = useState('');
     const [images, setImages] = useState([]);
     const [filter, setFilter] = useState({
@@ -99,7 +98,6 @@ function Edit() {
         locations: false
     });
     const [post, setPost] = useState({});
-    console.log(post)
 
     useEffect(() => {
         if (!localStorage.getItem('JWT')) {
@@ -146,7 +144,6 @@ function Edit() {
     };
 
     const handleImagesChange = ({fileList}) => {
-        console.log(fileList)
         setImages(fileList.map(file => {
             try{ 
                 file.file = file.originFileObj;
@@ -176,7 +173,6 @@ function Edit() {
         const imagesUrl = await Promise.all(
             images.map(async image => await uploadImage(image))
         );
-        // console.log(coverImageUrl, imagesUrl);
 
         await api.editPost(id, {
             ...post,
@@ -191,7 +187,7 @@ function Edit() {
 
     const uploadButton = (
         <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <PlusOutlined />
             <div style={{marginTop: 8}}>
                 Upload
             </div>

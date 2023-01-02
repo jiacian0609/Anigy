@@ -62,21 +62,21 @@ router.post('/', authentication(), async function(req, res, next) {
 		// Check the necessary variables
 		if(!animal || !breed || !color || !age || !sex || !cover_image || !neutered || !location || !contact)
 			return res.status(400).json({ error: '請輸入必填欄位' });
-		
+
 		// Add a new post
 		let user = await User.find({ _id: user_id });
 		const newPost = new Post({ 
 			user_id,
-			animal: animal ?? null, // necessary
-			breed: breed ?? null, // necessary
-			color: color ?? null, // necessary
-			age: age ?? null, // necessary
-			sex: sex ?? null, // necessary
-			cover_image: cover_image ?? null, // necessary
+			animal: animal, // necessary
+			breed: breed, // necessary
+			color: color, // necessary
+			age: age, // necessary
+			sex: sex, // necessary
+			cover_image: cover_image, // necessary
 			images: images ?? [],
-			neutered: neutered ?? null, // necessary
-			location: location ?? null, // necessary
-			contact: contact ?? null, // necessary
+			neutered: neutered, // necessary
+			location: location, // necessary
+			contact: contact, // necessary
 			contact_content: contact === 'mobile' ? user[0].mobile : user[0].email,
 			status: '待領養',
 			other_info: other_info ?? null,
@@ -100,7 +100,9 @@ router.patch('/:post_id', authentication(), async function(req, res, next) {
 	const { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url } = req.body
 
 	try {
-		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, status, other_info, origin_url }});
+		let user = await User.find({ _id: user_id });
+		const contact_content = contact === 'mobile' ? user[0].mobile : user[0].email;
+		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, breed, color, age, sex, cover_image, images, neutered, location, contact, contact_content, status, other_info, origin_url }});
 		if(updatePost.matchedCount === 0) {
 			return res.status(403).json({ error: '請先登入以修改貼文' });
 		}

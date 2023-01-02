@@ -8,7 +8,7 @@ import { authentication, updateDB } from '../utils/util.js';
 
 const router = Router();
 
-/* POST Sign Up */
+/* POST sign up */
 router.post('/signUp', async function (req, res) {
 	const username = req.body.username;
 	let password = req.body.password;
@@ -56,7 +56,7 @@ router.post('/signUp', async function (req, res) {
 	return res.status(200).json({ message: '註冊成功', JWT: token})
 });
 
-/* POST Sign In */
+/* POST sign in */
 router.post('/signIn', async (req, res) => {
 	try {
 		const { username, password } = req.body;
@@ -69,7 +69,7 @@ router.post('/signIn', async (req, res) => {
 		} else {
 			encryptedPassword = user[0].password;
 		}
-
+		
 		// Check whether the password is correct
 		const compare = await bcrypt.compare(password, encryptedPassword);
 		if(!compare)
@@ -98,16 +98,22 @@ router.post('/signIn', async (req, res) => {
 	}
   });
 
-//get user info
+/* GET a user's info */
 router.get('/', authentication(), async function(req, res, next)  {
+	const user_id = req.user_id;
+
 	try{
-		const user_id = req.user_id;
-		const user = await User.find({ _id: user_id })
-		res.send({'message': '成功找到使用者資訊', 'info': user[0]})    
+		if(!user_id)
+			return res.status(403).json({ error: '請先登入' });
+		
+		const user = await User.find({ _id: user_id }, { password: 0 });
+		return res.status(200).json({ message: '取得使用者資訊成功', info: user[0] })    
 	} catch (err) {
-		console.error(err.message)
+		console.error(err.message);
+		return res.status(500).json({ error: '取得使用者資訊失敗'})
 	}
 });
+
 //patch user info
 router.patch('/', authentication(), async function(req, res, next)  {
 	const user_id = req.user_id;

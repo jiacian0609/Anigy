@@ -57,7 +57,7 @@ router.post('/', authentication(), async function(req, res, next) {
 
 	try {
 		if(!user_id)
-			return res.status(403).json({ error: '請先登入以新增貼文' });
+			return res.status(403).json({ error: '請先登入' });
 
 		// Check the necessary variables
 		if(!animal || !breed || !age || !sex || !cover_image || !neutered || !location || !contact)
@@ -103,7 +103,7 @@ router.patch('/:post_id', authentication(), async function(req, res, next) {
 		const contact_content = contact === 'mobile' ? user[0].mobile : user[0].email;
 		const updatePost = await Post.updateOne({ _id: post_id, user_id }, { $set: { animal, breed, age, sex, cover_image, images, neutered, location, contact, contact_content, status, other_info, origin_url }});
 		if(updatePost.matchedCount === 0) {
-			return res.status(403).json({ error: '請先登入以修改貼文' });
+			return res.status(403).json({ error: '請先登入' });
 		}
 		else {
 			updateDB();
@@ -124,7 +124,7 @@ router.delete('/:post_id', authentication(), async function(req, res, next) {
 	try {
 		const deletePost = await Post.deleteOne({ _id: post_id, user_id });
 		if(deletePost.deletedCount === 0) {
-			return res.status(403).json({ error: '請先登入以刪除貼文' });
+			return res.status(403).json({ error: '請先登入' });
 		}
 		else {
 			updateDB();

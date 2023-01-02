@@ -155,7 +155,6 @@
             "user_id": "63a5ca04a6955aef5e115744",
             "animal": "貓頭鷹",
             "breed": "短耳貓頭鷹",
-            "color": "紅",
             "age": "老",
             "sex": "M",
             "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -173,7 +172,6 @@
             "user_id": "63a5ca04a6955aef5e115744",
             "animal": "貓頭鷹",
             "breed": "短耳貓頭鷹",
-            "color": "紅",
             "age": "老",
             "sex": "M",
             "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -206,7 +204,6 @@
     "body": {
         "animal": "貓頭鷹", // 必填
         "breed": "短耳貓頭鷹", // 必填
-        "color": "紅", // 必填
         "age": "老", // 必填
         "sex": "M", // 必填
         "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", // 必填
@@ -227,7 +224,6 @@
         "user_id": "63a5ca04a6955aef5e115744",
         "animal": "貓頭鷹",
         "breed": "短耳貓頭鷹",
-        "color": "紅",
         "age": "老",
         "sex": "M",
         "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -274,7 +270,6 @@
             "user_id": "63a5ca04a6955aef5e115744",
             "animal": "貓頭鷹",
             "breed": "短耳貓頭鷹",
-            "color": "紅",
             "age": "老",
             "sex": "M",
             "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -292,7 +287,6 @@
             "user_id": "63a5ca04a6955aef5e115744",
             "animal": "貓頭鷹",
             "breed": "短耳貓頭鷹",
-            "color": "紅",
             "age": "老",
             "sex": "M",
             "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -333,7 +327,6 @@
         "user_id": "63a5ca04a6955aef5e115744",
         "animal": "貓頭鷹",
         "breed": "短耳貓頭鷹",
-        "color": "紅",
         "age": "老",
         "sex": "M",
         "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
@@ -366,7 +359,6 @@
     "body": {
         "animal": "貓頭鷹", 
         "breed": "短耳貓頭鷹", 
-        "color": "紅", 
         "age": "幼年", 
         "sex": "M", 
         "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", 

@@ -15,7 +15,7 @@ import Manage from './containers/Manage';
 import Create from './containers/Create';
 import Edit from './containers/Edit';
 import Account from './containers/Account';
-import Modal from './components/AccountModal';
+import Modal from './containers/AccountModal';
 import NotFound from './containers/NotFound.js'
 
 function App() {

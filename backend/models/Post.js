@@ -6,7 +6,6 @@ const PostSchema = Schema({
         user_id: { type: String, required: true },
         animal: { type: String, required: true },
         breed: { type: String, required: true },
-        color: { type: String, required: true },
         age: { type: String, required: true },
         sex: { type: String, required: true },
         cover_image: { type: String, required: true },

@@ -90,14 +90,29 @@ function Main() {
         locations: []
     });
     const [animalFilter, setAnimalFilter] = useState([]);
+    const [postFilter, setPostFilter] = useState({
+        animal: 'All',
+        breed: 'All',
+        sex: 'All',
+        neutered: 'All',
+        age: 'All',
+        location: 'All'
+    });
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]);
+
+    const onClickSearch = () => {
+        setSearchMode(!searchMode);
+        setFilteredPosts(posts);
+    };
 
     useEffect(() => {
         api.getAllPost()
-        .then(res => setPosts(res.data));
-    }, []);
+        .then(res => {
+            setPosts(res.data);
+            setFilteredPosts(res.data);
+        });
 
-    useEffect(() => {
         api.getFilter()
         .then(res => {
             setFilter({
@@ -110,9 +125,20 @@ function Main() {
         });
     }, []);
 
+    useEffect(() => {
+        setFilteredPosts(posts.filter(post => (
+            (postFilter.animal === 'All' || post.animal === postFilter.animal) && 
+            (postFilter.breed === 'All' || post.breed === postFilter.breed) &&
+            (postFilter.sex === 'All' || post.sex === postFilter.sex) &&
+            (postFilter.neutered === 'All' || post.neutered === postFilter.neutered) &&
+            (postFilter.age === 'All' || post.age === postFilter.age) &&
+            (postFilter.location === 'All' || post.location === postFilter.location)
+        )))
+    }, [postFilter]);
+
     return (
         <Container>
-            <SearchButton search={searchMode} onClick={() => setSearchMode(!searchMode)}>
+            <SearchButton search={searchMode} onClick={onClickSearch}>
                 <img alt='search' src='/icons/search.png' style={{width: '20px', height: '20px'}}/>
                 {searchMode ? '取消搜尋' : '搜尋'}
             </SearchButton>
@@ -123,7 +149,7 @@ function Main() {
                         <Select
                             style={{ minWidth: '90px' }}
                             options={filter.animals}
-                            defaultValue='All'
+                            value={postFilter.animal}
                             onChange={value => {
                                 if (value === 'All')
                                     setFilter({
@@ -139,6 +165,11 @@ function Main() {
                                             .map(item => { return {value: item, label: item} })
                                         ]
                                     });
+                                setPostFilter({
+                                    ...postFilter,
+                                    animal: value,
+                                    breed: 'All'
+                                });
                             }}
                         />
                     </SelectField>
@@ -147,8 +178,11 @@ function Main() {
                         <Select
                             style={{ minWidth: '90px' }}
                             options={filter.breeds}
-                            defaultValue='All'
-                            // onChange={value => setPost({...post, sex: value})}
+                            value={postFilter.breed}
+                            onChange={value => setPostFilter({
+                                ...postFilter,
+                                breed: value
+                            })}
                         />
                     </SelectField>
                     <SelectField>
@@ -169,8 +203,11 @@ function Main() {
                                     label: '母'
                                 }
                             ]}
-                            defaultValue='All'
-                            // onChange={value => setPost({...post, sex: value})}
+                            value={postFilter.sex}
+                            onChange={value => setPostFilter({
+                                ...postFilter,
+                                sex: value
+                            })}
                         />
                     </SelectField>
                     <SelectField>
@@ -191,8 +228,11 @@ function Main() {
                                     label: '否'
                                 }
                             ]}
-                            defaultValue='All'
-                            // onChange={value => setPost({...post, sex: value})}
+                            value={postFilter.neutered}
+                            onChange={value => setPostFilter({
+                                ...postFilter,
+                                neutered: value
+                            })}
                         />
                     </SelectField>
                     <SelectField>
@@ -200,8 +240,11 @@ function Main() {
                         <Select
                             style={{ minWidth: '90px' }}
                             options={filter.ages}
-                            defaultValue='All'
-                            // onChange={value => setPost({...post, sex: value})}
+                            value={postFilter.age}
+                            onChange={value => setPostFilter({
+                                ...postFilter,
+                                age: value
+                            })}
                         />
                     </SelectField>
                     <SelectField>
@@ -209,8 +252,11 @@ function Main() {
                         <Select
                             style={{ minWidth: '90px' }}
                             options={filter.locations}
-                            defaultValue='All'
-                            // onChange={value => setPost({...post, sex: value})}
+                            value={postFilter.location}
+                            onChange={value => setPostFilter({
+                                ...postFilter,
+                                location: value
+                            })}
                         />
                     </SelectField>
                 </SearchContainer>
@@ -221,7 +267,7 @@ function Main() {
                 </Banner>
             }
             <PostContainer>
-            {posts.map(p => 
+            {filteredPosts.map(p => 
                 <PostButton 
                     key={p._id}
                     post={p}

@@ -76,23 +76,23 @@
         "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
     },
     "body": {
-        "animal": "貓頭鷹", 
-        "breed": "短耳貓頭鷹", 
-        "color": "紅", 
-        "age": "老", 
-        "sex": "M", 
-        "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", 
+        "animal": "貓頭鷹", // 必填
+        "breed": "短耳貓頭鷹", // 必填
+        "color": "紅", // 必填
+        "age": "老", // 必填
+        "sex": "M", // 必填
+        "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", // 必填
         "images": null, 
-        "neutered": true, 
-        "location": "台北市", 
-        "contact": null, 
-        "status": "待領養", 
+        "neutered": true, // 必填
+        "location": "台北市", // 必填
+        "contact": "email",  // 必填
         "other_info": null, 
         "origin_url": null
     }
 }
 ```
 ### Reponse
+#### 200
 ```json
 {
     "data": {
@@ -106,13 +106,32 @@
         "images": [],
         "neutered": true,
         "location": "台北市",
-        "contact": null,
+        "contact": "email",
+        "contact_content": "cy9815526@gmail.com",
         "status": "待領養",
         "other_info": null,
         "origin_url": null,
-        "_id": "63ab1fc72b48ef214c792c4c"
+        "_id": "63b2cd973617b3abdfd667c8"
     },
-    "message": "Add Success"
+    "message": "新增貼文成功"
+}
+```
+#### 400
+```json
+{
+    "error": "請輸入必填欄位"
+}
+```
+#### 403
+```json
+{
+    "error": "請先登入以新增貼文"
+}
+```
+#### 500
+```json
+{
+    "error": "新增貼文失敗"
 }
 ```
 

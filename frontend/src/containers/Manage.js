@@ -50,11 +50,11 @@ function Manage() {
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
 
-    const onDelete = (post_id) => {
-        api.deletePost(post_id)
+    const onDelete = async (post_id) => {
+        await api.deletePost(post_id)
         .then(res => toast.success(res.message));
 
-        api.getUserPost()
+        await api.getUserPost()
         .then(res => setPosts(res.data));
     }
 
@@ -66,7 +66,7 @@ function Manage() {
 
         api.getUserPost()
         .then(res => setPosts(res.data));
-    }, [onDelete]);
+    }, []);
 
     return (
         <Container>

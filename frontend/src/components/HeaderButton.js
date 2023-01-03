@@ -47,7 +47,8 @@ function HeaderButton({icon, name}) {
 
     function checkActive() {
         if (pathname === '/' && icon === 'main') return true;
-        else if ((pathname === '/signIn' || pathname === '/signUp' || pathname === '/signup' || pathname === '/signin' || pathname === '/account') && icon === 'signIn') return true;
+        else if ((pathname === '/signIn' || pathname === '/signUp' || pathname === '/signup' || pathname === '/signin' || pathname === '/account' || pathname === '/account/Modal') && icon === 'signIn') return true;
+        else if ((pathname === '/manage' || pathname === '/create') && icon === 'manage') return true;
         else if (pathname === `/${icon}`) return true;
         else return false;
     }

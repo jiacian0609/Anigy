@@ -25,25 +25,44 @@
 #### 設定環境變數
 1. 下載[環境變數壓縮檔](https://drive.google.com/file/d/1Kc9bn1kCnH_t9AmGpybCQsSSMzHE2M17/view?usp=sharing)
 2. 將兩個 `.env` 檔分別放到 `/frontend` 以及 `/backend` 底下
-#### 安裝所需套件（以下擇一執行）
-- `npm` 
-```
-cd frontend
-npm install
-cd ..
-cd ../backend
-npm install
-```
-- `yarn` 
-```
-cd frontend
-yarn
-cd ..
-cd ../backend
-yarn
-```
-#### 啟動前後端  
-   於本專案的根目錄開啟兩個終端機，分別執行 `yarn start` 以及 `yarn server` 以開啟前後端  
+#### 啟動後端
+1. 安裝所需套件
+	```
+	cd backend
+	npm install
+	```
+	或
+	```
+	cd backend
+	yarn
+	```
+2. 啟動伺服器
+	```
+	yarn server
+	```
+	或
+	```
+	npm run server
+	```
+#### 啟動前端
+1. 安裝所需套件
+	```
+	cd frontend
+	npm install
+	```
+	或
+	```
+	cd frontend
+	yarn
+	```
+2. 啟動伺服器
+	```
+	yarn start
+	```
+	或
+	```
+	npm start
+	```
 ### 功能測試
 1. 註冊／登入
 2. 搜尋貼文
@@ -53,3 +72,6 @@ yarn
 6. 修改個人資訊
 
 ## 組員負責項目
+### B08705001 李書成
+### B08705003 楊佳芊
+### B08705049 陳亮瑜

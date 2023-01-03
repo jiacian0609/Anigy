@@ -176,42 +176,45 @@
 ```
 ### Reponse
 #### 200
-```json
+```
 {
 	"data": [
 		{
-			"_id": "63b2cd433617b3abdfd667b2",
-			"user_id": "63a5ca04a6955aef5e115744",
-			"animal": "貓頭鷹",
-			"breed": "短耳貓頭鷹",
-			"age": "老",
-			"sex": "M",
-			"cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
-			"images": [],
-			"neutered": true,
-			"location": "台北市",
-			"contact": "mobile",
-			"contact_content": "0912345678",
-			"status": "待領養",
-			"other_info": null,
-			"origin_url": null
-		},
-		{
-			"_id": "63b2cd973617b3abdfd667c8",
-			"user_id": "63a5ca04a6955aef5e115744",
-			"animal": "貓頭鷹",
-			"breed": "短耳貓頭鷹",
-			"age": "老",
-			"sex": "M",
-			"cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
-			"images": [],
-			"neutered": true,
-			"location": "台北市",
-			"contact": "email",
-			"contact_content": "cy9815526@gmail.com",
-			"status": "待領養",
-			"other_info": null,
-			"origin_url": null
+            "_id": "63b412529662d2c96c892b3f",
+            "user_id": <USERID>,
+            "animal": "狗",
+            "breed": "混種狗",
+            "age": "幼年",
+            "sex": "M",
+            "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031931.png?alt=media&token=61fe5507-2bfa-4c6a-8011-823c91a13f4a",
+            "images": [],
+            "neutered": false,
+            "location": "嘉義市",
+            "contact": "email",
+            "contact_content": <EMAIL>,
+            "status": "待領養",
+            "other_info": "棕色外觀，身材瘦弱",
+            "origin_url": null
+        },
+        {
+            "_id": "63b412e99662d2c96c892ba0",
+            "user_id": <USERID>,
+            "animal": "狗",
+            "breed": "臘腸狗",
+            "age": "成年",
+            "sex": "F",
+            "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031934.png?alt=media&token=074f0076-e67c-4bd1-a2e3-8f2bf51321e9",
+            "images": [
+                "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031936.png?alt=media&token=fceb2c68-a55a-4df3-a4d0-a0113f0f55a5",
+                "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031940.png?alt=media&token=05424686-665e-407b-8e69-4d390ee578a3"
+            ],
+            "neutered": false,
+            "location": "嘉義市",
+            "contact": "mobile",
+            "contact_content": <MOBILE>,
+            "status": "待領養",
+            "other_info": "腿很短，很可憐",
+            "origin_url": null
 		}
 	]
 }
@@ -225,46 +228,52 @@
 
 ## POST `http://localhost:4000/api/posts`
 ### Request
-```json
+```
 {
 	"headers": {
 		"authorization": "Bearer <JWT>" 
 	},
 	"body": {
-		"animal": "貓頭鷹", // 必填
-		"breed": "短耳貓頭鷹", // 必填
-		"age": "老", // 必填
-		"sex": "M", // 必填
-		"cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", // 必填
-		"images": null, 
-		"neutered": true, // 必填
-		"location": "台北市", // 必填
-		"contact": "email",  // 必填
-		"other_info": null, 
-		"origin_url": null
+		"animal": "狗", // 必填
+        "breed": "臘腸狗", // 必填
+        "age": "成年", // 必填
+        "sex": "F", // 必填
+        "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031934.png?alt=media&token=074f0076-e67c-4bd1-a2e3-8f2bf51321e9", // 必填
+        "images": [
+            "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031936.png?alt=media&token=fceb2c68-a55a-4df3-a4d0-a0113f0f55a5",
+            "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031940.png?alt=media&token=05424686-665e-407b-8e69-4d390ee578a3"
+        ],
+        "neutered": false, // 必填
+        "location": "嘉義市", // 必填
+        "contact": "mobile", // 必填
+        "other_info": "腿很短，很可憐",
+        "origin_url": null
 	}
 }
 ```
 ### Reponse
 #### 200
-```json
+```
 {
 	"data": {
-		"user_id": "63a5ca04a6955aef5e115744",
-		"animal": "貓頭鷹",
-		"breed": "短耳貓頭鷹",
-		"age": "老",
-		"sex": "M",
-		"cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
-		"images": [],
-		"neutered": true,
-		"location": "台北市",
-		"contact": "email",
-		"contact_content": "cy9815526@gmail.com",
+		"user_id": <USERID>,
+		"animal": "狗",
+		"breed": "臘腸狗",
+		"age": "成年",
+		"sex": "F",
+		"cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031934.png?alt=media&token=074f0076-e67c-4bd1-a2e3-8f2bf51321e9",
+        "images": [
+            "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031936.png?alt=media&token=fceb2c68-a55a-4df3-a4d0-a0113f0f55a5",
+            "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031940.png?alt=media&token=05424686-665e-407b-8e69-4d390ee578a3"
+        ],
+		"neutered": false,
+		"location": "嘉義市",
+		"contact": "mobile",
+		"contact_content": <MOBILE>,
 		"status": "待領養",
-		"other_info": null,
+		"other_info": "腿很短，很可憐",
 		"origin_url": null,
-		"_id": "63b2cd973617b3abdfd667c8"
+		"_id": "63b412e99662d2c96c892ba0"
 	},
 	"message": "新增貼文成功"
 }
@@ -296,42 +305,45 @@
 ## GET `http://localhost:4000/api/posts/all`
 ### Reponse
 #### 200
-```json
+```
 {
 	"data": [
 		{
-			"_id": "63b2cd433617b3abdfd667b2",
-			"user_id": "63a5ca04a6955aef5e115744",
-			"animal": "貓頭鷹",
-			"breed": "短耳貓頭鷹",
-			"age": "老",
-			"sex": "M",
-			"cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
-			"images": [],
-			"neutered": true,
-			"location": "台北市",
-			"contact": "mobile",
-			"contact_content": "0912345678",
-			"status": "待領養",
-			"other_info": null,
-			"origin_url": null
-		},
-		{
-			"_id": "63b2cd973617b3abdfd667c8",
-			"user_id": "63a5ca04a6955aef5e115744",
-			"animal": "貓頭鷹",
-			"breed": "短耳貓頭鷹",
-			"age": "老",
-			"sex": "M",
-			"cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
-			"images": [],
-			"neutered": true,
-			"location": "台北市",
-			"contact": "email",
-			"contact_content": "cy9815526@gmail.com",
-			"status": "待領養",
-			"other_info": null,
-			"origin_url": null
+            "_id": "63b412529662d2c96c892b3f",
+            "user_id": <USERID>,
+            "animal": "狗",
+            "breed": "混種狗",
+            "age": "幼年",
+            "sex": "M",
+            "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031931.png?alt=media&token=61fe5507-2bfa-4c6a-8011-823c91a13f4a",
+            "images": [],
+            "neutered": false,
+            "location": "嘉義市",
+            "contact": "email",
+            "contact_content": <EMAIL>,
+            "status": "待領養",
+            "other_info": "棕色外觀，身材瘦弱",
+            "origin_url": null
+        },
+        {
+            "_id": "63b412e99662d2c96c892ba0",
+            "user_id": <USERID>,
+            "animal": "狗",
+            "breed": "臘腸狗",
+            "age": "成年",
+            "sex": "F",
+            "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031934.png?alt=media&token=074f0076-e67c-4bd1-a2e3-8f2bf51321e9",
+            "images": [
+                "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031936.png?alt=media&token=fceb2c68-a55a-4df3-a4d0-a0113f0f55a5",
+                "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031940.png?alt=media&token=05424686-665e-407b-8e69-4d390ee578a3"
+            ],
+            "neutered": false,
+            "location": "嘉義市",
+            "contact": "mobile",
+            "contact_content": <MOBILE>,
+            "status": "待領養",
+            "other_info": "腿很短，很可憐",
+            "origin_url": null
 		}
 	]
 }
@@ -354,24 +366,27 @@
 ```
 ### Reponse
 #### 200
-```json
+```
 {
 	"data": {
-		"_id": "63b2cd973617b3abdfd667c8",
-		"user_id": "63a5ca04a6955aef5e115744",
-		"animal": "貓頭鷹",
-		"breed": "短耳貓頭鷹",
-		"age": "老",
-		"sex": "M",
-		"cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5",
-		"images": [],
-		"neutered": true,
-		"location": "台北市",
-		"contact": "email",
-		"contact_content": "cy9815526@gmail.com",
-		"status": "待領養",
-		"other_info": null,
-		"origin_url": null
+        "_id": "63b412e99662d2c96c892ba0",
+        "user_id": <USERID>,
+        "animal": "狗",
+        "breed": "臘腸狗",
+        "age": "成年",
+        "sex": "F",
+        "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031934.png?alt=media&token=074f0076-e67c-4bd1-a2e3-8f2bf51321e9",
+        "images": [
+            "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031936.png?alt=media&token=fceb2c68-a55a-4df3-a4d0-a0113f0f55a5",
+            "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031940.png?alt=media&token=05424686-665e-407b-8e69-4d390ee578a3"
+        ],
+        "neutered": false,
+        "location": "嘉義市",
+        "contact": "mobile",
+        "contact_content": <MOBILE>,
+        "status": "待領養",
+        "other_info": "腿很短，很可憐",
+        "origin_url": null
 	},
 	"role": "WRITE"
 }
@@ -383,7 +398,7 @@
 }
 ```
 #### 500
-```json
+```
 {
 	"error": "取得貼文失敗"
 }
@@ -391,27 +406,31 @@
 
 ## PATCH `http://localhost:4000/api/posts/{post_id}`
 ### Request
-```json
+```
 {
 	"headers": {
 		"authorization": "Bearer <JWT>"
 	},
 	"body": {
-		"animal": "貓頭鷹", 
-		"breed": "短耳貓頭鷹", 
-		"age": "幼年", 
-		"sex": "M", 
-		"cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", 
-		"images": ["https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5", "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/97f79ba8-ab6e-4ffb-b58f-850b14bcb94a_org.jpg?alt=media&token=4a25b0e6-de88-4a65-abcf-9041ec195ed5"], 
-		"neutered": true, 
-		"location": "台北市", 
-		"contact": "email", 
-		"status": "已領養", 
-		"other_info": null, 
-		"origin_url": null
+		"animal": "狗", // 必填
+        "breed": "臘腸狗", // 必填
+        "age": "成年", // 必填
+        "sex": "F", // 必填
+        "cover_image": "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031934.png?alt=media&token=074f0076-e67c-4bd1-a2e3-8f2bf51321e9", // 必填
+        "images": [
+            "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031936.png?alt=media&token=fceb2c68-a55a-4df3-a4d0-a0113f0f55a5",
+            "https://firebasestorage.googleapis.com/v0/b/wpproject-87b0b.appspot.com/o/202301031940.png?alt=media&token=05424686-665e-407b-8e69-4d390ee578a3"
+        ],
+        "neutered": false, // 必填
+        "location": "嘉義市", // 必填
+        "contact": "mobile", // 必填
+		"status": "已領養", // 必填
+        "other_info": "腿很短，很可憐",
+        "origin_url": null
 	}
 }
 ```
+		 
 ### Reponse
 #### 200
 ```

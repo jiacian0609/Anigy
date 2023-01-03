@@ -68,9 +68,9 @@ const Logout = styled.button`
 `
 
 function Account({setJwt}) {
-    const [name, setName] = useState('fake name');
-    const [email, setEmail] = useState('fake email');
-    const [phone, setPhone] = useState('fake phone');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {

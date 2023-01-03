@@ -20,7 +20,6 @@ export const api = {
                 }
             })
             .then(res => res.data)
-            .catch(err => console.log(err))
         )
     },
     getPostDetail(post_id) {
@@ -42,11 +41,6 @@ export const api = {
                 }
             })
             .then(res => res.data)
-            .catch(err => {
-                console.log(err);
-                if (err.response)
-                    toast.error(err.response.data.error)
-            })
         )
     },
     editPost(post_id, body) {
@@ -119,7 +113,11 @@ export const api = {
     },
     getInfo(jwt) {
         return (
-            axios.get(`${hostname}/user/`, { headers: { Authorization: 'Bearer ' + jwt } })
+            axios.get(`${hostname}/user/`, {
+                headers: {
+                    authorization: `Bearer ${jwt}`
+                }
+            })
             .then(res =>res.data)
         )
     },
@@ -129,7 +127,11 @@ export const api = {
                 "username": name,
                 "email": email,
                 "mobile": mobile
-            }, { headers: { authorization: 'Bearer ' + jwt } })
+            }, {
+                headers: {
+                    authorization: `Bearer ${jwt}`
+                }
+            })
             .then( (response) => response.data)
             .catch( (error) => console.log(error))
         )

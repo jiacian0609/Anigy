@@ -38,7 +38,18 @@ function Manage() {
         }
 
         api.getUserPost()
-        .then(res => setPosts(res.data));
+        .then(res => setPosts(res.data))
+        .catch(err => {
+            console.log(err);
+            if (err.response.data) {
+                toast.error(err.response.data.error);
+                if (err.response.data.error === '請重新登入') {
+                    localStorage.removeItem('JWT');
+                    navigate('/signIn');
+                }
+            }
+            else toast.error(err);
+        });
     }, []);
 
     return (

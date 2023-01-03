@@ -87,6 +87,18 @@ function Account({setJwt}) {
             setEmail(email);
             setPhone(mobile);
         })
+        .catch(err => {
+            console.log(err);
+            if (err.response.data) {
+                toast.error(err.response.data.error);
+                if (err.response.data.error === '請重新登入') {
+                    setJwt('');
+                    localStorage.removeItem('JWT');
+                    navigate('/signIn');
+                }
+            }
+            else toast.error(err);
+        });
     })
 
     const signOut = () => {

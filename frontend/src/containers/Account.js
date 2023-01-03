@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 
 import { api } from "../api";
@@ -83,11 +82,10 @@ function Account({setJwt}) {
         const jwt = window.localStorage.getItem("JWT")
         api.getInfo(jwt)
         .then(res => {
-            console.log(res);
-            const {username, email, mobile} = res.info
-            setName(username)
-            setEmail(email)
-            setPhone(mobile)
+            const {username, email, mobile} = res.info;
+            setName(username);
+            setEmail(email);
+            setPhone(mobile);
         })
     })
 

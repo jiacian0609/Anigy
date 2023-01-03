@@ -28,9 +28,6 @@ app.use(function (req, res, next) {
 })
 
 app.use('/', routes);
-/* app.use(basePath + '/', indexRouter);
-app.use(basePath + '/users', usersRouter);
-app.use(basePath + '/posts', postsRouter); */
 
 // catch 404 and forward to error handler
 /* app.use(function(req, res, next) {

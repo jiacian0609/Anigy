@@ -6,7 +6,7 @@
   "author": "jiacian0609 <79597797+jiacian0609@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cd frontend && yarn start",
-    "server": "cd backend &&  npm run server"
+    "start": "cd frontend && npm start",
+    "server": "cd backend && npm run server"
   }
 }

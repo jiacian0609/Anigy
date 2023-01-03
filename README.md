@@ -22,11 +22,26 @@
 
 ## localhost 安裝與測試步驟
 ### 環境設置
-#### 下載 `.env` 檔
-1. 下載 [環境變數壓縮檔](https://drive.google.com/file/d/1Kc9bn1kCnH_t9AmGpybCQsSSMzHE2M17/view?usp=sharing)
+#### 設定環境變數
+1. 下載[環境變數壓縮檔](https://drive.google.com/file/d/1Kc9bn1kCnH_t9AmGpybCQsSSMzHE2M17/view?usp=sharing)
 2. 將兩個 `.env` 檔分別放到 `/frontend` 以及 `/backend` 底下
-#### 安裝所需套件  
-   分別 `cd backend` 以及 `cd frontend` 並執行 `yarn` 以安裝所需套件
+#### 安裝所需套件（以下擇一執行）
+- `npm` 
+```
+cd frontend
+npm install
+cd ..
+cd ../backend
+npm install
+```
+- `yarn` 
+```
+cd frontend
+yarn
+cd ..
+cd ../backend
+yarn
+```
 #### 啟動前後端  
    於本專案的根目錄開啟兩個終端機，分別執行 `yarn start` 以及 `yarn server` 以開啟前後端  
 ### 功能測試

@@ -13,11 +13,12 @@ const authentication = () => {
             JWT = JWT.replace('Bearer ', '');
             var payload = jwt.verify(JWT, process.env.TOKEN_SECRET);
             req.user_id = payload.Uid;
-        } catch(e) {
-            console.log(e)
+        } catch(error) {
+            //console.log(error.message)
+            if(error.message === 'jwt expired')
+                return res.status(403).json({ error: '請重新登入' });
         }
         next();
-        
     }; 
 };
 

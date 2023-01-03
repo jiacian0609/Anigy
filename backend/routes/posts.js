@@ -60,7 +60,7 @@ router.post('/', authentication(), async function(req, res, next) {
 			return res.status(403).json({ error: '請先登入' });
 
 		// Check the necessary variables
-		if(!animal || !breed || !age || !sex || !cover_image || !neutered || !location || !contact)
+		if(!animal || !breed || !age || !sex || !cover_image || neutered === undefined || !location || !contact)
 			return res.status(400).json({ error: '請輸入必填欄位' });
 
 		// Add a new post

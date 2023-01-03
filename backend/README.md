@@ -14,134 +14,153 @@
 
 ## POST `http://localhost:4000/api/user/signUp`
 ### Request
-```json
+```
 {
     "body" : {
-        "username": "1234",
-        "password": "1234",
-        "email": "1234",
-        "mobile": "1234",
+        "username": <USERNAME>,
+        "password": <PASSWORD>,
+        "email": <EMAIL>,
+        "mobile": <MOBILE>,
     }
 }
 ```
 ### Response
 #### 200
-```json
+```
 {
     "message": "註冊成功",
-    "jwt": "<jwt>"
+    "jwt": <JWT> 
 }
 ```
 #### 400
-```json
-{
-    "error": "註冊失敗"
-}
 ```
-```json
 {
     "error": "使用者名稱已經使用過"
 }
 ```
-```json
+```
 {
-    "error": "email已經使用過"
+    "error": "Email 已經使用過"
+}
+```
+#### 500
+```
+{
+    "error": "註冊失敗"
 }
 ```
 
 ## POST `http://localhost:4000/api/user/signIn`
 ### Request
-```json
+```
 {
     "body" : {
-        "username": "1234",
-        "password": "1234",
+        "username": <USERNAME>,
+        "password": <PASSWORD>
     }
 }
 ```
 ### Response
 #### 200
-```json
+```
 {
     "message": "登入成功",
-    "jwt": "<jwt>"
+    "jwt": <JWT>
 }
 ```
-#### 404
-```json
+#### 400
+```
 {
     "error": "使用者名稱不存在"
 }
 ```
 #### 403
-```json
+```
 {
     "error": "密碼錯誤"
+}
+```
+#### 500
+```
+{
+    "error": "登入失敗"
 }
 ```
 
 ## GET `http://localhost:4000/api/user`
 ### Request
-```json
+```
 {
     "headers": {
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+        "authorization": "Bearer <JWT>" 
     }
 }
 ```
 ### Response
 #### 200
-```json
+```
 {
     "info": {
-        "username": 1234,
-        "email": 1234,
-        "mobile": 1234
+        "username": <USERNAME>,
+        "email": <EMAIL>,
+        "mobile": <MOBILE>
     },
-    "message": "成功找到使用者資訊"
+    "message": "取得使用者資訊成功"
+}
+```
+#### 403
+```
+{
+    "error": "請先登入"
+}
+```
+#### 500
+```
+{
+    "error": "取得使用者資訊失敗"
 }
 ```
 
 ## PATCH `http://localhost:4000/api/user`
 ### Request
-```json
+```
 {
     "headers": {
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+        "authorization": "Bearer <JWT>"  
     },
     "body" : {
-        "username": "name",
-        "email": "email",
-        "mobile": "mobile"
+        "username": <USERNAME>,
+        "email": <EMAIL>,
+        "mobile": <MOBILE>
     }
 }
 ```
 ### Response
 #### 200
-```json
-{
-    "message": "更新成功"
-}
 ```
-#### 400
-```json
 {
-    "message": "更新失敗"
+    "message": "修改使用者資訊成功"
 }
 ```
 #### 403
-```json
+```
 {
-    "message": "更新失敗"
+    "error": "請先登入"
+}
+```
+#### 500
+```
+{
+    "message": "修改使用者資訊失敗"
 }
 ```
 
 ## GET `http://localhost:4000/api/posts`
 ### Request
-```json
+```
 {
     "headers": {
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+        "authorization": "Bearer <JWT>"
     }
 }
 ```
@@ -188,7 +207,7 @@
 }
 ```
 #### 500
-```json
+```
 {
     "error": "取得使用者貼文失敗"
 }
@@ -199,7 +218,7 @@
 ```json
 {
     "headers": {
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+        "authorization": "Bearer <JWT>" 
     },
     "body": {
         "animal": "貓頭鷹", // 必填
@@ -241,19 +260,19 @@
 }
 ```
 #### 400
-```json
+```
 {
     "error": "請輸入必填欄位"
 }
 ```
 #### 403
-```json
+```
 {
-    "error": "請先登入以新增貼文"
+    "error": "請先登入"
 }
 ```
 #### 500
-```json
+```
 {
     "error": "新增貼文失敗"
 }
@@ -303,7 +322,7 @@
 }
 ```
 #### 500
-```json
+```
 {
     "error": "取得全部貼文失敗"
 }
@@ -311,10 +330,10 @@
 
 ## GET `http://localhost:4000/api/posts/{post_id}`
 ### Request
-```json
+```
 {
     "headers": {
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+        "authorization": "Bearer <JWT>" 
     }
 }
 ```
@@ -354,7 +373,7 @@
 ```json
 {
     "headers": {
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+        "authorization": "Bearer <JWT>"
     },
     "body": {
         "animal": "貓頭鷹", 
@@ -374,19 +393,19 @@
 ```
 ### Reponse
 #### 200
-```json
+```
 {
     "message": "修改貼文成功"
 }
 ```
 #### 403
-```json
+```
 {
-    "error": "請先登入以修改貼文"
+    "error": "請先登入"
 }
 ```
 #### 500
-```json
+```
 {
     "error": "修改貼文失敗"
 }
@@ -394,28 +413,28 @@
 
 ## DELETE `http://localhost:4000/api/posts/{post_id}`
 ### Request
-```json
+```
 {
     "headers": {
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI2M2E1Y2EwNGE2OTU1YWVmNWUxMTU3NDQiLCJVc2VybmFtZSI6IkNpbmR5IiwiRW1haWwiOiJjeTk4MTU1MjZAZ21haWwuY29tIiwiTW9iaWxlIjoiMDkxMjM0NTY3OCIsImlhdCI6MTY3MjE1NzY3MywiZXhwIjoxNjcyMTY0ODczfQ.vi56hIgf04wXdWrIF20RsPgH6iejAU7nQdRF-VQX3U0" 
+        "authorization": "Bearer <JWT>" 
     }
 }
 ```
 ### Reponse
 #### 200
-```json
+```
 {
     "message": "刪除貼文成功"
 }
 ```
 #### 403
-```json
+```
 {
-    "error": "請先登入以刪除貼文"
+    "error": "請先登入"
 }
 ```
 #### 500
-```json
+```
 {
     "error": "刪除貼文失敗"
 }
@@ -424,7 +443,7 @@
 ## GET `http://localhost:4000/api/filters`
 ### Reponse
 #### 200
-```json
+```
 {
     "data": {
         "ages": [
@@ -456,7 +475,7 @@
 }
 ```
 #### 500
-```json
+```
 {
     "error": "取得篩選欄位失敗"
 }

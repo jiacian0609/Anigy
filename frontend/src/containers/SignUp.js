@@ -80,10 +80,11 @@ function SignUp({setJwt}) {
             toast.error('請同意公開資訊');
             return;
         }
-        api.signup(email, username, password, phone)
+        api.signUp(email, username, password, phone)
         .then(response => {
 			window.localStorage.setItem('JWT', response.JWT);
             setJwt(response.JWT);
+            toast.success(response.message);
             navigate('/');
 		})
 		.catch(error => console.log(error))

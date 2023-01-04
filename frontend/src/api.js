@@ -90,7 +90,7 @@ export const api = {
             })
         )
     }, 
-    signup(email, username, password, phone) {
+    signUp(email, username, password, phone) {
         return (
             axios.post(`${hostname}/user/signUp`, {
                 "email": email,

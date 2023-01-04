@@ -39,7 +39,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/signIn" element={<SignIn setJwt={setJwt} />} />
-            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/signUp" element={<SignUp setJwt={setJwt} />} />
             <Route path="/post/:id" element={<Post />} />
             <Route path="/manage" element={<Manage />} />
             <Route path="/create" element={<Create />} />

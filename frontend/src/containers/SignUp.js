@@ -1,11 +1,9 @@
 import React from "react";
 import styled from 'styled-components'
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { api } from '../api'
 import { toast } from "react-toastify";
-
-import SubmitButton from "../components/SubmitButton";
-import _ from "lodash";
 
 const Base = styled.div`
     width: 100%;
@@ -16,82 +14,79 @@ const Base = styled.div`
 `
 
 const SignInBox = styled.div`
+    background-color: white;
     border-radius: 10%;
     width: 40%;
-    padding: 30px 80px;
     margin: auto;
     justify-content: center;
     display: flex;
-    flex-direction: column;
+	flex-direction: column;
+	align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
     box-shadow: 0px 3px 5px grey;
 `
 
 const InputText = styled.div`
+    width: 300px;
     font-size: 20px;
+    align-self: left;
     text-align: left;
 `
 
 const InputBar = styled.input`
-    width: 100%;
     text-align: left;
-    font-size: 15px;
-    line-height: 20px;
-    padding: 10px 20px;
+    height: 50px;
+    font-size: 25px;
+    padding-left: 20px;
     border-radius: 50px;
     margin-top: 10px;
     margin-bottom: 20px;
     border: 0px;
     background-color: #F1F1F1;
     box-shadow: 0px 3px 3px grey;
-    
-    &:focus {
-        outline: solid 2px #365A33;
-    }
 `
 
+const Submit = styled.button`
+    width: 30%;
+    height: 50px;
+    font-size: 25px;
+    color: white;
+    font-weight: bolder;
+    background-color: #365A33;
+    border-radius: 50px;
+    margin-top: 20px;
+    border: 0px;
+`
 const Checkbox = styled.label`
     font-size: 20px;
-    margin-bottom: 10px;
 `
 const Signin = styled.button`
-    margin-top: 20px;
     text-decoration: underline;
     font-size: 16px;
     border: 0px;
     background: white;
-    cursor: pointer;
-
-    &:hover {
-        color: #365A33;
-    }
+    margin-top: 10px;
 `
 
-function SignUp() {
+function SignUp({setJwt}) {
     const navigate = useNavigate();
 
-    const handleSubmit = (email, username, password, phone) => {
-        if (_.isEmpty(email) || _.isEmpty(username) || _.isEmpty(password) || _.isEmpty(phone)) {
-            toast.error('請輸入資訊');
-            return;
-        }
-
-        // console.log('username', username);
-        const chked = document.querySelectorAll("[type=checkbox]");
-        // console.log(chked[0].checked);
+    const handleSubmit = ( email, username, password, phone) => {
+        console.log('username', username);
+        var chked = document.querySelectorAll("[type=checkbox]");
+        console.log(chked[0].checked);
         if(!chked[0].checked) {
             toast.error('請同意公開資訊');
             return;
         }
         api.signup(email, username, password, phone)
         .then(response => {
-            console.log(response);
-            if (response) {
-                toast.success('註冊成功，請重新登入');
-                navigate('/signin');
-            }
+			window.localStorage.setItem('JWT', response.JWT);
+            setJwt(response.JWT);
+            navigate('/');
 		})
 		.catch(error => console.log(error))
-        
     }
 
     return (
@@ -109,7 +104,7 @@ function SignUp() {
                     <input type='checkbox' value='我同意公開聯絡電話和信箱'/>
                     <span>我同意公開聯絡電話和信箱</span>
                 </Checkbox>
-                <SubmitButton name='註冊' width='50%' onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('phone').value)} />
+                <Submit onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('phone').value)}>註冊</Submit>
                 <Signin onClick={() => navigate('/signin')}>已經有帳號嗎？快來登入吧！</Signin>
             </SignInBox>
         </Base>

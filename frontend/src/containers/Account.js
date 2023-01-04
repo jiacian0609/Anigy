@@ -44,6 +44,7 @@ const Edit = styled.div`
     height: 30px;
     background-image: url('/icons/edit.png');
     background-size: contain;
+    cursor: pointer;
 `
 
 const Div = styled.div`
@@ -53,14 +54,16 @@ const Div = styled.div`
 const Logout = styled.button`
     background-color: white;
     border-radius: 30px;
-    width: 60px;
-    height: 40px;
+    width: 90px;
+    height: 50px;
     border: 2px solid #365A33;
     color: #365A33;
     font-weight: bold;
     font-size: 20px;
     margin-left: 210px;
     margin-top: 40px;
+    cursor: pointer;
+
     &:hover {
         background-color: #365A33;
         color: #F1F1F1;

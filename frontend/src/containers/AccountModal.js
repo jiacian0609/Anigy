@@ -6,9 +6,8 @@ import { api } from '../api'
 
 const Content = styled.div`
     width: 600px;
-    margin: 0 auto;
+    margin: 50px auto;
     border-radius: 10%;
-    margin-top: 100px;
     padding: 50px 0;
     display: flex;
     flex-direction: column;
@@ -37,29 +36,39 @@ const Input = styled.input`
     margin-left: 20px;
     height: 30px;
     width: 300px;
+
+    &:focus {
+        outline: solid 2px #365A33;
+    }
 `
 const Bt = styled.div`
     padding-left: 250px;
     margin-top: 60px;
 `
 const CancelBt = styled.button`
-    width: 50px;
-    height: 30px;
+    width: 60px;
+    height: 35px;
     border-radius: 30px;
+    background: white;
     font-weight: bold;
-    border: grey 1px solid;
+    font-size: 15px;
+    border: #365A33 1px solid;
     margin: 0px 30px;
+    cursor: pointer;
     &:hover {
-        background-color: #D9D9D9;
+        background-color: #365A33;
+        color: #F1F1F1;
     }
 `
 const SaveBt = styled.button`
-    width: 50px;
-    height: 30px;
+    width: 60px;
+    height: 35px;
     border-radius: 30px;
     border: #365A33 1px solid;
     background: white;
     font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
     &:hover {
         background-color: #365A33;
         color: #F1F1F1;

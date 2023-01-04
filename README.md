@@ -3,7 +3,7 @@
 1. Demo 影片連結：
 2. 服務簡介：
 3. Deploy 連結：https://anigy.netlify.app/
-4. (如果有給 deployed 連結) 使用/操作方式 (含伺服器端以及使用者端)
+4. 使用／操作方式：參考下方[功能測試](https://github.com/jiacian0609/Anigy#%E5%8A%9F%E8%83%BD%E6%B8%AC%E8%A9%A6)
 5. Github link：https://github.com/jiacian0609/Anigy
 6. 其他說明
 7. 使用與參考之框架／模組／原始碼
@@ -30,39 +30,22 @@
 1. 安裝所需套件
 	```
 	cd backend
-	npm install
-	```
-	或
-	```
-	cd backend
 	yarn
 	```
 2. 啟動伺服器
 	```
 	yarn server
 	```
-	或
-	```
-	npm run server
-	```
 #### 啟動前端
-1. 安裝所需套件
-	```
-	cd frontend
-	npm install
-	```
-	或
+1. 開啟另一個終端機
+2. 安裝所需套件
 	```
 	cd frontend
 	yarn
 	```
-2. 開啟瀏覽器
+3. 開啟瀏覽器
 	```
 	yarn start
-	```
-	或
-	```
-	npm start
 	```
 ### 功能測試
 #### 註冊／登入

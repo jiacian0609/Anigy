@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { api } from '../api'
 import { toast } from "react-toastify";
 
+import SubmitButton from "../components/SubmitButton";
+
 const Base = styled.div`
     width: 100%;
     height: calc(100% - 100px);
@@ -67,6 +69,11 @@ const Signin = styled.button`
     border: 0px;
     background: white;
     margin-top: 10px;
+    cursor: pointer;
+
+    &:hover {
+        color: #365A33;
+    }
 `
 
 function SignUp({setJwt}) {
@@ -105,7 +112,7 @@ function SignUp({setJwt}) {
                     <input type='checkbox' value='我同意公開聯絡電話和信箱'/>
                     <span>我同意公開聯絡電話和信箱</span>
                 </Checkbox>
-                <Submit onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('phone').value)}>註冊</Submit>
+                <SubmitButton name='註冊' width='30%' onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('phone').value)} />
                 <Signin onClick={() => navigate('/signin')}>已經有帳號嗎？快來登入吧！</Signin>
             </SignInBox>
         </Base>

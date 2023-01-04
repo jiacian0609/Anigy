@@ -86,8 +86,7 @@ function Modal() {
 
 
     const handleSave = () => {
-        const jwt = window.localStorage.getItem("JWT");
-        api.patchInfo(name, email, mobile, jwt)
+        api.patchInfo(name, email, mobile)
         .then( (response) => {
             navigate('/account');
 		})

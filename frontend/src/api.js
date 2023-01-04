@@ -2,7 +2,6 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 
 const hostname = process.env.REACT_APP_API_HOSTNAME;
-const jwt = localStorage.getItem('JWT');
 
 export const api = {
     getAllPost() {
@@ -13,6 +12,7 @@ export const api = {
         )
     },
     getUserPost() {
+        const jwt = localStorage.getItem('JWT');
         return (
             axios.get(`${hostname}/posts`, {
                 headers: {
@@ -23,6 +23,7 @@ export const api = {
         )
     },
     getPostDetail(post_id) {
+        const jwt = localStorage.getItem('JWT');
         return (
             axios.get(`${hostname}/posts/${post_id}`, {
                 headers: {
@@ -34,6 +35,7 @@ export const api = {
         )
     },
     createPost(body) {
+        const jwt = localStorage.getItem('JWT');
         return (
             axios.post(`${hostname}/posts`, body, {
                 headers: {
@@ -44,6 +46,7 @@ export const api = {
         )
     },
     editPost(post_id, body) {
+        const jwt = localStorage.getItem('JWT');
         return (
             axios.patch(`${hostname}/posts/${post_id}`, body, {
                 headers: {
@@ -59,6 +62,7 @@ export const api = {
         )
     },
     deletePost(post_id) {
+        const jwt = localStorage.getItem('JWT');
         return (
             axios.delete(`${hostname}/posts/${post_id}`, {
                 headers: {
@@ -106,7 +110,8 @@ export const api = {
             })
         )
     },
-    getInfo(jwt) {
+    getInfo() {
+        const jwt = localStorage.getItem('JWT');
         return (
             axios.get(`${hostname}/user/`, {
                 headers: {
@@ -116,7 +121,8 @@ export const api = {
             .then(res =>res.data)
         )
     },
-    patchInfo(name, email, mobile, jwt) {
+    patchInfo(name, email, mobile) {
+        const jwt = localStorage.getItem('JWT');
         return (
             axios.patch(`${hostname}/user/`, {
                 "username": name,

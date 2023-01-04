@@ -82,8 +82,7 @@ function Account({setJwt}) {
             navigate('/signIn');
         }
 
-        const jwt = window.localStorage.getItem("JWT")
-        api.getInfo(jwt)
+        api.getInfo()
         .then(res => {
             const {username, email, mobile} = res.info;
             setName(username);
@@ -91,7 +90,6 @@ function Account({setJwt}) {
             setPhone(mobile);
         })
         .catch(err => {
-            console.log(err);
             if (err.response.data) {
                 toast.error(err.response.data.error);
                 if (err.response.data.error === '請重新登入') {

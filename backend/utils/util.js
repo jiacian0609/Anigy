@@ -15,7 +15,7 @@ const authentication = () => {
             req.user_id = payload.Uid;
         } catch(error) {
             //console.log(error.message)
-            if(error.message === 'jwt expired' && !(req.method === 'GET' && req.originalUrl.includes('/api/posts/')))
+            if(error.message === 'jwt expired' && !(req.method === 'GET' && req.originalUrl.includes('/api/posts/') && req.originalUrl.length >= 20))
                 return res.status(403).json({ error: '請重新登入' });
         }
         next();

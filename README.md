@@ -75,7 +75,7 @@
 2. 點擊右上角的 `搜尋`，可以依據動物、品種、性別、結紮與否、年齡、地區進行貼文搜尋
 #### 查看貼文
 1. 點擊每篇貼文，會進到個貼文的主頁，可以查看所有資訊
-2. 若為自己發佈的貼文，右上角會有 <img src="./frontend/public/icons/edit.png" width="10"/> 以及 <img src="./frontend/public/icons/delete.png" width="10"/>，可以進行修改或是刪除
+2. 若為自己發佈的貼文，右上角會有 <img src="./frontend/public/icons/edit.png" width="15"/> 以及 <img src="./frontend/public/icons/delete.png" width="15"/>，可以進行修改或是刪除
 #### 新增貼文
 1. 點擊右上角的 `我的貼文`，可以查看使用者發佈過的所有貼文
 2. 點擊 `新增送養貼文`，進到新增貼文頁面
@@ -83,13 +83,16 @@
 4. 點擊 `新增貼文`，若新增成功則會回到我的貼文頁面，可以在最下面查看新增的貼文
 #### 修改貼文
 1. 在我的貼文頁面，選擇欲修改的貼文
-2. 點擊貼文右上角的 <img src="./frontend/public/icons/edit.png" width="10"/>，進到編輯貼文頁面
+2. 點擊貼文右上角的 <img src="./frontend/public/icons/edit.png" width="15"/>，進到編輯貼文頁面
 3. 修改完資訊後，點擊 `編輯貼文`，若修改成功則會到該則貼文的主頁
 #### 刪除貼文
 1. 在我的貼文頁面，選擇欲刪除的貼文
-2. 點擊貼文右上角的 <img src="./frontend/public/icons/delete.png" width="10"/>，完成刪除
-
-#### 修改個人資訊
+2. 點擊貼文右上角的 <img src="./frontend/public/icons/delete.png" width="15"/>，完成刪除
+#### 編輯個人資訊
+1. 點擊右上角的 `帳戶管理`，進到編輯使用者資訊的頁面
+2. 點擊 <img src="./frontend/public/icons/edit.png" width="15"/>，可以編輯個人資訊
+3. 修改完後點擊 `確定`，回到編輯使用者資訊的頁面
+4. 最後可以點擊 `登出`，離開網頁
 
 ## 組員負責項目
 ### B08705001 李書成
@@ -102,7 +105,7 @@
 * 首頁、搜尋、貼文相關之前端頁面開發
 * 介面 Demo 
 ### B08705049 陳亮瑜
-* 資料庫設計
-* 貼文相關後端 API 開發
+* 設計 Figma prototype
+* 身分驗證、貼文、篩選器相關後端 API 開發
 * 服務部屬
 * README 撰寫

@@ -16,16 +16,13 @@ const Base = styled.div`
 `
 
 const SignInBox = styled.div`
-    background-color: white;
     border-radius: 10%;
     width: 40%;
+    padding: 50px 80px;
     margin: auto;
     justify-content: center;
     display: flex;
 	flex-direction: column;
-	align-items: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
     box-shadow: 0px 3px 5px grey;
 `
 
@@ -37,16 +34,21 @@ const InputText = styled.div`
 `
 
 const InputBar = styled.input`
+    width: 100%;
     text-align: left;
-    height: 50px;
-    font-size: 25px;
-    padding-left: 20px;
+    font-size: 15px;
+    line-height: 20px;
+    padding: 10px 20px;
     border-radius: 50px;
     margin-top: 10px;
     margin-bottom: 20px;
     border: 0px;
     background-color: #F1F1F1;
     box-shadow: 0px 3px 3px grey;
+
+    &:focus {
+        outline: solid 2px #365A33;
+    }
 `
 
 const Submit = styled.button`
@@ -62,6 +64,8 @@ const Submit = styled.button`
 `
 const Checkbox = styled.label`
     font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 `
 const Signin = styled.button`
     text-decoration: underline;
@@ -112,7 +116,7 @@ function SignUp({setJwt}) {
                     <input type='checkbox' value='我同意公開聯絡電話和信箱'/>
                     <span>我同意公開聯絡電話和信箱</span>
                 </Checkbox>
-                <SubmitButton name='註冊' width='30%' onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('phone').value)} />
+                <SubmitButton name='註冊' width='50%' onClick={() => handleSubmit(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('phone').value)} />
                 <Signin onClick={() => navigate('/signin')}>已經有帳號嗎？快來登入吧！</Signin>
             </SignInBox>
         </Base>

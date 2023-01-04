@@ -84,10 +84,14 @@ function SignUp() {
         }
         api.signup(email, username, password, phone)
         .then(response => {
-			window.localStorage.setItem('JWT', response.JWT);
-            navigate('/');
+            console.log(response);
+            if (response) {
+                toast.success('註冊成功，請重新登入');
+                navigate('/signin');
+            }
 		})
 		.catch(error => console.log(error))
+        
     }
 
     return (

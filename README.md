@@ -1,6 +1,6 @@
 # (Group 3) Anigy 流浪動物收養平台
 ## 基本介紹
-1. Demo 影片連結：
+1. Demo 影片連結：https://youtu.be/S2ms0l0p5aI
 2. 服務簡介：Anigy 為一個整合流浪動物資訊的平台，統整收養流浪動物的相關資訊，讓使用者可以更快速地尋找欲收養的動物，也可以透過發佈貼文分享流浪動物的資訊，為連接流浪動物以及愛心人士的最佳橋樑。
 3. Deploy 連結：https://anigy.netlify.app/
 4. 使用／操作方式：參考下方[功能測試](https://github.com/jiacian0609/Anigy#%E5%8A%9F%E8%83%BD%E6%B8%AC%E8%A9%A6)
